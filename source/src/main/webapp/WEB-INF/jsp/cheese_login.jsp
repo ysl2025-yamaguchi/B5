@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン/新規登録</title>
+<jsp:include page="cheese_header.jsp"/>
 </head>
 <body>
 <form method="POST" action="webapp/CheeseLoginServlet">
