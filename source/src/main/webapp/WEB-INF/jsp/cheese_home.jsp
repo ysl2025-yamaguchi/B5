@@ -7,11 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div id = "messageArea" class = "message red">
-	<c:if test="${not empty errorMsg}">
-		${errorMsg}
-	</c:if>
-</div>
 
 </body>
 </html>
