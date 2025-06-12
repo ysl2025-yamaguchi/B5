@@ -14,24 +14,24 @@
 		<!-- <button onclick="loginError()">エラーを表示</button> -->
 
 		<label for="users_name">ユーザー名</label>
-		<inpit type="" id="" name="" required><br>
+		<input type="text" id="username" name="username" required><br>
 
 		<label for="password">パスワード</label>
-		<inpit type="password" id="password" name="password" required><br>
+		<input type="password" id="password" name="password" required><br>
 
-		<button type="">ログイン</button>
+		<button type="submit">ログイン</button>
 	</div>
 	<div>
 		<span id="registError_message" style="color: red;"></span>
 		<!-- <button onclick="registError()">エラーを表示</button> -->
 
 		<label for="users_name">ユーザー名</label>
-		<inpit type="" id="" name="" required><br>
+		<input type="text" id="" name="" required><br>
 
 		<label for="password">パスワード</label>
-		<inpit type="password" id="password" name="password" required><br>
+		<input type="password" id="password" name="password" required><br>
 
-		<button type="">新規登録</button>
+		<button type="submit">新規登録</button>
 	</div>
 
 </form>
