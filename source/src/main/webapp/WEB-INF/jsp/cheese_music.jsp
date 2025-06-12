@@ -7,12 +7,15 @@
 <title>曲画面 | MUSIC CHEESE</title>
 </head>
 <body>
+<jsp:include page="cheese_header.jsp">
+<main>
 <section>
 	<h1><img src="/webapp/img/add.png" width="25" height="25">曲を追加</h1>
-	<div>
-	<input type="text" placeholder="名前">
-	<button>追加</button>
-	</div>
+	<form method="POST" id="regist_music" action="/webapp/CheeseRegistMusicServlet">
+		<input type="text" placeholder="名前" id="music_name" name="music_name">
+		<button type="submit">追加</button>
+		<p id="output" style="color: red;"></p>
+	</form>
 </section>
 <section>
 <h2><img src="/webapp/img/blackcheese.png" width="25" height="25">曲検索</h2>
@@ -27,18 +30,19 @@
 </div>
 </section>
 
- <section>
-    <div>
-      <span><img src="/webapp/img/open.png" width="15" height="15">曲A</span>
+ <section class="song-list">
+    <div class="song-header">
+    <img src="/webapp/img/open.png" width="15" height="15">
       <div>
         <button>編集</button>
         <button>削除</button>
       </div>
     </div>
-    <div>
-      ・Aフレーズ<br>
-      ・Bフレーズ
+    <div class="phrases">
+      <c:out value="${phrase.title}" />
     </div>
   </section>
+ </main>
+ <script src="/webapp/js/cheese_music.js"></script>
 </body>
 </html>
