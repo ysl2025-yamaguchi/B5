@@ -11,7 +11,7 @@
 <form method="POST" action="webapp/CheeseLoginServlet">
 	<div>
 		<span id="loginError_message" style="color: red;"></span>
-		<button onclick="loginError()">エラーを表示</button>
+		<!-- <button onclick="loginError()">エラーを表示</button> -->
 
 		<label for="users_name">ユーザー名</label>
 		<inpit type="" id="" name="" required><br>
@@ -23,7 +23,7 @@
 	</div>
 	<div>
 		<span id="registError_message" style="color: red;"></span>
-		<button onclick="registError()">エラーを表示</button>
+		<!-- <button onclick="registError()">エラーを表示</button> -->
 
 		<label for="users_name">ユーザー名</label>
 		<inpit type="" id="" name="" required><br>
