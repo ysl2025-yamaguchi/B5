@@ -9,6 +9,7 @@
 <body>
 <jsp:include page="cheese_header.jsp">
 <main>
+<!-- 曲追加 -->
 <section>
 	<h1><img src="/webapp/img/add.png" width="25" height="25">曲を追加</h1>
 	<form method="POST" id="regist_music" action="/webapp/CheeseRegistMusicServlet">
@@ -17,6 +18,7 @@
 		<p id="output" style="color: red;"></p>
 	</form>
 </section>
+<!-- 曲検索 -->
 <section>
 <h2><img src="/webapp/img/blackcheese.png" width="25" height="25">曲検索</h2>
 <div>
@@ -29,17 +31,17 @@
 	</div>
 </div>
 </section>
-
+<!-- 曲リスト -->
  <section class="song-list">
     <div class="song-header">
-    <img src="/webapp/img/open.png" width="15" height="15">
+    <span><img src="/webapp/img/open.png" width="15" height="15">${music.name}</span>
       <div>
         <button>編集</button>
         <button>削除</button>
       </div>
     </div>
     <div class="phrases">
-      <c:out value="${phrase.title}" />
+      <p>${phrase.title}</p>
     </div>
   </section>
  </main>
