@@ -20,25 +20,26 @@
 
 	<div>
 		<span id="loginError_message" style="color: red;"></span>
-		<!-- <button onclick="loginError()">エラーを表示</button> -->
+		<button onclick="loginError()">エラーを表示</button>
 
-		<input type="text" id="username" name="username" required placeholder="ユーザー名"><br>
+		<input type="text" id="username" name="username" placeholder="ユーザー名"><br>
 
-		<input type="password" id="password" name="password" required placeholder="パスワード"><br>
+		<input type="password" id="password" name="password" placeholder="パスワード"><br>
 
 		<button type="submit">ログイン</button>
 	</div>
 	<div>
 		<span id="registError_message" style="color: red;"></span>
-		<!-- <button onclick="registError()">エラーを表示</button> -->
+		<button onclick="registError()">エラーを表示</button>
 
-		<input type="text" id="" name="" required placeholder="ユーザー名"><br>
+		<input type="text" id="" name="" placeholder="ユーザー名"><br>
 
-		<input type="password" id="password" name="password" required placeholder="パスワード"><br>
+		<input type="password" id="password" name="password" placeholder="パスワード"><br>
 
 		<input type="password" id="password" name="password" required placeholder="パスワード（確認用）"><br>
 		<button type="submit">新規登録</button>
 	</div>
 </form>
+<script src="/webapp/js/cheese_login.js"></script>
 </body>
 </html>
