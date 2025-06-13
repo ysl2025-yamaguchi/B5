@@ -13,20 +13,7 @@ body {
       max-width: 700px;
       padding: 20px;
     }
-
-#addMusicSection{
-      display:none;
-      margin-top: 10px;
-    }
-
-#openMusicSection{
-      display:none;
-      margin-top: 10px;
-    }
-    /* body {
-      font-family: Arial Black, sans-serif;
-      margin: 20px;
-    } */
+    
 header.header {
       display: flex;
       justify-content: center;
@@ -36,7 +23,8 @@ header.header {
       margin-bottom: 20px;
       position: relative;
     }
-    .logo {
+
+.logo {
       display: flex;
       justify-content: center;
       margin-bottom: 10px;
@@ -97,35 +85,4 @@ header.header {
     section {
       margin-top: 30px;
     }
-    .box {
-      border: 1px solid #ccc;
-      background-color: #f7f7f7;
-      padding: 15px;
-      margin-top: 10px;
-    }
-    .song-list {
-      border: 1px solid #ccc;
-      margin-top: 20px;
-    }
-    .song-header {
-      background-color: #eee;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .phrases {
-      padding: 10px;
-    }
-    input[type="text"] {
-      width: 200px;
-      padding: 5px;
-    }
-    button {
-      padding: 5px 10px;
-    }
-    .radio-group {
-      margin-top: 10px;
-    }
-    .radio-group label {
-      display: block;
-    }
+ 
