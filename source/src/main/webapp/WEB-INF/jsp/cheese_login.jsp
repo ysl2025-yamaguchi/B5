@@ -8,38 +8,44 @@
 <jsp:include page="cheese_header.jsp"/>
 </head>
 <body>
-<form method="POST" action="webapp/CheeseLoginServlet">
-	
-	<h1>
+
+    <h1>
 		<img src="/webapp/img/blackcheese.png" width="50" height="50" alt="CHEESE">
 	</h1>
 	<div class="logo">
 		<a href="/webapp/MenuServlet"><img src="/webapp/img/logo.png" width="600" height="200" alt="MUSIC CHEESE"></a>
 	</div>
-	
 
-	<div>
-		<span id="loginError_message" style="color: red;"></span>
-		<button onclick="loginError()">エラーを表示</button>
+	<div class="container">
+        <!-- 切り替えボタン -->
+        <button onclick="showLogin()">ログイン画面</button>
+        <button onclick="showRegister()">新規登録画面</button>
 
-		<input type="text" id="username" name="username" placeholder="ユーザー名"><br>
+ <form method="POST" action="webapp/CheeseLoginServlet">
 
-		<input type="password" id="password" name="password" placeholder="パスワード"><br>
 
-		<button type="submit">ログイン</button>
-	</div>
-	<div>
-		<span id="registError_message" style="color: red;"></span>
-		<button onclick="registError()">エラーを表示</button>
+        <!-- ログインフォーム -->
+        <div id="loginForm" class="form-container">
+            <h2>ログイン</h2>
+            <span id="loginError_message" class="error-message"></span>
+            <input type="text" id="login_username" name="login_username" placeholder="ユーザー名"><br>
+            <input type="password" id="login_password" name="login_password" placeholder="パスワード"><br>
+            <button onclick="validateLogin()">ログイン</button>
+        </div>
 
-		<input type="text" id="" name="" placeholder="ユーザー名"><br>
+        <!-- 新規登録フォーム -->
+        <div id="registerForm" class="form-container">
+            <h2>新規登録</h2>
+            <span id="registError_message" class="error-message"></span>
+            <input type="text" id="register_username" name="register_username" placeholder="ユーザー名"><br>
+            <input type="password" id="register_password" name="register_password" placeholder="パスワード"><br>
+            <input type="password" id="register_rePassword" name="register_rePassword" placeholder="パスワード（確認用）"><br>
+            <button onclick="validateRegister()">新規登録</button>
+        </div>
+    </div>
 
-		<input type="password" id="password" name="password" placeholder="パスワード"><br>
+ </form>
 
-		<input type="password" id="rePassword" name="rePassword" placeholder="パスワード（確認用）"><br>
-		<button type="submit">新規登録</button>
-	</div>
-</form>
 <script src="/webapp/js/cheese_login.js"></script>
 </body>
 </html>
