@@ -3,10 +3,10 @@ package dto;
 import java.io.Serializable;
 
 public class CheeseUser implements Serializable {
-	private int id; /* ID */
-	private String name; /* ユーザー名 */
-	private String password; /* パスワード */
-	private int thema; /* テーマ */
+	private int id;           /* ID */
+	private String name;      /* ユーザー名 */
+	private String password;  /* パスワード */
+	private int thema;        /* テーマ */
 	private String updatedAt; /* 更新日時 */
 	private String createdAt; /* 作成日時 */
 		
