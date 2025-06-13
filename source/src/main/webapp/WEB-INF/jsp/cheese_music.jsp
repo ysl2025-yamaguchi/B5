@@ -10,14 +10,16 @@
 <jsp:include page="cheese_header.jsp" />
 <main>
 <!-- 曲追加 -->
-<div>
-	<h1>+ 曲を追加</h1>
+
+	<button id="addMusic">+</button>
+	<label>曲を追加</label>
+	<div id="addMusicSection">
 	<form method="POST" id="regist_music" action="/webapp/CheeseRegistMusicServlet">
 		<input type="text" placeholder="名前" id="music_name" name="music_name">
 		<button type="submit">追加</button>
 		<p id="output" style="color: red;"></p>
 	</form>
-</div>
+	</div>
 <!-- 曲検索 -->
 <section>
 <h2><img src="/webapp/img/blackcheese.png" width="25" height="25">曲検索</h2>
