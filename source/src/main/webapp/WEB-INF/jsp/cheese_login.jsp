@@ -36,7 +36,7 @@
 
 		<input type="password" id="password" name="password" placeholder="パスワード"><br>
 
-		<input type="password" id="password" name="password" required placeholder="パスワード（確認用）"><br>
+		<input type="password" id="rePassword" name="rePassword" placeholder="パスワード（確認用）"><br>
 		<button type="submit">新規登録</button>
 	</div>
 </form>
