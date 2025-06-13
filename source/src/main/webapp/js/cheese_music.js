@@ -1,3 +1,5 @@
+
+//エラーメッセージの表示
 document.getElementById('regist_music').onsubmit = function(event) {
     
     const music_name = document.getElementById('music_name').value;

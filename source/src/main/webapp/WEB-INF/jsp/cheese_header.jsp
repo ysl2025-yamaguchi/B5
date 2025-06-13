@@ -9,7 +9,7 @@
 <body>
 <header class="header">
 	<h1><img src="/webapp/img/blackcheese.png" width="50" height="50" alt="CHEESE"></h1>
-	<div class="logo"><a href="/webapp/MenuServlet"><img src="/webapp/img/logo.png" width="600" height="200" alt="MUSIC CHEESE"></a></div>
+	<div class="logo"><a href="/webapp/CheesePhraseListServlet"><img src="/webapp/img/logo.png" width="600" height="200" alt="MUSIC CHEESE"></a></div>
 	<nav class="nav">
 		<ul>
 			<li><a href="/webapp/CheesePhraseListServlet"><strong>Home</strong></a></li>
