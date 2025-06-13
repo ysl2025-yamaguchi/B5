@@ -10,7 +10,6 @@
 <jsp:include page="cheese_header.jsp" />
 <main>
 <!-- 曲追加 -->
-
 	<button id="addMusic">+</button>
 	<label>曲を追加</label>
 	<div id="addMusicSection">
@@ -34,18 +33,15 @@
 </div>
 </section>
 <!-- 曲リスト -->
- <section class="song-list">
-    <div class="song-header">
-    <span><img src="/webapp/img/open.png" width="15" height="15">${music.name}</span>
-      <div>
-        <button>編集</button>
-        <button>削除</button>
+ 	<button id="openMusic">></button>
+    <label>${music.name}</label>
+      <div id="openMusicSection">
+       <form>${phrase.title}<br>
+       <button type="submit">編集</button>
+       <button type="submit">削除</button>
+       </form>
       </div>
-    </div>
-    <div class="phrases">
-      <p>${phrase.title}</p>
-    </div>
-  </section>
+   
  </main>
  <script src="/webapp/js/cheese_music.js"></script>
 </body>
