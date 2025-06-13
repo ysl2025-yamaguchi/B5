@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>曲編集画面 | MUSIC CHEESE</title>
 </head>
 <body>
 
