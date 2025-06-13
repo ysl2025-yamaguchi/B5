@@ -9,7 +9,7 @@ public class CheeseMusicPhrase  implements Serializable{
 	private int phraseId;
 	private String title;
 	private String remarks;
-	private int order;
+	private int phrase_order;
 	private String updatedAt;
 	private String createdAt;
 	
@@ -43,11 +43,11 @@ public class CheeseMusicPhrase  implements Serializable{
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public int getOrder() {
-		return order;
+	public int getphrase_order() {
+		return phrase_order;
 	}
-	public void setOrder(int order) {
-		this.order = order;
+	public void setphrase_order(int phrase_order) {
+		this.phrase_order = phrase_order;
 	}
 	public String getUpdatedAt() {
 		return updatedAt;
@@ -66,7 +66,7 @@ public CheeseMusicPhrase() {
 	this(0, 0, 0, "", "", 0, "", "");
 }
 	
-public CheeseMusicPhrase(int id, int musicId, int phraseId, String title, String remarks, int order,
+public CheeseMusicPhrase(int id, int musicId, int phraseId, String title, String remarks, int phrase_order,
 		String updatedAt, String createdAt) {
 	super();
 	this.id = id;
@@ -74,7 +74,7 @@ public CheeseMusicPhrase(int id, int musicId, int phraseId, String title, String
 	this.phraseId = phraseId;
 	this.title = title;
 	this.remarks = remarks;
-	this.order = order;
+	this.phrase_order = phrase_order;
 	this.updatedAt = updatedAt;
 	this.createdAt = createdAt;
 }

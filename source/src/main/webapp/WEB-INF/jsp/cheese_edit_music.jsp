@@ -5,17 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>曲編集画面 | MUSIC CHEESE</title>
+<title>Edit Music</title>
 </head>
 <body>
 
-<jsp:include page="cheese_header.jsp" />
+<header class="header">
+	<h1><img src="/webapp/img/logo.png" width="50" height="50" alt="CHEESE"></h1>
+	<div class="logo"><a href="/webapp/MenuServlet"><img src="/webapp/img/logo.png" width="500" height="200" alt="MUSIC CHEESE"></a></div>
+	<nav class="nav">
+		<ul>
+			<li><a href="/webapp/CheesePhraseListServlet"><strong>Home</strong></a></li>
+			<li><a href="/webapp/CheeseMusicListServlet"><strong>Music</strong></a></li>
+			<li><a href="/webapp/CheeseLogoutServlet"><strong>Logout</strong></a></li>
+		</ul>
+	</nav>
+</header>
+
+<!-- 曲名入力フォーム -->
+<h1 for="songName">曲名：</h1>
+<input type="text" id="songName" name="songName" value="${song.name}" />
 
 <!-- ボタン群 -->
 <div class="actionButtons">
 <label>重複数チェック: <input type="number" id="duplicateCount" value="3" min="2" max="5"></label>
 <button id="checkDuplicates">重複チェック</button>
-<button id="saveBtn" disabled>保存</button>
+<button id="saveBtn" >保存</button>
 </div>
 
 <!-- 重複メッセージ -->
@@ -28,7 +42,6 @@ ${errorMsg}
 </c:if>
 </div>
 
-<h2>${song.name}</h2>
 
 <!-- 追加ボタン -->
 <button id="addPhraseBtn">＋</button>
@@ -52,6 +65,7 @@ ${errorMsg}
 </c:forEach>
 </div>
 
+<script src="scripts/cheese_edit_music.js"></script>
 
 </body>
 </html>
