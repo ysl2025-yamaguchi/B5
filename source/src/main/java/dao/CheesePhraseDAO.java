@@ -12,7 +12,8 @@ import dto.CheesePhrase;
 
 public class CheesePhraseDAO {
 	
-	public List<CheesePhrase> search(List<String> searchWordList, List<String> searchTagList, int userId) {
+	// キーワードもしくはタグ名で検索
+	public List<CheesePhrase> select(List<String> searchWordList, List<String> searchTagList, int userId) {
 		Connection conn = null;
 		List<CheesePhrase> phraseList = new ArrayList<CheesePhrase>();
 		
@@ -27,9 +28,6 @@ public class CheesePhraseDAO {
 			
 			// SQL文を準備する
 			StringBuilder sql = new StringBuilder();
-			PreparedStatement pStmt;
-			ResultSet rs;
-			
 			sql.setLength(0);
 			sql.append("SELECT DISTINCT phrases.id, phrases.name, phrases.remarks, phrases.path, phrases.user_id, phrases.created_at, phrases.updated_at");
 			sql.append("FROM phrases LEFT JOIN phrases_tags ON phrases.id = phrases_tags.phrase_id");
@@ -46,6 +44,7 @@ public class CheesePhraseDAO {
 				sql.append("tags.name LIKE ?");
 			}
 			
+			PreparedStatement pStmt;
 			pStmt = conn.prepareStatement(sql.toString());
 			pStmt.setInt(1, userId);
 			int i, j;
@@ -57,6 +56,7 @@ public class CheesePhraseDAO {
 			}
 			
 			// SQL文を実行し、結果表を取得する
+			ResultSet rs;
 			rs = pStmt.executeQuery();
 			
 			// 結果表をコレクションにコピーする
