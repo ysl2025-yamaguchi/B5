@@ -24,7 +24,7 @@ public class CheeseUserDao {
 					"root", "password");
 
 			// SELECT文を準備する
-			String sql = "SELECT count(*) FROM CheeseUser WHERE name=? AND password=?";
+			String sql = "SELECT count(*) FROM users WHERE name=? AND password=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, userpw.getName());
 			pStmt.setString(2, userpw.getPassword());
@@ -58,4 +58,58 @@ public class CheeseUserDao {
 		// 結果を返す
 		return loginResult;
 	}
+	
+	public boolean insert(CheeseUser card) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "INSERT INTO users ((id, name, password, thema) VALUES (0, ?, ?, 1)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			if (card.getName() != null) {
+				pStmt.setString(1, card.getName());
+			} else {
+				pStmt.setString(1, "");
+			}
+			if (card.getPassword() != null) {
+				pStmt.setString(2, card.getPassword());
+			} else {
+				pStmt.setString(2, "");
+			}
+			
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
+	
 }
