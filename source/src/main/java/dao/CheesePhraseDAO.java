@@ -36,14 +36,6 @@ public class CheesePhraseDAO {
 			sql.append("JOIN tags ON phrases_tags.tag_id = tags.id");
 			sql.append("WHERE phrases.user_id = ?");
 			
-//			sql.append("SELECT bc.id, bc.user_id, bc.name, bc.gender, bc.company_id, bc.department, ");
-//			sql.append("bc.position, bc.phone, bc.email, bc.created_at, bc.updated_at, bc.remarks, ");
-//			sql.append("c.name AS company_name, c.address AS company_address, c.tel AS company_tel, c.fax AS company_fax, "
-//					+ "c.zipcode AS company_zipcode, c.member_count AS company_member_count ");
-//			sql.append("FROM business_card bc ");
-//			sql.append("JOIN company c ON bc.company_id = c.id ");
-//			sql.append("WHERE bc.user_id = ?");
-			
 			for (int i = 0; i < searchWordList.size(); i++) {
 				sql.append(" AND ");
 				sql.append("phrases.name LIKE ?");
@@ -53,8 +45,6 @@ public class CheesePhraseDAO {
 				sql.append(" AND ");
 				sql.append("tags.name LIKE ?");
 			}
-			
-//			System.out.println(sql);
 			
 			pStmt = conn.prepareStatement(sql.toString());
 			pStmt.setInt(1, userId);
