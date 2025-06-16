@@ -83,7 +83,7 @@ public class CheeseMusicDao {
 		// SQL文を準備する
 		String sql = "SELECT id, name, user_id, created_at, updated_at "
 					+ "FROM musics "
-					+ "WHERE name LIKE ? "
+					+ "WHERE name LIKE ? AND (? = 0 OR user_id = ?) "
 					+ "ORDER BY created_at";
 					
 		PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -94,6 +94,8 @@ public class CheeseMusicDao {
 		} else {
 			pStmt.setString(1, "%");
 		}
+		pStmt.setInt(2, card.getUserId());
+		pStmt.setInt(3, card.getUserId());
 		
 		// SQL文を実行し、結果表を取得する
 		ResultSet rs = pStmt.executeQuery();
