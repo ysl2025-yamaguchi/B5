@@ -22,7 +22,7 @@ public class CheesePhraseTagDaoTest {
 
 	        // SELECT テスト
 	        System.out.println("---------- SELECT テスト ----------");
-	        List<CheesePhraseTag> list1 = dao.selectPhraseTagInfo(1); // すべて取得
+	        List<CheesePhraseTag> list1 = dao.selectPhraseTagInfo(1);
 	        showAllData(list1);
 
 	        // INSERT テスト
@@ -39,8 +39,8 @@ public class CheesePhraseTagDaoTest {
 	        List<CheesePhraseTag> list2 = dao.selectPhraseTagInfo(0);
 	        if (!list2.isEmpty()) {
 	            CheesePhraseTag updateTag = list2.get(0);
-	            updateTag.setPhraseId(2); // 別の存在するIDに変更
-	            updateTag.setTagId(2);    // 別の存在するIDに変更
+	            updateTag.setPhraseId(2); 
+	            updateTag.setTagId(2);   
 	            boolean updateResult = dao.update(updateTag);
 	            System.out.println(updateResult ? "更新成功！" : "更新失敗！");
 	        }
