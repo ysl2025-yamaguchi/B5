@@ -1,60 +1,58 @@
 -- ユーザー
 create table users(
-   id int primary key,
+   id int primary key auto_increment,
    name varchar(32) not null,
    password varchar(20) not null,
-   thema int,
+   thema int default 1,
    created_at datetime default current_timestamp,
    updated_at datetime default current_timestamp on update current_timestamp
 );
 
+-- テスト
+ insert into users (name, password) values ('yama', 'password');
+ select * from users;
+ 
 -- フレーズデータ
 create table phrases(
-   id int primary key,
+   id int primary key auto_increment,
    name varchar(20) not null,
    remarks varchar(30),
    path varchar(50),
+   user_id int,
    created_at datetime default current_timestamp,
-   updated_at datetime default current_timestamp on update current_timestamp,
-   user_id int
-
+   updated_at datetime default current_timestamp on update current_timestamp
 );
 
 -- 曲データ
 create table musics(
-   id int primary key,
+   id int primary key auto_increment,
    name varchar(20) not null,
+   user_id int,
    created_at datetime default current_timestamp,
-   updated_at datetime default current_timestamp on update current_timestamp,
-   user_id int
-
+   updated_at datetime default current_timestamp on update current_timestamp
 );
 
 -- タグ
 create table tags(
-   id int primary key,
+   id int primary key auto_increment,
    name varchar(20) not null,
-   created_at datetime default current_timestamp,
-   updated_at datetime default current_timestamp on update current_timestamp,
    user_id int
-
+   created_at datetime default current_timestamp,
+   updated_at datetime default current_timestamp on update current_timestamp
 );
 
 -- フレーズタグデータ
 create table phrases_tags(
-   id int primary key,
-   phrase_id int,
-   phrase_name varchar(20) not null,   
-   phrase_remarks varchar(20) not null,  
+   id int primary key auto_increment,
+   phrase_id int, 
    tag_id int,
-   tag_name varchar(20) not null,       
    created_at datetime default current_timestamp,
    updated_at datetime default current_timestamp on update current_timestamp
 );
 
 -- 曲フレーズデータ
 create table musics_phrases(
-   id int primary key,
+   id int primary key auto_increment,
    music_id int,
    phrase_id int,
    title varchar(20),
@@ -62,6 +60,7 @@ create table musics_phrases(
    phrase_order int,
    created_at datetime default current_timestamp,
    updated_at datetime default current_timestamp on update current_timestamp
+
    
    
    
@@ -538,4 +537,6 @@ create table musics_phrases(
    
    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+=======
+>>>>>>> 04b90864f3df4826a5da2946fd504adc6fd353b1
 );

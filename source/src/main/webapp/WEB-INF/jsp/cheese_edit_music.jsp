@@ -9,17 +9,7 @@
 </head>
 <body>
 
-<header class="header">
-	<h1><img src="/webapp/img/logo.png" width="50" height="50" alt="CHEESE"></h1>
-	<div class="logo"><a href="/webapp/MenuServlet"><img src="/webapp/img/logo.png" width="500" height="200" alt="MUSIC CHEESE"></a></div>
-	<nav class="nav">
-		<ul>
-			<li><a href="/webapp/CheesePhraseListServlet"><strong>Home</strong></a></li>
-			<li><a href="/webapp/CheeseMusicListServlet"><strong>Music</strong></a></li>
-			<li><a href="/webapp/CheeseLogoutServlet"><strong>Logout</strong></a></li>
-		</ul>
-	</nav>
-</header>
+<jsp:include page="cheese_header.jsp" />
 
 <!-- 曲名入力フォーム -->
 <h1 for="songName">曲名：</h1>

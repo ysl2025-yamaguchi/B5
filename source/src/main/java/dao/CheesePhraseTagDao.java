@@ -38,12 +38,11 @@ public class CheesePhraseTagDao {
 	        
 	           while (rs.next()) {
 	            	    CheesePhraseTag dto = new CheesePhraseTag();
-	            	    dto.setPhraseId(rs.getInt("phrase_id"));
-	            	    dto.setPhraseName(rs.getString("phrase_name"));
-	            	    dto.setPhraseRemarks(rs.getString("phrase_remarks"));
-	            	    dto.setTagId(rs.getInt("tag_id"));
-	            	    dto.setTagName(rs.getString("tag_name"));
-	            	    list.add(dto);
+	            	    rs.getInt("id");
+	            	    rs.getInt("phrase_id");
+	            	    rs.getInt("tag_id");
+	            	  
+	            	 list.add(dto);
 	            	}
 	               
 

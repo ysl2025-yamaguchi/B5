@@ -13,10 +13,7 @@ public class CheesePhraseTagDaoTest {
 	        for (CheesePhraseTag tag : tagList) {
 	            System.out.println("ID：" + tag.getId());
 	            System.out.println("フレーズID：" + tag.getPhraseId());
-	            System.out.println("フレーズ名：" + tag.getPhraseName());
-	            System.out.println("フレーズメモ：" + tag.getPhraseRemarks());
 	            System.out.println("タグID：" + tag.getTagId());
-	            System.out.println("タグ名：" + tag.getTagName());
 	            
 	        }
 	    }
