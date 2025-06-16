@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Insert title here</title>
 </head>
 <body>
 <header class="header">
-	<h1><img src="/webapp/img/blackcheese.png" width="30" height="30" alt="CHEESE"></h1>
-	<div class="logo"><a href="/webapp/CheesePhraseListServlet"><img src="/webapp/img/logo.png" width="500" height="170" alt="MUSIC CHEESE"></a></div>
+	<h1><img src="/webapp/img/blackcheese.png" width="50" height="50" alt="CHEESE"></h1>
+	<div class="logo"><a href="/webapp/CheesePhraseListServlet"><img src="/webapp/img/logo.png" width="600" height="200" alt="MUSIC CHEESE"></a></div>
 	<nav class="nav">
 		<ul>
 			<li><a href="/webapp/CheesePhraseListServlet"><strong>Home</strong></a></li>
