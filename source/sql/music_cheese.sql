@@ -3,7 +3,7 @@ create table users(
    id int primary key auto_increment,
    name varchar(32) not null,
    password varchar(20) not null,
-   thema int,
+   thema int default 1,
    created_at datetime default current_timestamp,
    updated_at datetime default current_timestamp on update current_timestamp
 );
@@ -14,30 +14,27 @@ create table phrases(
    name varchar(20) not null,
    remarks varchar(30),
    path varchar(50),
+   user_id int,
    created_at datetime default current_timestamp,
-   updated_at datetime default current_timestamp on update current_timestamp,
-   user_id int
-
+   updated_at datetime default current_timestamp on update current_timestamp
 );
 
 -- 曲データ
 create table musics(
    id int primary key auto_increment,
    name varchar(20) not null,
+   user_id int,
    created_at datetime default current_timestamp,
-   updated_at datetime default current_timestamp on update current_timestamp,
-   user_id int
-
+   updated_at datetime default current_timestamp on update current_timestamp
 );
 
 -- タグ
 create table tags(
    id int primary key auto_increment,
    name varchar(20) not null,
-   created_at datetime default current_timestamp,
-   updated_at datetime default current_timestamp on update current_timestamp,
    user_id int
-
+   created_at datetime default current_timestamp,
+   updated_at datetime default current_timestamp on update current_timestamp
 );
 
 -- フレーズタグデータ
@@ -59,5 +56,4 @@ create table musics_phrases(
    phrase_order int,
    created_at datetime default current_timestamp,
    updated_at datetime default current_timestamp on update current_timestamp
-
 );

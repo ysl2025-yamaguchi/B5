@@ -26,38 +26,27 @@ public class CheeseMusicPhraseDao {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "SELECT number, post_code, company_name, address, department_name, telephone_number, position_name, fax_number, name, email_address, remarks FROM Bc WHERE company_name LIKE ? AND name LIKE ? ORDER BY number";
+				String sql = "SELECT id, music_id, phrase_id, title, remarks, phrase_order, updated_at, created_at FROM musics_phrases WHERE music_id = ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				if (card.getCompany_name() != null) {
-					pStmt.setString(1, "%" + card.getCompany_name() + "%");
-				} else {
-					pStmt.setString(1, "%");
-				}
-				if (card.getName() != null) {
-					pStmt.setString(2, "%" + card.getName() + "%");
-				} else {
-					pStmt.setString(2, "%");
-				}
+					pStmt.setInt(1, card.getMusicId());
+
 
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
 
 				// 結果表をコレクションにコピーする
 				while (rs.next()) {
-					CheeseMusicPhrase = new CheeseMusicPhrase(rs.getInt("number"), 
-													rs.getString("post_code"), 
-													rs.getString("company_name"), 
-													rs.getString("address"), 
-													rs.getString("department_name"), 
-													rs.getString("telephone_number"), 
-													rs.getString("position_name"), 
-													rs.getString("fax_number"), 
-													rs.getString("name"), 
-													rs.getString("email_address"), 
-													rs.getString("remarks"));
-					cardList.add(CheeseMusicPhrase);
+					CheeseMusicPhrase  cheeseMusicPhrase = new CheeseMusicPhrase(rs.getInt("id"), 
+													rs.getInt("music_id"), 
+													rs.getInt("phrase_id"), 
+													rs.getString("title"), 
+													rs.getString("remarks"), 
+													rs.getInt("phrase_order"), 
+													rs.getString("updated_at"), 
+													rs.getString("created_at"));
+					cardList.add(cheeseMusicPhrase);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -96,60 +85,26 @@ public class CheeseMusicPhraseDao {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "INSERT INTO CheeseMusicPhrase VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO Musics_phrases (music_id, phrase_id, title, remarks, phrase_order) VALUES (?, ?, ?, ?, ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				if (card.getPost_code() != null) {
-					pStmt.setString(1, card.getPost_code());
-				} else {
-					pStmt.setString(1, "");
-				}
-				if (card.getCompany_name() != null) {
-					pStmt.setString(2, card.getCompany_name());
-				} else {
-					pStmt.setString(2, "");
-				}
-				if (card.getAddress() != null) {
-					pStmt.setString(3, card.getAddress());
+					pStmt.setInt(1, card.getMusicId());
+
+					pStmt.setInt(2, card.getPhraseId());
+				
+				if (card.getTitle() != null) {
+					pStmt.setString(3, card.getTitle());
 				} else {
 					pStmt.setString(3, "");
 				}
-				if (card.getDepartment_name() != null) {
-					pStmt.setString(4, card.getDepartment_name());
+				if (card.getRemarks() != null) {
+					pStmt.setString(4, card.getRemarks());
 				} else {
 					pStmt.setString(4, "");
 				}
-				if (card.getTelephone_number() != null) {
-					pStmt.setString(5, card.getTelephone_number());
-				} else {
-					pStmt.setString(5, "");
-				}
-				if (card.getPosition_name() != null) {
-					pStmt.setString(6, card.getPosition_name());
-				} else {
-					pStmt.setString(6, "");
-				}
-				if (card.getFax_number() != null) {
-					pStmt.setString(7, card.getFax_number());
-				} else {
-					pStmt.setString(7, "");
-				}
-				if (card.getName() != null) {
-					pStmt.setString(8, card.getName());
-				} else {
-					pStmt.setString(8, "");
-				}
-				if (card.getEmail_address() != null) {
-					pStmt.setString(9, card.getEmail_address());
-				} else {
-					pStmt.setString(9, "");
-				}
-				if (card.getRemarks() != null) {
-					pStmt.setString(10, card.getRemarks());
-				} else {
-					pStmt.setString(10, "");
-				}
+
+					pStmt.setInt(5, card.getPhraseOrder());
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
@@ -189,62 +144,27 @@ public class CheeseMusicPhraseDao {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "UPDATE Bc SET Post_code=?, company_name=?, address=?, department_name=?, telephone_number=?, position_name=?, fax_number=?, name=?, email_address=?, remarks=? WHERE number=?";
+				String sql = "UPDATE musics_phrases SET title=?, remarks=?, phrase_order=?  WHERE id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				if (card.getPost_code() != null) {
-					pStmt.setString(1, card.getPost_code());
+				if (card.getTitle() != null) {
+					pStmt.setString(1, card.getTitle());
 				} else {
 					pStmt.setString(1, "");
 				}
-				if (card.getCompany_name() != null) {
-					pStmt.setString(2, card.getCompany_name());
+				if (card.getRemarks() != null) {
+					pStmt.setString(2, card.getRemarks());
 				} else {
 					pStmt.setString(2, "");
 				}
-				if (card.getAddress() != null) {
-					pStmt.setString(3, card.getAddress());
+				if (card.getPhraseOrder() != 0) {
+					pStmt.setInt(3, card.getPhraseOrder());
 				} else {
-					pStmt.setString(3, "");
-				}
-				if (card.getDepartment_name() != null) {
-					pStmt.setString(4, card.getDepartment_name());
-				} else {
-					pStmt.setString(4, "");
-				}
-				if (card.getTelephone_number() != null) {
-					pStmt.setString(5, card.getTelephone_number());
-				} else {
-					pStmt.setString(5, "");
-				}
-				if (card.getPosition_name() != null) {
-					pStmt.setString(6, card.getPosition_name());
-				} else {
-					pStmt.setString(6, "");
-				}
-				if (card.getFax_number() != null) {
-					pStmt.setString(7, card.getFax_number());
-				} else {
-					pStmt.setString(7, "");
-				}
-				if (card.getName() != null) {
-					pStmt.setString(8, card.getName());
-				} else {
-					pStmt.setString(8, "");
-				}
-				if (card.getEmail_address() != null) {
-					pStmt.setString(9, card.getEmail_address());
-				} else {
-					pStmt.setString(9, "");
-				}
-				if (card.getRemarks() != null) {
-					pStmt.setString(10, card.getRemarks());
-				} else {
-					pStmt.setString(10, "");
+					throw new SQLException();
 				}
 				
-				pStmt.setInt(11, card.getNumber());
+				pStmt.setInt(4, card.getId());
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
@@ -284,11 +204,11 @@ public class CheeseMusicPhraseDao {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "DELETE FROM Bc WHERE number=?";
+				String sql = "DELETE FROM musics_phrases WHERE id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				pStmt.setInt(1, card.getNumber());
+				pStmt.setInt(1, card.getId());
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
