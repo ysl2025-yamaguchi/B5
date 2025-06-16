@@ -8,6 +8,10 @@ create table users(
    updated_at datetime default current_timestamp on update current_timestamp
 );
 
+-- テスト
+ insert into users (name, password) values ('yama', 'password');
+ select * from users;
+ 
 -- フレーズデータ
 create table phrases(
    id int primary key auto_increment,

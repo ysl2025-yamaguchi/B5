@@ -59,7 +59,7 @@ public class CheeseUserDao {
 		return loginResult;
 	}
 	
-	public boolean insert(CheeseUser card) {
+	public boolean isRegistOK(CheeseUser card) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -73,7 +73,7 @@ public class CheeseUserDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO users ((id, name, password, thema) VALUES (0, ?, ?, 1)";
+			String sql = "INSERT INTO users (name, password) VALUES (?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
