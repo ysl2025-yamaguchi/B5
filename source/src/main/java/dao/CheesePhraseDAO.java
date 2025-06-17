@@ -13,7 +13,7 @@ import dto.CheesePhrase;
 public class CheesePhraseDAO {
 	
 	// キーワードもしくはタグ名で検索
-	public List<CheesePhrase> select(List<String> searchWordList, List<String> searchTagList, int userId) {
+	public List<CheesePhrase> select(List<String> searchWordList, List<String> searchTagList, String order, int userId) {
 		Connection conn = null;
 		List<CheesePhrase> phraseList = new ArrayList<CheesePhrase>();
 		
@@ -50,6 +50,24 @@ public class CheesePhraseDAO {
 				sql.append("tag_concat LIKE ?");
 			}
 			
+			switch (order) {
+			case "created_desc":
+				sql.append(" ORDER BY created_at DESC ");
+				break;
+			case "created_asc":
+				sql.append(" ORDER BY created_at ASC ");
+				break;
+			case "updated_desc":
+				sql.append(" ORDER BY updated_at DESC ");
+				break;
+			case "updated_asc":
+				sql.append(" ORDER BY updated_at ASC ");
+				break;
+			default:
+				sql.append(" ORDER BY created_at DESC ");
+				break;
+			}
+			
 			PreparedStatement pStmt;
 			pStmt = conn.prepareStatement(sql.toString());
 			pStmt.setInt(1, userId);
@@ -61,7 +79,6 @@ public class CheesePhraseDAO {
 				pStmt.setString(j + i + 2, "%" + searchTagList.get(j) + "%");
 			}
 			
-			System.out.println(pStmt);
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs;
 			rs = pStmt.executeQuery();
