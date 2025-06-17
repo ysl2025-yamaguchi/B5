@@ -22,7 +22,7 @@ public class CheeseMusicDao {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
 		// データベースに接続する
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
 				+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 				"root", "password");
 					
@@ -76,7 +76,7 @@ public class CheeseMusicDao {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 		// データベースに接続する
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
 							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 							"root", "password");
 
@@ -152,7 +152,7 @@ public class CheeseMusicDao {
 	        
 	        // データベースに接続する
 	        conn = DriverManager.getConnection(
-	            "jdbc:mysql://localhost:3306/music_cheese?"
+	            "jdbc:mysql://localhost:3306/b5?"
 	            + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
 	            "root", "password"
 	        		);
@@ -204,7 +204,7 @@ public class CheeseMusicDao {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
