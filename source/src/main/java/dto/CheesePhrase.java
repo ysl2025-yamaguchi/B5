@@ -7,9 +7,9 @@ public class CheesePhrase implements Serializable {
 	private String name;
 	private String remarks;
 	private String path;
-	private String updatedAt;
-	private String createdAt;
 	private int userId;
+	private String createdAt;
+	private String updatedAt;
 	
 	public int getId() {
 		return id;
@@ -43,12 +43,12 @@ public class CheesePhrase implements Serializable {
 		this.path = path;
 	}
 	
-	public String getUpdatedAt() {
-		return updatedAt;
+	public int getUserId() {
+		return userId;
 	}
 	
-	public void setUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 	public String getCreatedAt() {
@@ -59,25 +59,25 @@ public class CheesePhrase implements Serializable {
 		this.createdAt = createdAt;
 	}
 	
-	public int getUserId() {
-		return userId;
+	public String getUpdatedAt() {
+		return updatedAt;
 	}
 	
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public CheesePhrase() {
-		this(0, "", "", "", "", "", 0);
+		this(0, "", "", "", 0, "", "");
 	}
 	
-	public CheesePhrase(int id, String name, String remarks, String path, String updatedAt, String createdAt, int userId) {
+	public CheesePhrase(int id, String name, String remarks, String path, int userId, String createdAt, String updatedAt) {
 		this.id = id;
 		this.name = name;
 		this.remarks = remarks;
 		this.path = path;
-		this.updatedAt = updatedAt;
-		this.createdAt = createdAt;
 		this.userId = userId;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 }

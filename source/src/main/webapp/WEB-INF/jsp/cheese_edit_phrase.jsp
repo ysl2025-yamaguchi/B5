@@ -8,38 +8,60 @@
 </head>
 <body>
      
-    <small id="errorMessage"></small>
+   <span id="errorMessage"></span>
     <!-- 編集したいフレーズデータの入力 -->
-    <form action="">
+    <form action="/webapp/CheeseEditPhraseServlet">
       <div class="phrase">
-      <input type="text" name="phraseName" id="" placeholder="名前"><br>
-     <input type="text" name="phraseRemarks" id="" placeholder="メモ"><br>
-    </div>
+       <input type="hidden" name="phraseId" value="${phrases.id}"/>
+        <input type="text" name="phraseName" id="" placeholder="名前" value="${phrases.name}"><br>
+        <input type="text" name="phraseRemarks" id="" placeholder="メモ" value="${phrases.remarks}"><br>
+      </div>
 
-    <div class="addTag">
-        <div class="">
-            <button class="addTag" name="">+</button>
-            <label for="">タグを追加</label>
-    </div>
-      
-    <div class="registeredTag">
-          <input type="radio" name="" id="">
+      <div>
+        <button id="addTag" name="">+</button>
+        <label for="">タグを追加</label>
+      </div>
+      <div id="addTagSection">
+          <div class="registeredTag">
+          <input type="radio" name="" id="" >
           <label for="">登録済</label><br>
           <select name="" id="">
             <option value="">登録済タグ</option>
           </select>
-    </div>
+      </div>
 
-    <div class="newTag">
+      <div class="newTag" >
           <input type="radio" name="" id="">
           <label for="">新規</label><br>
           <input type="text" name="" id="">
-    </div>
+      </div>
+      <div class="addButton">
         <input type="submit" value="追加"><br>
-        <input type="submit" value="登録">
-    </div>
+      </div>
+
+      <div class="addedTag" hidden>
+        <input type="text" name="" id="" readonly>
+      </div>
+      </div>
+     
+        
+      <input type="submit" value="登録">
+     
     
     </form>
-    
-</body>
+    <script>
+ // タグを追加
+  //+ボタンをクリックすると登録済や新規のフォームが表示される
+  document.getElementById('addTag').addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('addTagSection').style.display = 'block';
+      });
+  //+ボタンをダブルクリックすると登録済や新規のフォームが消える
+  document.getElementById('addTag').addEventListener('dblclick', function (e) {
+        e.preventDefault();
+        document.getElementById('addTagSection').style.display = 'none';
+       
+      });
+    </script>
+   </body>
 </html>
