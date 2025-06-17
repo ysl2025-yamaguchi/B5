@@ -48,16 +48,16 @@
    </div>
 
    <!-- フレーズ検索 -->
-   <form method = "post" action = "B5/CheesePhraseListServlet" autocomplete = "off">
+   <form method = "post" action = "CheesePhraseListServlet" autocomplete = "off">
       <span>フレーズを検索</span> <br>
       <div class = "search_box">
-         <input type = "text" name = "search_word_line" placeholder = "「キーワード」「#タグ」">
+         <input type = "text" name = "search_str_line" placeholder = "「キーワード」「#タグ」"  value="${searchStrLine}">
          <input type = "submit" name = "search" value = ""> <br>
          <select name = "order">
-            <option value = "created_desc">登録が新しい順</option>
-            <option value = "created_asc">登録が古い順</option>
-            <option value = "updated_desc">更新が新しい順</option>
-            <option value = "updated_asc">更新が古い順</option>
+            <option value = "created_desc" <c:if test = "${order == 'created_desc'}">selected</c:if>>登録が新しい順</option>
+            <option value = "created_asc" <c:if test = "${order == 'created_asc'}">selected</c:if>>登録が古い順</option>
+            <option value = "updated_desc" <c:if test = "${order == 'updated_desc'}">selected</c:if>>更新が新しい順</option>
+            <option value = "updated_asc" <c:if test = "${order == 'updated_asc'}">selected</c:if>>更新が古い順</option>
          </select>
       </div> 
    </form>
