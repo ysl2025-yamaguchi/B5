@@ -12,7 +12,7 @@ import dto.CheeseMusicPhrase;
 
 public class CheeseMusicPhraseDao {
 	// 引数card指定された項目で検索して、取得されたデータのリストを返す
-		public List<CheeseMusicPhrase> select(CheeseMusicPhrase card) {
+		public List<CheeseMusicPhrase> select(int musicId) {
 			Connection conn = null;
 			List<CheeseMusicPhrase> cardList = new ArrayList<CheeseMusicPhrase>();
 
@@ -21,7 +21,7 @@ public class CheeseMusicPhraseDao {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
@@ -30,7 +30,7 @@ public class CheeseMusicPhraseDao {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-					pStmt.setInt(1, card.getMusicId());
+					pStmt.setInt(1, musicId);
 
 
 				// SQL文を実行し、結果表を取得する
@@ -80,12 +80,12 @@ public class CheeseMusicPhraseDao {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "INSERT INTO Musics_phrases (music_id, phrase_id, title, remarks, phrase_order) VALUES (?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO musics_phrases (music_id, phrase_id, title, remarks, phrase_order) VALUES (?, ?, ?, ?, ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -139,7 +139,7 @@ public class CheeseMusicPhraseDao {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
@@ -158,11 +158,8 @@ public class CheeseMusicPhraseDao {
 				} else {
 					pStmt.setString(2, "");
 				}
-				if (card.getPhraseOrder() != 0) {
-					pStmt.setInt(3, card.getPhraseOrder());
-				} else {
-					throw new SQLException();
-				}
+				
+				pStmt.setInt(3, card.getPhraseOrder());
 				
 				pStmt.setInt(4, card.getId());
 
@@ -199,7 +196,7 @@ public class CheeseMusicPhraseDao {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
