@@ -29,10 +29,16 @@ public class CheesePhraseDAO {
 			// SQL文を準備する
 			StringBuilder sql = new StringBuilder();
 			sql.setLength(0);
-			sql.append("SELECT DISTINCT phrases.id, phrases.name, phrases.remarks, phrases.path, phrases.user_id, phrases.created_at, phrases.updated_at");
-			sql.append("FROM phrases LEFT JOIN phrases_tags ON phrases.id = phrases_tags.phrase_id");
-			sql.append("JOIN tags ON phrases_tags.tag_id = tags.id");
-			sql.append("WHERE phrases.user_id = ?");
+			sql.append("SELECT phrases.id, phrases.name, phrases.remarks, phrases.path, phrases.user_id, "
+					+ "phrases.created_at, phrases.updated_at, "
+					+ "GROUP_CONCAT(tags.name ORDER BY tags.name SEPARATOR ' ') AS tag_concat "
+					+ "FROM phrases " 
+					+ "LEFT JOIN phrases_tags ON phrases.id = phrases_tags.phrase_id "
+					+ "LEFT JOIN tags ON phrases_tags.tag_id = tags.id "
+					+ "GROUP BY phrases.id  HAVING phrases.user_id = ? ");
+//			sql.append("FROM phrases LEFT JOIN phrases_tags ON phrases.id = phrases_tags.phrase_id ");
+//			sql.append("LEFT JOIN tags ON phrases_tags.tag_id = tags.id ");
+//			sql.append("WHERE phrases.user_id = ?");
 			
 			for (int i = 0; i < searchWordList.size(); i++) {
 				sql.append(" AND ");
@@ -41,7 +47,7 @@ public class CheesePhraseDAO {
 			
 			for (int i = 0; i < searchTagList.size(); i++) {
 				sql.append(" AND ");
-				sql.append("tags.name LIKE ?");
+				sql.append("tag_concat LIKE ?");
 			}
 			
 			PreparedStatement pStmt;
@@ -55,6 +61,7 @@ public class CheesePhraseDAO {
 				pStmt.setString(j + i + 2, "%" + searchTagList.get(j) + "%");
 			}
 			
+			System.out.println(pStmt);
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs;
 			rs = pStmt.executeQuery();
