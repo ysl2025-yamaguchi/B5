@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,24 +50,23 @@
    <!-- フレーズ検索 -->
    <form method = "post" action = "B5/CheesePhraseListServlet" autocomplete = "off">
       <span>フレーズを検索</span> <br>
-      <dvi class = "search_box">
+      <div class = "search_box">
          <input type = "text" name = "search_word_line" placeholder = "「キーワード」「#タグ」">
-         <input type = "submit" name = "search" value = "" class> <br>
+         <input type = "submit" name = "search" value = ""> <br>
          <select name = "order">
             <option value = "created_desc">登録が新しい順</option>
             <option value = "created_asc">登録が古い順</option>
             <option value = "updated_desc">更新が新しい順</option>
             <option value = "updated_asc">更新が古い順</option>
          </select>
-      </dvi> 
+      </div> 
    </form>
 
-   <dvi class = "phrase_list">
+   <div class = "phrase_list">
       <c:forEach var="phrase" items="${phraseList}">
-         <details open>
+         <details>
             <summary class="test">
-               フレーズA
-               <c:out value = "${phras.name}" />
+               <c:out value = "${phrase.name}" />
             </summary>
             <div>
                <audio controls src="phrase_audio/sample.m4a"></audio><br>
@@ -76,8 +76,8 @@
                         メモ：
                      </td>
                      <td>
-                        <span>ここにメモ内容を表示</span>
-                        <c:out value = "${phrase.reamarks} " /></option>
+                        <span></span>
+                        <c:out value = "${phrase.remarks} " />
                      </td>
                   </tr>
                   <tr>
@@ -88,7 +88,6 @@
                         <c:forEach var="tag" items="${tagList[phrase.id]}">
                            <c:out value = "${tag.name} " />
                         </c:forEach>
-                        タグA タグB タグC
                      </td>
                   </tr>
                </table>
@@ -108,7 +107,7 @@
          <c:forEach var="e" items="${companyList}">
          <option value="${e.id}"><c:out value = "${e.name}" /></option>
       </c:forEach>
-   </dvi>
+   </div>
 
 </body>
 
