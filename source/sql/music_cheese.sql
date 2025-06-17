@@ -1,7 +1,7 @@
 -- ユーザー
 create table users(
    id int primary key auto_increment,
-   name varchar(32) not null,
+   name varchar(32) not null unique,
    password varchar(20) not null,
    thema int default 1,
    created_at datetime default current_timestamp,
