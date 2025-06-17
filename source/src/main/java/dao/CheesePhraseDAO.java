@@ -61,7 +61,6 @@ public class CheesePhraseDAO {
 				pStmt.setString(j + i + 2, "%" + searchTagList.get(j) + "%");
 			}
 			
-			System.out.println(pStmt);
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs;
 			rs = pStmt.executeQuery();
