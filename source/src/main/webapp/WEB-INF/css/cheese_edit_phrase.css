@@ -2,4 +2,25 @@
       display: none;
       margin-top: 10px;
 }
-  
+#tagsContainer button{
+  color: red;
+
+}
+#tagsContainer input{
+      width: 40px;
+}
+.container{
+  margin: 0 auto 0 auto;	
+  width: 500px;		
+  padding:50px;
+  border: 20px;
+  background-color:#9accff;
+  border-radius: 10px;
+  margin-top: 100px; 
+  border-radius: 20px;
+  color: #ffffff;
+}
+.addContainer{
+      display: flex;
+      
+}

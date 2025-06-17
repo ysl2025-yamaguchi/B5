@@ -6,11 +6,9 @@ public class CheesePhraseTag implements Serializable{
 	    private int id;
 	    private int phraseId;          
 	    private int tagId;
-	    private String createdAt;
+        private String createdAt;
 		private String updatedAt;
-		 public CheesePhraseTag() {
-		    	this(0,0,0,"","");
-		    }
+	    
 		public int getId() {
 			return id;
 		}
@@ -49,7 +47,34 @@ public class CheesePhraseTag implements Serializable{
 			this.createdAt = createdAt;
 			this.updatedAt = updatedAt;
 		}
-        
+		public CheesePhraseTag() {
+		    this(0,0,0,"","");
+		}
+		
+		private String phraseName;
+		private String phraseRemarks;
+		private String tagName;
+		public String getPhraseName() {
+			return phraseName;
+		}
+		public void setPhraseName(String phraseName) {
+			this.phraseName = phraseName;
+		}
+		public String getPhraseRemarks() {
+			return phraseRemarks;
+		}
+		public void setPhraseRemarks(String phraseRemarks) {
+			this.phraseRemarks = phraseRemarks;
+		}
+		public String getTagName() {
+			return tagName;
+		}
+		public void setTagName(String tagName) {
+			this.tagName = tagName;
+		}
+
+		
+	    
 
 	
 		
