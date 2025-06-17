@@ -7,7 +7,8 @@
    <meta charset="UTF-8">
    <title>home</title>
    <link rel="stylesheet" type="text/css" href="css/cheese_home.css">
-   <script src = "js/cheese_home.js"></script>
+   <!-- <script src = "js/cheese_home.js"></script> -->
+   <script src="<c:url value='/js/cheese_home.js' />"></script>
 </head>
 
 <body>
