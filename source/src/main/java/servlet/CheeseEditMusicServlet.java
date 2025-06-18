@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,14 +18,23 @@ import dto.CheeseMusicPhrase;
 public class CheeseEditMusicServlet  extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 曲編集画面にフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
+		dispatcher.forward(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/B5/CheeseLoginServlet");
+			response.sendRedirect("/CheeseLoginServlet");
 			return;
 		}
+		
+		
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -52,5 +62,10 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 				request.setAttribute("result", "失敗");
 			}
 		}
+		
+		// 結果ページにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
+				dispatcher.forward(request, response);
+				
 	}
 }

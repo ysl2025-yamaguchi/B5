@@ -1,11 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Edit Music</title>
+<style>
+  .phraseBox {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .controls button {
+    margin-right: 5px;
+  }
+  .message {
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  .red { color: red; }
+  .green { color: green; }
+  .gray { color: gray; }
+</style>
 </head>
 <body>
 
@@ -17,45 +33,59 @@
 
 <!-- ボタン群 -->
 <div class="actionButtons">
-<label>重複数チェック: <input type="number" id="duplicateCount" value="3" min="2" max="5"></label>
-<button id="checkDuplicates">重複チェック</button>
-<button id="saveBtn" >保存</button>
+  <label>重複数チェック: <input type="number" id="duplicateCount" value="3" min="2" max="5"></label>
+  <button id="checkDuplicates" type="button">重複チェック</button>
+  <button id="saveBtn" form="editForm" type="button">保存</button>
 </div>
 
-<!-- 重複メッセージ -->
+<!-- メッセージエリア -->
 <div id="dupMessageArea" class="message red"></div>
 <div id="dupSongNames" class="message gray"></div>
-
 <div id="messageArea" class="message red">
-<c:if test="${not empty errorMsg}">
-${errorMsg}
-</c:if>
+  <c:if test="${not empty errorMsg}">
+    ${errorMsg}
+  </c:if>
 </div>
 
+<!-- ＋ボタン -->
+<button id="addPhraseBtn" type="button">＋</button>
 
-<!-- 追加ボタン -->
-<button id="addPhraseBtn">＋</button>
+<!-- ✅ フォーム開始 -->
+<form id="editForm" method="post" action="CheeseEditMusicServlet">
 
 <!-- フレーズリスト -->
 <div id="phraseContainer">
-<c:forEach var="phrase" items="${phraseList}" varStatus="status">
-<div class="phraseBox" data-index="${status.index}">
-<h3>${status.index + 1}.</h3>
-<input type="text" name="title" value="${phrase.title}" placeholder="タイトル">
-<input type="text" name="author" value="${phrase.author}" placeholder="名前">
-<textarea name="memo">${phrase.memo}</textarea>
+  <c:forEach var="phrase" items="${phraseList}" varStatus="status">
+    <div class="phraseBox" data-index="${status.index}">
+      <h3>${status.index + 1}.</h3>
+      
+      <input type="file" name="phrases[0].audioFile">
+      
+      <input type="text" name="title" value="${phrase.title}" placeholder="タイトル">
+      <input type="text" name="author" value="${phrase.author}" placeholder="名前">
+      <textarea name="memo">${phrase.memo}</textarea>
+      <!-- タグ入力欄 -->
+<div class="tag-section">
+  <input type="text" name="tagInput" class="tagInput" placeholder="タグを入力（例：#ラブソング）">
+  <button type="button" class="addTagBtn">タグ追加</button>
+  <div class="tagList"></div> <!-- 追加されたタグが表示される -->
+</div>
+      
 
-<!-- コントロールボタン -->
-<div class="controls">
-<button class="moveUp">↑</button>
-<button class="moveDown">↓</button>
-<button class="deleteBtn">×</button>
-</div>
-</div>
-</c:forEach>
+      <!-- コントロールボタン -->
+      <div class="controls">
+        <button class="moveUp" type="button">↑</button>
+        <button class="moveDown" type="button">↓</button>
+        <button class="deleteBtn" type="button">×</button>
+      </div>
+    </div>
+  </c:forEach>
 </div>
 
-<script src="scripts/cheese_edit_music.js"></script>
+</form>
+<!-- ✅ フォーム終了 -->
+
+<script src="<c:url value='/js/cheese_edit_music.js' />"></script>
 
 </body>
 </html>
