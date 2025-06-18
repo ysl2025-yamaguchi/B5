@@ -10,9 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import dao.CheesePhraseDAO;
+import dao.CheesePhraseDao;
+import dao.CheeseTagDao;
 import dto.CheesePhrase;
+import dto.CheeseTag;
 
 /**
  * Servlet implementation class CheesePhraseListServlet
@@ -26,18 +29,22 @@ public class CheesePhraseListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("id") == null) {
-//			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
-//			return;
-//		}
+		HttpSession session = request.getSession();
+		if (session.getAttribute("login_user") == null) {
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
 		
-		List<CheesePhrase> PhraseList;
-		CheesePhraseDAO phraseDAO =  new CheesePhraseDAO();
-		PhraseList = phraseDAO.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+		List<CheeseTag> tagList;
+		CheeseTagDao tag = new CheeseTagDao();
+		
+		
+		List<CheesePhrase> phraseList;
+		CheesePhraseDao phraseDao =  new CheesePhraseDao();
+		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
 		
         // リクエスト属性にセット
-        request.setAttribute("phraseList", PhraseList);
+        request.setAttribute("phraseList", phraseList);
 //        request.setAttribute("total", cardList.size());
 
         // 検索ページにフォワード
@@ -54,7 +61,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 		String searchStrLine = request.getParameter("search_str_line");
 		List<String> searchWordList = new ArrayList<String>();
 		List<String> searchTagList = new ArrayList<String>();
-		if (!searchStrLine.isEmpty()) {
+		if (searchStrLine != null && !searchStrLine.isEmpty()) {
 			for (String searchStr : searchStrLine.split("[ |　]+")) {
 				if (searchStr.charAt(0) == '#') {
 					searchTagList.add(searchStr.substring(1));
@@ -65,13 +72,16 @@ public class CheesePhraseListServlet extends HttpServlet {
 			}
 		}
 		String order = request.getParameter("order");
+		if (order == null || order.isEmpty()) {
+			order = "created_desc";
+		}
 		
-		List<CheesePhrase> PhraseList;
-		CheesePhraseDAO phraseDAO =  new CheesePhraseDAO();
-		PhraseList = phraseDAO.select(searchWordList, searchTagList, order, 1);
+		List<CheesePhrase> phraseList;
+		CheesePhraseDao phraseDao =  new CheesePhraseDao();
+		phraseList = phraseDao.select(searchWordList, searchTagList, order, 1);
 		
         // リクエスト属性にセット
-        request.setAttribute("phraseList", PhraseList);
+        request.setAttribute("phraseList", phraseList);
         request.setAttribute("searchStrLine", searchStrLine);
         request.setAttribute("order", order);
 		
