@@ -42,9 +42,23 @@ public class CheeseRegistUserServlet extends HttpServlet {
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String name = request.getParameter("name");
-		String password = 
+		String username = request.getParameter("register_name");
+		String pw = request.getParameter("register_password");
 		
-		
+		// 登録処理を行う
+		CheeseUserDao bDao = new CheeseUserDao();
+		CheeseUser user = new CheeseUser();
+		user.setName(username);
+		user.setPassword(pw);
+		if (bDao.isRegistOK(user)){ // 登録成功
+			request.setAttribute("result", "登録成功！");
+		} else { // 登録失敗
+			request.setAttribute("result", "登録失敗！");
+
+			// 結果ページにフォワードする
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheeseLogin.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
 
 }
