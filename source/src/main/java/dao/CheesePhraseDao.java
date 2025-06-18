@@ -10,7 +10,7 @@ import java.util.List;
 
 import dto.CheesePhrase;
 
-public class CheesePhraseDAO {
+public class CheesePhraseDao {
 	
 	// キーワードもしくはタグ名で検索
 	public List<CheesePhrase> select(List<String> searchWordList, List<String> searchTagList, String order, int userId) {
@@ -278,6 +278,54 @@ public class CheesePhraseDAO {
 
 		// 結果を返す
 		return result;
+	}
+	
+	public int getNextId() {
+		Connection conn = null;
+		int nextId = -1;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "SHOW TABLE STATUS FROM b5 LIKE 'phrases'";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs;
+			rs = pStmt.executeQuery();
+			
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				nextId = rs.getInt("auto_increment");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			nextId = -1;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			nextId = -1;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					nextId = -1;
+				}
+			}
+		}
+
+		// 結果を返す
+		return nextId;
 	}
 	
 }

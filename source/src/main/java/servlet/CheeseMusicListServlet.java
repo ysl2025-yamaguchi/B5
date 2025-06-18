@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CheeseMusicDao;
 import dto.CheeseMusic;
@@ -29,7 +30,7 @@ public class CheeseMusicListServlet extends HttpServlet {
 //		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 //		HttpSession session = request.getSession();
 //		if (session.getAttribute("id") == null) {
-//		response.sendRedirect("/b5/CheeseLoginServlet");
+//		response.sendRedirect("/CheeseLoginServlet");
 //		return;
 //	}
 		// 曲ページにフォワードする
@@ -46,17 +47,28 @@ public class CheeseMusicListServlet extends HttpServlet {
 //		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 //		HttpSession session = request.getSession();
 //		if (session.getAttribute("id") == null) {
-//			response.sendRedirect("/B5/CheeseLoginServlet");
+//			response.sendRedirect("/CheeseLoginServlet");
 //			return;
 //		}
+		
+		HttpSession session = request.getSession();
+		String result = (String) session.getAttribute("result");
+		if (result != null) {
+			request.setAttribute("result", result);
+			session.removeAttribute("result");  // 1回だけ表示
+		}
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
+		String sort = request.getParameter("sort");
 
 		// 検索処理を行う
+		CheeseMusic condition = new CheeseMusic();
+		condition.setName(name);
+		
 		CheeseMusicDao bDao = new CheeseMusicDao();
-		List<CheeseMusic> cardList = bDao.select(new CheeseMusic(0, name, 0, "",""));
+		List<CheeseMusic> cardList = bDao.select(condition, sort);
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("cardList", cardList);

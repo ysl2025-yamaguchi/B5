@@ -9,24 +9,43 @@ document.getElementById('regist_music').onsubmit = function(event) {
     }
 };
 
-//曲追加ボタンの操作
-document.getElementById('addMusic').addEventListener('click', function(e){
-  e.preventDefault();
-  document.getElementById('addMusicSection').style.display = 'block';
-});
+// 曲追加フォームを初期非表示
+  document.addEventListener("DOMContentLoaded", function () {
+  const addMusicSection = document.getElementById('addMusicSection');
+  addMusicSection.style.display = 'none';
 
-document.getElementById('addMusic').addEventListener('dblclick', function(e){
-  e.preventDefault();
-  document.getElementById('addMusicSection').style.display = 'none';
-});
+  const addMusicBtn = document.getElementById('addMusic');
 
-//曲表示ボタンの操作
-document.getElementById('openMusic').addEventListener('click', function(e){
-  e.preventDefault();
-  document.getElementById('openMusicSection').style.display = 'block';
-});
+  addMusicBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    addMusicSection.style.display = 'block';
+  });
 
-document.getElementById('openMusic').addEventListener('dblclick', function(e){
-  e.preventDefault();
-  document.getElementById('openMusicSection').style.display = 'none';
+  addMusicBtn.addEventListener('dblclick', function(e){
+    e.preventDefault();
+    addMusicSection.style.display = 'none';
+  });
+
+// 全ての詳細セクションを非表示
+  const toggleSections = document.querySelectorAll(".toggle-section");
+  toggleSections.forEach(function (section) {
+    section.style.display = "none";
+  });
+
+// 開閉処理を追加
+  const toggleButtons = document.querySelectorAll(".toggle-btn");
+  toggleButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const targetId = btn.getAttribute("data-target");
+      const section = document.getElementById(targetId);
+
+      if (section.style.display === "block") {
+        section.style.display = "none";
+        btn.textContent = btn.textContent.replace("▼", "▶");
+      } else {
+        section.style.display = "block";
+        btn.textContent = btn.textContent.replace("▶", "▼");
+      }
+    });
+  });
 });

@@ -46,7 +46,7 @@ public class CheeseUser implements Serializable {
 		return updatedAt;
 	}
 	
-	public void setUpdateAt(String updatedAt) {
+	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	

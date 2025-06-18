@@ -3,10 +3,10 @@ package test;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.CheesePhraseDAO;
+import dao.CheesePhraseDao;
 import dto.CheesePhrase;
 
-public class CheesePhraseDAOTest {
+public class CheesePhraseDaoTest {
 	
 	public static void showAllData(List<CheesePhrase> phraseList) {
 		for (CheesePhrase phrase :  phraseList) {
@@ -24,37 +24,39 @@ public class CheesePhraseDAOTest {
 	}
 
 	public static void main(String[] args) {
-		CheesePhraseDAO dao = new CheesePhraseDAO();
+		CheesePhraseDao dao = new CheesePhraseDao();
 		// selectのテスト
 		int userId = 1;
 		System.out.println("---------- select()のテスト1 ----------");
 		List<String> searchWordList = new ArrayList<String>(); 
 		List<String> searchTagList = new ArrayList<String>(); 
 		searchWordList.add("3");
-		List<CheesePhrase> phraseList = dao.select(searchWordList, searchTagList, userId);
-		CheesePhraseDAOTest.showAllData(phraseList);
+		List<CheesePhrase> phraseList = dao.select(searchWordList, searchTagList, "", userId);
+		CheesePhraseDaoTest.showAllData(phraseList);
 		
 		System.out.println("---------- select()のテスト2 ----------");
 		searchWordList.clear();
 		searchTagList.clear();
 		searchTagList.add("A");
-		phraseList = dao.select(searchWordList, searchTagList, userId);
-		CheesePhraseDAOTest.showAllData(phraseList);
+		phraseList = dao.select(searchWordList, searchTagList, "", userId);
+		CheesePhraseDaoTest.showAllData(phraseList);
 		
 		System.out.println("---------- select()のテスト3 ----------");
 		searchWordList.clear();
 		searchTagList.clear();
 		searchTagList.add("D");
-		phraseList = dao.select(searchWordList, searchTagList, userId);
-		CheesePhraseDAOTest.showAllData(phraseList);
+		phraseList = dao.select(searchWordList, searchTagList, "", userId);
+		CheesePhraseDaoTest.showAllData(phraseList);
 		
 		System.out.println("---------- select()のテスト4 ----------");
 		searchWordList.clear();
 		searchTagList.clear();
 		searchTagList.add("B");
 		searchTagList.add("C");
-		phraseList = dao.select(searchWordList, searchTagList, userId);
-		CheesePhraseDAOTest.showAllData(phraseList);
+		phraseList = dao.select(searchWordList, searchTagList, "", userId);
+		CheesePhraseDaoTest.showAllData(phraseList);
+		
+		System.out.println(dao.getNextId());
 		
 		
 		// insertのテスト
@@ -66,7 +68,7 @@ public class CheesePhraseDAOTest {
 //			List<String> searchTagList = new ArrayList<String>(); 
 //			int userId = 1;
 //			List<CheesePhrase> phraseList = dao.select(searchWordList, searchTagList, userId);
-//			CheesePhraseDAOTest.showAllData(phraseList);
+//			CheesePhraseDaoTest.showAllData(phraseList);
 //		}
 //		else {
 //			System.out.println("登録失敗");
