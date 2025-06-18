@@ -5,17 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src = "js/cheese_edit_phrase.js"></script>
-<link rel="stylesheet" type="text/css" href="css/cheese_edit_phrase.css">
+<title>フレーズ編集画面</title>
+ <link rel="stylesheet" type="text/css" href="css/cheese_edit_phrase.css">
+   <!-- <script src = "js/cheese_home.js"></script> -->
+  
+
 </head>
 <body>
-  
- <form action="/CheeseEditPhraseServlet" method="post" id="updateTag">
-    <div class="phrase">
-      <input type="hidden" name="id" value="${phrases}" />
-      <input type="text" name="phraseName" placeholder="名前" value="${phrases.id}"><br>
-      <input type="text" name="phraseRemarks" placeholder="メモ" value="${phrases.id}"><br>
+    
+    <jsp:include page="cheese_header.jsp" />
+ <c:if test="${not empty result}">
+  <p>${result}</p>
+</c:if>
+   
+ <form method="POST" action="<c:url value='/CheesePhraseEditServlet' />">
+ <div class="phrase">
+       <input type="hidden" name="id" value="${phrases_tags.id}" />
+      <input type="hidden" name="phraseId" value="${phrases.id}" />
+      <input type="text" name="phraseName" placeholder="名前" value="${phrases.name}"><br>
+      <input type="text" name="phraseRemarks" placeholder="メモ" value="${phrases.remarks}"><br>
     </div>
 
     <div>
@@ -36,7 +44,7 @@
           </select>
         </div>
 
-        <div class="newTag">
+      <div class="newTag">
           <input type="radio" name="tagType" id="newTagRadio" value="new">
           <label for="newTagRadio">新規</label><br>
           <input type="text" name="newTag" id="newTagInput" placeholder="新しいタグ名">
@@ -51,12 +59,13 @@
     </div>
 
     <div>
-      <input type="submit" value="変更">
+      <input type="submit" value="登録">
     </div>
-  </form>
+  
+</form>
    
     
 
-
+ <script src="<c:url value='/js/cheese_edit_phrase.js' />"></script>
 </body>
 </html>

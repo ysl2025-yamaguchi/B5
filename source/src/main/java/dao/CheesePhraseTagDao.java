@@ -55,7 +55,7 @@ public class CheesePhraseTagDao {
 
 
         //insert Phrasetag
-        public boolean insert(CheesePhraseTag card) {
+        public boolean insert(CheesePhraseTag phraseTag) {
     		Connection conn = null;
     		boolean result = false;
 
@@ -73,8 +73,8 @@ public class CheesePhraseTagDao {
     			PreparedStatement pStmt = conn.prepareStatement(sql);
     			// SQL文を完成させる
     		
-    			pStmt.setInt(1, card.getPhraseId());  // phrase_id は int
-    			pStmt.setInt(2, card.getTagId());     // tag_id も int
+    			pStmt.setInt(1, phraseTag.getPhraseId());  
+    			pStmt.setInt(2, phraseTag.getTagId());     
     			
 
     			// SQL文を実行する
@@ -188,4 +188,15 @@ public class CheesePhraseTagDao {
     		// 結果を返す
     		return result;
     	}
+    	// 新しいタグを挿入するメソッド
+//        public void insertNewTag(String tagName) throws SQLException {
+//            String sql = "INSERT INTO tags (name) VALUES (?)";
+//            try (Connection conn = getConnection(); 
+//            		PreparedStatement ps = conn.prepareStatement(sql)) {
+//                ps.setString(1, tagName);
+//                ps.executeUpdate();
+//            }
+//        }
+    
+    	
 }
