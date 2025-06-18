@@ -22,7 +22,7 @@ public class CheeseRegistUserServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/B5/CheeseLoginUserServlet");
+			response.sendRedirect("/B5/CheeseLoginServlet");
 			return;
 		}
 		
