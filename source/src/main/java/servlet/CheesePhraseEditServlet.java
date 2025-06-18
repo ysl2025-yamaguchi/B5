@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.CheesePhraseDAO;
+import dao.CheesePhraseDao;
 import dao.CheesePhraseTagDao;
 import dao.CheeseTagDao;
 import dto.CheesePhrase;
@@ -44,7 +44,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		List<CheesePhrase> phraseList;
-		CheesePhraseDAO phraseDAO =  new CheesePhraseDAO();
+		CheesePhraseDao phraseDAO =  new CheesePhraseDao();
 		phraseList = phraseDAO.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
 		
 		List<CheeseTag> tagList;
