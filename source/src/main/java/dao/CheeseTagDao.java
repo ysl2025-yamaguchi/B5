@@ -21,7 +21,7 @@ public class CheeseTagDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 	
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 			
@@ -30,13 +30,11 @@ public class CheeseTagDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
-			pStmt.setInt(1, card.getId());
 			if (card.getName() != null) {
-			pStmt.setString(2, card.getName());
+			pStmt.setString(1, card.getName());
 			} else {
-			pStmt.setString(2, "");
+			pStmt.setString(1, "");
 			}
-			pStmt.setInt(3, card.getUserId());
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
@@ -70,7 +68,7 @@ public class CheeseTagDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -113,7 +111,7 @@ public class CheeseTagDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/music_cheese?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 
@@ -129,9 +127,9 @@ public class CheeseTagDao {
 				CheeseTag cheeseTag = new CheeseTag(
 						rs.getInt("id"),
 						rs.getString("name"),
-						rs.getInt("userId"),
-						rs.getString("updatedAt"),
-						rs.getString("createdAt")
+						rs.getInt("user_id"),
+						rs.getString("updated_at"),
+						rs.getString("created_at")
 						);
 				cardList.add(cheeseTag);
 			}
