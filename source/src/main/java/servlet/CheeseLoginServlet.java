@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.CheeseUserDao;
 import dto.CheeseUser;
 
+@WebServlet("/CheeseLoginServlet")
 public class CheeseLoginServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +43,7 @@ public class CheeseLoginServlet extends HttpServlet{
 			session.setAttribute("login_user", user);
 
 			// メニューサーブレットにリダイレクトする
-			response.sendRedirect("/B5/CheesePhraseListServlet");
+			response.sendRedirect(request.getContextPath() + "/CheesePhraseListServlet");
 		} else { // ログイン失敗
 			// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
 			request.setAttribute("result", "ログインに失敗しました。");
