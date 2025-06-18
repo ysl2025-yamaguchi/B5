@@ -1,67 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src = "js/cheese_edit_phrase.js"></script>
+<link rel="stylesheet" type="text/css" href="css/cheese_edit_phrase.css">
 </head>
 <body>
-     
-   <span id="errorMessage"></span>
-    <!-- 編集したいフレーズデータの入力 -->
-    <form action="/webapp/CheeseEditPhraseServlet">
-      <div class="phrase">
-       <input type="hidden" name="phraseId" value="${phrases.id}"/>
-        <input type="text" name="phraseName" id="" placeholder="名前" value="${phrases.name}"><br>
-        <input type="text" name="phraseRemarks" id="" placeholder="メモ" value="${phrases.remarks}"><br>
-      </div>
+  
+ <form action="/CheeseEditPhraseServlet" method="post" id="updateTag">
+    <div class="phrase">
+      <input type="hidden" name="id" value="${phrases}" />
+      <input type="text" name="phraseName" placeholder="名前" value="${phrases.id}"><br>
+      <input type="text" name="phraseRemarks" placeholder="メモ" value="${phrases.id}"><br>
+    </div>
 
-      <div>
-        <button id="addTag" name="">+</button>
-        <label for="">タグを追加</label>
-      </div>
+    <div>
+      <button type="button" id="addTag">+</button>
+      <label>タグを追加</label>
+    </div>
+
+    <div class="addContainer">
       <div id="addTagSection">
-          <div class="registeredTag">
-          <input type="radio" name="" id="" >
-          <label for="">登録済</label><br>
-          <select name="" id="">
-            <option value="">登録済タグ</option>
+        <div class="registeredTag">
+          <input type="radio" name="tagType" id="registeredTagRadio" value="registered" checked>
+          <label for="registeredTagRadio">登録済</label><br>
+          <select name="registeredTag" id="registeredTagSelect">
+            <c:forEach var="tag" items="${tags}">
+                <option value="${tag.id}">${tag.name}</option>
+            </c:forEach>
+           
           </select>
-      </div>
+        </div>
 
-      <div class="newTag" >
-          <input type="radio" name="" id="">
-          <label for="">新規</label><br>
-          <input type="text" name="" id="">
-      </div>
-      <div class="addButton">
-        <input type="submit" value="追加"><br>
-      </div>
+        <div class="newTag">
+          <input type="radio" name="tagType" id="newTagRadio" value="new">
+          <label for="newTagRadio">新規</label><br>
+          <input type="text" name="newTag" id="newTagInput" placeholder="新しいタグ名">
+        </div>
 
-      <div class="addedTag" hidden>
-        <input type="text" name="" id="" readonly>
+        <div id="tagsContainer"></div>
+
+        <div class="addButton">
+          <input type="button" value="追加" id="addButton"><br>
+        </div>
       </div>
-      </div>
-     
-        
-      <input type="submit" value="登録">
-     
+    </div>
+
+    <div>
+      <input type="submit" value="変更">
+    </div>
+  </form>
+   
     
-    </form>
-    <script>
- // タグを追加
-  //+ボタンをクリックすると登録済や新規のフォームが表示される
-  document.getElementById('addTag').addEventListener('click', function (e) {
-        e.preventDefault();
-        document.getElementById('addTagSection').style.display = 'block';
-      });
-  //+ボタンをダブルクリックすると登録済や新規のフォームが消える
-  document.getElementById('addTag').addEventListener('dblclick', function (e) {
-        e.preventDefault();
-        document.getElementById('addTagSection').style.display = 'none';
-       
-      });
-    </script>
-   </body>
+
+
+</body>
 </html>

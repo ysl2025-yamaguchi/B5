@@ -7,7 +7,8 @@
    <meta charset="UTF-8">
    <title>home</title>
    <link rel="stylesheet" type="text/css" href="css/cheese_home.css">
-   <script src = "js/cheese_home.js"></script>
+   <!-- <script src = "js/cheese_home.js"></script> -->
+   <script src="<c:url value='/js/cheese_home.js' />"></script>
 </head>
 
 <body>
@@ -16,9 +17,9 @@
 
    <!-- フレーズ登録 -->
     <div>
-      <span id = "error_message"></span> <br>
-      <form method = "POST" id = "regist_phrase_form" action = "B5/CheeseRegistPhraseServlet">
-      <input type = "file" value = "uplode file" accept = ".mp3, .m4a, .wav"> <br>
+      <span id = "error_message"><c:out value = "${result}"/></span> <br>
+      <form method = "POST" id = "regist_phrase_form" action = "CheeseRegistPhraseServlet" enctype="multipart/form-data">
+      <input type = "file" value = "uplode file" name = "uploded_file" accept = ".mp3, .m4a, .wav"> <br>
          <input type = "text" name = "name" placeholder = "フレーズ名"> <br>
          <input type = "text" name = "remarks" placeholder = "メモ"> <br>
          <div>
