@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +11,18 @@
 <body>
 <header class="header">
 	<div class="cheese-icon">
-		<img src="${pageContext.request.contextPath}/img/blackcheese.png" width="30" height="30" alt="CHEESE">
+		<img src="<c:url value='/img/blackcheese.png' />" width="30" height="30" alt="CHEESE">
 	</div>
 	<div class="logo">
-		<a href="${pageContext.request.contextPath}/CheesePhraseListServlet">
-			<img src="${pageContext.request.contextPath}/img/logo.png" width="300" height="100" alt="MUSIC CHEESE">
+		<a href="<c:url value='/CheesePhraseListServlet' />">
+			<img src="<c:url value='/img/logo.png' />" width="300" height="100" alt="MUSIC CHEESE">
 		</a>
 	</div>
 	<nav class="nav">
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/CheesePhraseListServlet"><strong>Home</strong></a><span class="line-right"></span></li>
-			<li><a href="${pageContext.request.contextPath}/CheeseMusicListServlet"><strong>Music</strong></a><span class="line-right"></span></li>
-			<li><a href="${pageContext.request.contextPath}/CheeseLogoutServlet"><strong>Logout</strong></a><span class="line-left"></span></li>
+			<li><a href="<c:url value='/CheesePhraseListServlet' />"><strong>Home</strong></a><span class="line-right"></span></li>
+			<li><a href="<c:url value='/CheeseMusicListServlet' />"><strong>Music</strong></a><span class="line-right"></span></li>
+			<li><a href="<c:url value='/CheeseLogoutServlet' />"><strong>Logout</strong></a><span class="line-left"></span></li>
 		</ul>
 	</nav>
 </header>
