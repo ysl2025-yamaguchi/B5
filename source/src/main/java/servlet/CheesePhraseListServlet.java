@@ -54,7 +54,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 		String searchStrLine = request.getParameter("search_str_line");
 		List<String> searchWordList = new ArrayList<String>();
 		List<String> searchTagList = new ArrayList<String>();
-		if (!searchStrLine.isEmpty()) {
+		if (searchStrLine != null && !searchStrLine.isEmpty()) {
 			for (String searchStr : searchStrLine.split("[ |　]+")) {
 				if (searchStr.charAt(0) == '#') {
 					searchTagList.add(searchStr.substring(1));
@@ -65,6 +65,9 @@ public class CheesePhraseListServlet extends HttpServlet {
 			}
 		}
 		String order = request.getParameter("order");
+		if (order == null || order.isEmpty()) {
+			order = "created_desc";
+		}
 		
 		List<CheesePhrase> PhraseList;
 		CheesePhraseDAO phraseDAO =  new CheesePhraseDAO();
