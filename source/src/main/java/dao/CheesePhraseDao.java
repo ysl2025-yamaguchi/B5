@@ -10,7 +10,7 @@ import java.util.List;
 
 import dto.CheesePhrase;
 
-public class CheesePhraseDAO {
+public class CheesePhraseDao {
 	
 	// キーワードもしくはタグ名で検索
 	public List<CheesePhrase> select(List<String> searchWordList, List<String> searchTagList, String order, int userId) {
