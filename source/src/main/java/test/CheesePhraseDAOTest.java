@@ -31,21 +31,21 @@ public class CheesePhraseDAOTest {
 		List<String> searchWordList = new ArrayList<String>(); 
 		List<String> searchTagList = new ArrayList<String>(); 
 		searchWordList.add("3");
-		List<CheesePhrase> phraseList = dao.select(searchWordList, searchTagList, userId);
+		List<CheesePhrase> phraseList = dao.select(searchWordList, searchTagList, "", userId);
 		CheesePhraseDAOTest.showAllData(phraseList);
 		
 		System.out.println("---------- select()のテスト2 ----------");
 		searchWordList.clear();
 		searchTagList.clear();
 		searchTagList.add("A");
-		phraseList = dao.select(searchWordList, searchTagList, userId);
+		phraseList = dao.select(searchWordList, searchTagList, "", userId);
 		CheesePhraseDAOTest.showAllData(phraseList);
 		
 		System.out.println("---------- select()のテスト3 ----------");
 		searchWordList.clear();
 		searchTagList.clear();
 		searchTagList.add("D");
-		phraseList = dao.select(searchWordList, searchTagList, userId);
+		phraseList = dao.select(searchWordList, searchTagList, "", userId);
 		CheesePhraseDAOTest.showAllData(phraseList);
 		
 		System.out.println("---------- select()のテスト4 ----------");
@@ -53,8 +53,10 @@ public class CheesePhraseDAOTest {
 		searchTagList.clear();
 		searchTagList.add("B");
 		searchTagList.add("C");
-		phraseList = dao.select(searchWordList, searchTagList, userId);
+		phraseList = dao.select(searchWordList, searchTagList, "", userId);
 		CheesePhraseDAOTest.showAllData(phraseList);
+		
+		System.out.println(dao.getNextId());
 		
 		
 		// insertのテスト
