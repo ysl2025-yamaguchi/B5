@@ -22,19 +22,19 @@ public class CheeseMusicDAOTest {
 		
 		
 		// insert()のテスト
-		System.out.println("---------- insert()のテスト ----------");
-		CheeseMusic insRec = new CheeseMusic(0, "チータラ", 2, "", "");
-		if (dao.insert(insRec)) {
-			System.out.println("登録成功！");
-			List<CheeseMusic> cardListIns = dao.select(new CheeseMusic(0, "", 0, "", ""));
-			CheeseMusicDAOTest.showAllData(cardListIns);
-		} else {
-			System.out.println("登録失敗！");
-		}
+//		System.out.println("---------- insert()のテスト ----------");
+//		CheeseMusic insRec = new CheeseMusic(0, "チータラ", 2, "", "");
+//		if (dao.insert(insRec)) {
+//			System.out.println("登録成功！");
+//			List<CheeseMusic> cardListIns = dao.select(new CheeseMusic(0, "", 0, "", ""));
+//			CheeseMusicDAOTest.showAllData(cardListIns);
+//		} else {
+//			System.out.println("登録失敗！");
+//		}
 		
 		// select()のテスト1
 		System.out.println("---------- select()のテスト1 ----------");
-		List<CheeseMusic> cardListSel1 = dao.select(new CheeseMusic(0, "チー", 0, "",""));
+		List<CheeseMusic> cardListSel1 = dao.select(new CheeseMusic(0, "チーズ", 0, "",""));
 		CheeseMusicDAOTest.showAllData(cardListSel1);
 		
 		// select()のテスト2
@@ -60,10 +60,10 @@ public class CheeseMusicDAOTest {
 		
 		// delete()のテスト
 		System.out.println("---------- delete()のテスト ----------");
-		List<CheeseMusic> cardListDel = dao.select(new CheeseMusic(1, "", 0, "", ""));
+		List<CheeseMusic> cardListDel = dao.select(new CheeseMusic(7, "", 0, "", ""));
 		CheeseMusic delRec = cardListDel.get(0);
 		System.out.println(cardListDel.size());
-		if (dao.delete(delRec)) {
+		if (dao.deleteById(delRec.getId())) {
 		System.out.println("削除成功！");
 		cardListDel = dao.select(new CheeseMusic(0, "", 0, "", ""));
 		CheeseMusicDAOTest.showAllData(cardListDel);

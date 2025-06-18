@@ -195,7 +195,7 @@ public class CheeseMusicDao {
 	}        
 	
 	// 引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
-		public boolean delete(CheeseMusic card) {
+		public boolean deleteById(int id) {
 			Connection conn = null;
 			boolean result = false;
 
@@ -213,7 +213,7 @@ public class CheeseMusicDao {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				pStmt.setInt(1, card.getId());
+				pStmt.setInt(1, id);
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {

@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,14 +46,14 @@ public class CheeseRegistMusicServlet extends HttpServlet {
 		boolean success = dao.insert(new CheeseMusic(0, name, userId, createdAt, updatedAt));
 		
 		if (success) { // 登録成功
-			request.setAttribute("result", "登録成功しました！");
+			request.getSession().setAttribute("result", "登録成功しました！");
 		} else { // 登録失敗
-			request.setAttribute("result", "登録に失敗しました。");
+			request.getSession().setAttribute("result", "登録に失敗しました。");
 		}
-
+		
 		// 同じJSPにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_music.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("CheeseMusicListServlet"); // JSPを表示するサーブレットなど
+	    return;
 	}
 	
 }
