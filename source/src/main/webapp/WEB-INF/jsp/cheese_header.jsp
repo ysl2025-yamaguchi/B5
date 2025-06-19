@@ -10,9 +10,23 @@
 </head>
 <body>
 <header class="header">
-	<div class="cheese-icon">
-		<img src="<c:url value='/img/blackcheese.png' />" width="30" height="30" alt="CHEESE">
+<div class="cheese-menu">
+  <img src="<c:url value='/img/blackcheese.png' />" id="themeImage" alt="テーマ切替" width="30" height="30">
+  <ul class="dropdown" id="themeDropdown">
+    <li data-theme="light">ライト</li>
+    <li data-theme="dark">ダーク</li>
+    <li data-theme="ocean">オーシャン</li>
+    <li data-theme="sunset">サンセット</li>
+  </ul>
+</div>
+
+<!-- 
+<div class="cheese-icon">
+		<img src="<c:url value='/img/blackcheese.png' />" width="30" height="30" alt="CHEESE" id="themaImage">
 	</div>
+	 -->
+	
+	
 	<div class="logo">
 		<a href="<c:url value='/CheesePhraseListServlet' />">
 			<img src="<c:url value='/img/logo.png' />" width="300" height="100" alt="MUSIC CHEESE">

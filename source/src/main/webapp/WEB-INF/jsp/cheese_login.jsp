@@ -6,14 +6,58 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン/新規登録</title>
-<jsp:include page="cheese_header.jsp"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
 </head>
 <body>
-<h1><img src="/webapp/img/blackcheese.png" width="30" height="30" alt="CHEESE"></h1>
-	<div class="logo"><a href="/webapp/CheesePhraseListServlet">
-		<img src="/webapp/img/logo.png" width="500" height="170" alt="MUSIC CHEESE"></a>
+<header class="header">
+
+<div class="cheese-menu">
+  <img src="<c:url value='/img/blackcheese.png' />" id="themeImage" alt="テーマ切替" width="30" height="30">
+  <ul class="dropdown" id="themeDropdown">
+    <li data-theme="light">ライト</li>
+    <li data-theme="dark">ダーク</li>
+    <li data-theme="ocean">オーシャン</li>
+    <li data-theme="sunset">サンセット</li>
+  </ul>
+</div>
+
+<!--  
+<div class="cheese-icon">
+<img src="<c:url value='/img/blackcheese.png' />" width="30" height="30" alt="CHEESE" id="themeImage">
+
+<select id="themeSelector">
+      <option value="light">ライト</option>
+      <option value="dark">ダーク</option>
+      <option value="ocean">オーシャン</option>
+      <option value="sunset">サンセット</option>
+</select>
+
+	
 	</div>
 
+
+<div class="cheese-icon">
+  <img src="<c:url value='/img/blackcheese.png' />"
+       id="themeImage"
+       alt="テーマ切替"
+       width="30" height="30">
+  <div class="theme-select-wrapper" id="themeWrapper">
+    <select id="themeSelector">
+      <option value="light">ライト</option>
+      <option value="dark">ダーク</option>
+      <option value="ocean">オーシャン</option>
+      <option value="sunset">サンセット</option>
+    </select>
+  </div>
+</div>
+-->
+
+	<div class="logo">
+		<a href="<c:url value='/CheeseLoginServlet' />">
+			<img src="<c:url value='/img/logo.png' />" width="300" height="100" alt="MUSIC CHEESE">
+		</a>
+	</div>
+</header>
 	<div class="container">
         <!-- 切り替えボタン -->
         <button onclick="showLogin()">ログイン画面</button>
@@ -43,6 +87,8 @@
  
  </form>
 <script src="<c:url value='/js/cheese_login.js' />"></script>
+<script src="<c:url value='/js/cheese_common.js' />"></script>
 
 </body>
 </html>
+
