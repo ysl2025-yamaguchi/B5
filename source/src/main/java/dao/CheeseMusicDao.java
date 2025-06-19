@@ -134,15 +134,16 @@ public class CheeseMusicDao {
 	}
 	
 	//検索結果の並び替え処理
-	public List<CheeseMusic> select(CheeseMusic card, String orderBy) {
+	public List<CheeseMusic> select(List<String> searchWordList, String orderBy, int userId) {
 	    Connection conn = null;
 	    List<CheeseMusic> cardList = new ArrayList<>();
 	    
 	    String safeOrderBy;
 	    switch (orderBy) {
-	        case "new":  safeOrderBy = "created_at DESC"; break;
-	        case "old":  safeOrderBy = "created_at ASC"; break;
-	        case "update": safeOrderBy = "updated_at DESC"; break;
+	        case "created_desc":  safeOrderBy = "created_at DESC"; break;
+	        case "created_asc":  safeOrderBy = "created_at ASC"; break;
+	        case "updated_desc": safeOrderBy = "updated_at DESC"; break;
+	        case "updated_asc": safeOrderBy = "updated_at ASC"; break;
 	        default:     safeOrderBy = "created_at DESC"; break;
 	    } 
 	    
@@ -159,14 +160,19 @@ public class CheeseMusicDao {
 	        
 	        // SQL文を準備する    
 	        String sql = "SELECT id, name, user_id, created_at, updated_at "
-	        			+ "FROM musics "
-	        			+ "WHERE name LIKE ? "
-	        			+ "ORDER BY " + safeOrderBy;
+	        			+ "FROM musics WHERE user_id = ?";
+	        for (int i = 0; i<searchWordList.size();i++) {
+	        	sql += " AND name LIKE ?";
+	        } 
+	        sql += " ORDER BY " + safeOrderBy;
+	        
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 	        
 	        // SQL文を完成させる
-	        pStmt.setString(1, "%" + (card.getName() != null ? card.getName() : "") + "%");
-        
+	        pStmt.setInt(1, userId);
+	        for (int i = 0; i<searchWordList.size();i++) {
+	        	pStmt.setString(i+2, "%"+searchWordList.get(i)+"%");
+	        } 
 	        ResultSet rs = pStmt.executeQuery();
 	        
 	        // SQL文を実行する

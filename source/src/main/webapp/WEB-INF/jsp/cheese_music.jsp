@@ -30,15 +30,16 @@
 <section>
 <label><img src="<c:url value='/img/blackcheese.png' />" width="25" height="25">曲検索</label>
 <form method="POST" action="<c:url value='/CheeseMusicListServlet' />">
-	<input type="text" name="name" placeholder="キーワード">
+	<input type="text" name="search_str_line" placeholder="キーワード" value="${searchStrLine}" autocomplete="off">
 	<button type="submit">
 		<img src="<c:url value='/img/search.png' />" width="15" height="15">
-	</button>
-	<div>
-		<label><input type="radio" name="sort" value="new" checked>新しい順</label>
-		<label><input type="radio" name="sort" value="old">古い順</label>
-		<label><input type="radio" name="sort" value="update">更新順</label>
-	</div>
+	</button><br>
+	<select name="sort">
+		<option value = "created_desc" <c:if test = "${sort == 'created_desc'}">selected</c:if>>登録が新しい順</option>
+            <option value = "created_asc" <c:if test = "${sort == 'created_asc'}">selected</c:if>>登録が古い順</option>
+            <option value = "updated_desc" <c:if test = "${sort == 'updated_desc'}">selected</c:if>>更新が新しい順</option>
+            <option value = "updated_asc" <c:if test = "${sort == 'updated_asc'}">selected</c:if>>更新が古い順</option>
+	</select>
 </form>
 </section>
 <!-- 曲リスト -->
