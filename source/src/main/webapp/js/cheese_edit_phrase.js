@@ -10,13 +10,7 @@ document.getElementById('addTag').addEventListener('dblclick', function (e) {
       document.getElementById('addTagSection').style.display = 'none';
      
     });
-let formObj = document.getElementById('updateTag');
-let errorMessageObj = document.getElementById('error_message');
 
-
-formObj.onsubmit = function() {
-    errorMessageObj.textContent = '変更が行われました';
- }
 //新規追加
 const addButton=document.getElementById('addButton');
 const newTagInput=document.getElementById('newTagInput');
@@ -45,4 +39,4 @@ const tagsContainer=document.getElementById('tagsContainer');
       tagsContainer.appendChild(tagDiv);
 
       newTagInput.value = '';
-    });
+   });

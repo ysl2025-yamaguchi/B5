@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -38,22 +37,23 @@ public class CheesePhraseEditServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+		request.setCharacterEncoding("UTF-8");
 //		HttpSession session = request.getSession(false);
 //		Integer userId = (Integer) session.getAttribute("userId");
-		
-		request.setCharacterEncoding("UTF-8");
-		List<CheesePhrase> phraseList;
-		CheesePhraseDao phraseDAO =  new CheesePhraseDao();
-		phraseList = phraseDAO.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
-		
+//	    List<CheesePhrase> phraseList;
+//		CheesePhraseDao phraseDao =  new CheesePhraseDao();
+//		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1); 
+//		
 		List<CheeseTag> tagList;
 		CheeseTagDao tagDao = new CheeseTagDao();
 		tagList= tagDao.select(new CheeseTag(0,"", 0,"","")); 
-
+		request.setAttribute("tagList", tagList);
+//		int phraseId = Integer.parseInt(request.getParameter("phraseId"));
+		int phraseId = 1;
+		CheesePhraseTagDao list = new CheesePhraseTagDao();
+		List<CheesePhraseTag> phraseTagList=list.selectPhraseTagInfo(phraseId);
+	    request.setAttribute("phraseTagList", phraseTagList);
 		
-	    request.setAttribute("tagList", tagList);
-		request.setAttribute("phraseList", phraseList);
 	   
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_phrase.jsp");
         dispatcher.forward(request, response);
@@ -73,32 +73,35 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		 request.setCharacterEncoding("UTF-8");
 
 		    // Get parameters from the form
-		    int id = Integer.parseInt(request.getParameter("id"));
-		    int phraseId = Integer.parseInt(request.getParameter("phraseId"));
-		    int tagId = Integer.parseInt(request.getParameter("tagId"));
-		  
+			int id= Integer.parseInt(request.getParameter("id"));
+			int phraseId= Integer.parseInt(request.getParameter("phraseId"));
+			int tagId= Integer.parseInt(request.getParameter("tagId"));
+			int userId= Integer.parseInt(request.getParameter("userId"));
+			String phraseName = request.getParameter("phraseName");
+			String phraseRemarks = request.getParameter("phraseRemarks");
+			String phrasePath = request.getParameter("phrasePath");
+			String tagName = request.getParameter("tagName");
+            String updated_at = request.getParameter("updated_at");
+			String created_at = request.getParameter("created_at");
 		    // Prepare DAO and model
 		    CheesePhraseTagDao dao = new CheesePhraseTagDao();
+		    CheesePhraseDao pDao=new CheesePhraseDao();
+		    CheeseTagDao tDao=new CheeseTagDao();
 			if (request.getParameter("submit").equals("更新")) {
-				if (dao.update(new CheesePhraseTag(id,phraseId,tagId,"",""))) { // 更新成功
-					request.setAttribute("result", "更新成功！");
-				} else { // 更新失敗
-					request.setAttribute("result","更新失敗！");
-				}
-			} else {
-				if (dao.delete(new CheesePhraseTag(id,phraseId,tagId,"",""))) {
-						// 削除成功
-					request.setAttribute("result", "削除成功！");
-				} else { // 削除失敗					request.setAttribute("result", "削除失敗！");
-				}
+				dao.update(new CheesePhraseTag(id,phraseId,tagId,created_at,updated_at));
+				pDao.update(new CheesePhrase(phraseId,phraseName,phraseRemarks,phrasePath,userId,created_at, updated_at));
 			}
-
-////		    // Forward to result page
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+			// For tag
+			if (request.getParameter("submit").equals("追加")) {
+                tDao.insert(new CheeseTag(tagId,tagName,userId,created_at,updated_at));
+			}
+		    // Forward to result page
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_phrase.jsp");
 		    dispatcher.forward(request, response);
 	}
 }
-
+          
+           
 
 //	        int phraseId = Integer.parseInt(request.getParameter("phraseId"));
 //	        String phraseName = request.getParameter("phraseName");

@@ -13,17 +13,17 @@
 </head>
 <body>
     
-    <jsp:include page="cheese_header.jsp" />
+ <jsp:include page="cheese_header.jsp" />
  <c:if test="${not empty result}">
   <p>${result}</p>
 </c:if>
-   
+ <c:forEach var="list" items="${phraseTagList}" >
  <form method="POST" action="<c:url value='/CheesePhraseEditServlet' />">
  <div class="phrase">
-       <input type="hidden" name="id" value="${phrases_tags.id}" />
-      <input type="hidden" name="phraseId" value="${phrases.id}" />
-      <input type="text" name="phraseName" placeholder="名前" value="${phrases.name}"><br>
-      <input type="text" name="phraseRemarks" placeholder="メモ" value="${phrases.remarks}"><br>
+       <input type="hidden" name="id" value="${list.id}" />
+      <input type="hidden" name="phraseId" value="${list.phrase_id}" />
+      <input type="text" name="phraseName" placeholder="名前" value="${list.phrase_name}"><br>
+      <input type="text" name="phraseRemarks" placeholder="メモ" value="${list.phrase_remarks}"><br>
     </div>
 
     <div>
@@ -37,7 +37,10 @@
           <input type="radio" name="tagType" id="registeredTagRadio" value="registered" checked>
           <label for="registeredTagRadio">登録済</label><br>
           <select name="registeredTag" id="registeredTagSelect">
-            <c:forEach var="tag" items="${tags}">
+               <option value = "0">タグA</option>
+                  <option value = "0">タグB</option>
+                  <option value = "0">タグC</option>
+            <c:forEach var="tag" items="${tagList}">
                 <option value="${tag.id}">${tag.name}</option>
             </c:forEach>
            
@@ -63,7 +66,7 @@
     </div>
   
 </form>
-   
+  </c:forEach> 
     
 
  <script src="<c:url value='/js/cheese_edit_phrase.js' />"></script>
