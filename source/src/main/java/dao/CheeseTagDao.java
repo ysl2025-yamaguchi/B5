@@ -128,7 +128,7 @@ public class CheeseTagDao {
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
 			for (int i = 0; i < tagIdList.size(); i++) {
-				pStmt.setInt(i,  tagIdList.get(i));
+				pStmt.setInt(i + 1,  tagIdList.get(i));
 			}
 			
 			// SELECT文を実行し、結果表を取得する
