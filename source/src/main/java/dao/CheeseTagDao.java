@@ -121,7 +121,7 @@ public class CheeseTagDao {
 			sql.append("SELECT * from tags WHERE");
 			for (int i = 0; i < tagIdList.size(); i++) {
 				if (i != 0) {
-				sql.append(" OR ");
+					sql.append(" OR ");
 				}
 				sql.append(" id = ? ");
 			}
@@ -220,58 +220,58 @@ public class CheeseTagDao {
 	}
 	
 	
-	public List<CheeseTag> select(CheeseTag card) {
-		Connection conn = null;
-		List<CheeseTag> cardList = new ArrayList<CheeseTag>();
-
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
-					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "password");
-
-			// SQL文を準備する
-			String sql = "SELECT * FROM tags WHERE user_id=?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1,  card.getUserId());
-			
-			// SELECT文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
-			
-			while (rs.next()) {
-				CheeseTag cheeseTag = new CheeseTag(
-						rs.getInt("id"),
-						rs.getString("name"),
-						rs.getInt("user_id"),
-						rs.getString("updated_at"),
-						rs.getString("created_at")
-						);
-				cardList.add(cheeseTag);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			cardList = null;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			cardList = null;
-		} finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					cardList = null;
-				}
-			}
-		}
-
-		// 結果を返す
-		return cardList;
-	}
+//	public List<CheeseTag> select(CheeseTag card) {
+//		Connection conn = null;
+//		List<CheeseTag> cardList = new ArrayList<CheeseTag>();
+//
+//		try {
+//			// JDBCドライバを読み込む
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//
+//			// データベースに接続する
+//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
+//					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//					"root", "password");
+//
+//			// SQL文を準備する
+//			String sql = "SELECT * FROM tags WHERE user_id=?";
+//			PreparedStatement pStmt = conn.prepareStatement(sql);
+//			pStmt.setInt(1,  card.getUserId());
+//			
+//			// SELECT文を実行し、結果表を取得する
+//			ResultSet rs = pStmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				CheeseTag cheeseTag = new CheeseTag(
+//						rs.getInt("id"),
+//						rs.getString("name"),
+//						rs.getInt("user_id"),
+//						rs.getString("updated_at"),
+//						rs.getString("created_at")
+//						);
+//				cardList.add(cheeseTag);
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			cardList = null;
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//			cardList = null;
+//		} finally {
+//			// データベースを切断
+//			if (conn != null) {
+//				try {
+//					conn.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//					cardList = null;
+//				}
+//			}
+//		}
+//
+//		// 結果を返す
+//		return cardList;
+//	}
 
 	
 }
