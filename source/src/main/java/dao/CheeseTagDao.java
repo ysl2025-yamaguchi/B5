@@ -102,6 +102,70 @@ public class CheeseTagDao {
 		return result;
 	}
 	
+	public List<CheeseTag> select(List<Integer> tagIdList) {
+		Connection conn = null;
+		List<CheeseTag> tagList = new ArrayList<CheeseTag>();
+		
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			StringBuilder sql = new StringBuilder();
+			sql.setLength(0);
+			sql.append("SELECT * from tags WHERE");
+			for (int i = 0; i < tagIdList.size(); i++) {
+				if (i != 0) {
+				sql.append(" OR ");
+				}
+				sql.append(" tag_id = ? ");
+			}
+			
+			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
+			for (int i = 0; i < tagIdList.size(); i++) {
+				pStmt.setInt(i,  tagIdList.get(i));
+			}
+			
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			
+			while (rs.next()) {
+				CheeseTag tag = new CheeseTag(
+						rs.getInt("id"),
+						rs.getString("name"),
+						rs.getInt("user_id"),
+						rs.getString("updated_at"),
+						rs.getString("created_at")
+						);
+				tagList.add(tag);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			tagList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			tagList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					tagList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return tagList;
+	}
+	
 	public List<CheeseTag> select(CheeseTag card) {
 		Connection conn = null;
 		List<CheeseTag> cardList = new ArrayList<CheeseTag>();
