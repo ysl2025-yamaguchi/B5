@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import dao.CheesePhraseDAO;
+import dao.CheesePhraseDao;
 
 /**
  * Servlet implementation class CheeseRegistPhraseServlet
@@ -49,17 +49,21 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 			String extension = uplodedFileName.substring(dotPosition);
 			
 			// 保存時のファイル名を決定
-			CheesePhraseDAO dao = new CheesePhraseDAO();
+			CheesePhraseDao dao = new CheesePhraseDao();
 			String fileName = "phrase_" + dao.getNextId() + extension;
 			
 			try {
 				if (testFlag) {
-			    	part.write("c:/plusdojo2025/B5" + "/" + fileName);
+//					if (!Files.exists("c:/plusdojo2025/B5/uploded/")) {
+//						
+//					}
+			    	part.write("c:/plusdojo2025/B5/uploded/" + fileName);
 				}
 				else {
-			    	part.write(request.getContextPath() + "/" + fileName);
+			    	part.write(request.getContextPath() + "/uploded/" + fileName);
 				}
 				request.setAttribute("result", "登録が成功しました!!!!!!!!!!!!!!!!!!!!!!!!");
+					
 			}
 			catch (IOException e ) {
 				request.setAttribute("result", "登録登録に失敗しました");
