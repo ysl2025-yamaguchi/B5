@@ -10,12 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.CheesePhraseDao;
-import dao.CheeseTagDao;
 import dto.CheesePhrase;
-import dto.CheeseTag;
 
 /**
  * Servlet implementation class CheesePhraseListServlet
@@ -29,14 +26,14 @@ public class CheesePhraseListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("login_user") == null) {
-			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
-			return;
-		}
-		
-		List<CheeseTag> tagList;
-		CheeseTagDao tag = new CheeseTagDao();
+//		HttpSession session = request.getSession();
+//		if (session.getAttribute("login_user") == null) {
+//			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+//			return;
+//		}
+//		
+//		List<CheeseTag> tagList;
+//		CheeseTagDao tag = new CheeseTagDao();
 		
 		
 		List<CheesePhrase> phraseList;
