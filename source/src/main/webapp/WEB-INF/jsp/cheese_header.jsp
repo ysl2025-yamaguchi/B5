@@ -7,17 +7,21 @@
 	<meta charset="UTF-8">
 	<title>MUSIC CHEESE</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
+	<script src="<c:url value='/js/cheese_common.js' />"></script>
 </head>
 <body>
+<input type="hidden" name="selected_theme" id="selected_theme">
 <header class="header">
 <div class="cheese-menu">
-  <img src="<c:url value='/img/blackcheese.png' />" id="themeImage" alt="テーマ切替" width="30" height="30">
-  <ul class="dropdown" id="themeDropdown">
-    <li data-theme="light">ライト</li>
-    <li data-theme="dark">ダーク</li>
-    <li data-theme="ocean">オーシャン</li>
-    <li data-theme="sunset">サンセット</li>
-  </ul>
+	<form id = "change_thema" method = "POST" action = "/CheeseChengeThemaServlet">
+	  <img src="blackcheese.png" id="themeImage" alt="テーマ切替" width="30" height="30"> <br>
+	  <select class = "select_thema" id = "select_thema">
+		<option value = "light">ライト</option>
+		<option value = "dark">ダーク</option>
+		<option value = "ocean">オーシャン</option>
+		<option value = "sunset">サンセット</option>
+	  </select>
+  </form>
 </div>
 
 <!-- 

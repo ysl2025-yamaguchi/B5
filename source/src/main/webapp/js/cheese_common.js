@@ -1,3 +1,19 @@
+let selectObj = document.getElementById('select_thema');
+let tmpObj = document.getElementById('tmp');
+
+document.getElementById('themeImage').addEventListener('click', function() {
+	if (selectObj.style.display === 'none' || selectObj.style.display === '') {
+		selectObj.style.display = 'block';
+	}
+	else {
+		selectObj.style.display = 'none';
+	}
+});
+
+document.getElementById('select_thema').addEventListener('change', function() {
+	document.getElementById('change_thema').submit();
+}); 
+ 
  /*
  const img = document.getElementById("themeImage");
     const selector = document.getElementById("themeSelector");
@@ -12,7 +28,8 @@
       body.classList.add("theme-" + selector.value); // 選んだテーマを追加
     });
     */
-    
+
+/*    
 const themeImage = document.getElementById("themeImage");
 const dropdown = document.getElementById("themeDropdown");
 const body = document.body;
@@ -35,3 +52,4 @@ document.addEventListener("click", (e) => {
     dropdown.style.display = "none";
   }
 });
+*/

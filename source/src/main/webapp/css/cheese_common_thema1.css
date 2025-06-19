@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#select_thema {
+    position: absolute;
+}
+
 #cheese{
       position: absolute;
       margin: 0 auto;
