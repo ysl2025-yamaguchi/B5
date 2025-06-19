@@ -32,6 +32,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/CheeseLoginServlet");
 			return;
+
 		}
 		
 		
