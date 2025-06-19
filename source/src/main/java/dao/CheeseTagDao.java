@@ -123,7 +123,7 @@ public class CheeseTagDao {
 				if (i != 0) {
 				sql.append(" OR ");
 				}
-				sql.append(" tag_id = ? ");
+				sql.append(" id = ? ");
 			}
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql.toString());
