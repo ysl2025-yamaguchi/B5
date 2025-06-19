@@ -214,3 +214,22 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.phraseBox').forEach(attachControlEvents);
   
 });
+
+ // 重複チェック処理
+  document.getElementById("checkDuplicates").addEventListener("click", function () {
+    const inputs = document.querySelectorAll(".phrase-name");
+    const params = [];
+    inputs.forEach((el, i) => {
+      if (el.value.trim() !== "") {
+        params.push("phrase" + i + "=" + encodeURIComponent(el.value.trim()));
+      }
+    });
+    fetch("CheeseCheckMusicServlet", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.join("&")
+    })
+    .then(res => res.text())
+    .then(msg => alert(msg));
+  });
+   
