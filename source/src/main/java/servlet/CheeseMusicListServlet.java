@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -33,6 +34,13 @@ public class CheeseMusicListServlet extends HttpServlet {
 //		response.sendRedirect("/CheeseLoginServlet");
 //		return;
 //	}
+		List<String> searchWordList = new ArrayList<String>();
+		CheeseMusicDao bDao = new CheeseMusicDao();
+		List<CheeseMusic> cardList = bDao.select(searchWordList, "", 1);
+		
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("cardList", cardList);
+		
 		// 曲ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_music.jsp");
 		dispatcher.forward(request, response);
@@ -60,18 +68,26 @@ public class CheeseMusicListServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String name = request.getParameter("name");
+		
+		String searchStrLine = request.getParameter("search_str_line");
+		List<String> searchWordList = new ArrayList<String>();
+		if (searchStrLine != null && !searchStrLine.isEmpty()) {
+			for (String searchStr : searchStrLine.split("[ |　]+")) {
+				searchWordList.add(searchStr);
+			}
+		}
+		
 		String sort = request.getParameter("sort");
 
 		// 検索処理を行う
-		CheeseMusic condition = new CheeseMusic();
-		condition.setName(name);
 		
 		CheeseMusicDao bDao = new CheeseMusicDao();
-		List<CheeseMusic> cardList = bDao.select(condition, sort);
+		List<CheeseMusic> cardList = bDao.select(searchWordList, sort, 1);
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("cardList", cardList);
+		request.setAttribute("searchStrLine", searchStrLine);
+		request.setAttribute("sort", sort);
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_music.jsp");

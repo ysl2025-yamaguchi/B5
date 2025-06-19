@@ -61,6 +61,8 @@
       
       <input type="file" name="phrases[0].audioFile">
       
+      <input type="hidden" name="musicId" value="${song.id}" />
+      
       <input type="text" name="title" value="${phrase.title}" placeholder="タイトル">
       <input type="text" name="author" value="${phrase.author}" placeholder="名前">
       <textarea name="memo">${phrase.memo}</textarea>
