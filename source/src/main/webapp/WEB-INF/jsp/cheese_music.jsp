@@ -50,23 +50,26 @@
  	<button class="toggle-btn" data-target="music_${music.id}" >▶ ${music.name}</button>
 
       <div id="music_${music.id}" class="toggle-section">
-      
-       <a href="<c:url value='/CheeseEditMusicServlet?id=${music.id}' />">
-       <button type="submit">編集</button>
-       </a>
-       
+     <!-- フレーズ一覧 -->
+     <ul>
+       <c:forEach var="phrase" items="${phraseList}">
+       <li><c:out value="${phrase.name}" /></li>
+       </c:forEach>
+     </ul>
+     <div style="display: flex; gap: 8px;">
+     	<form method = "GET" action = "<c:url value='/CheeseEditMusicServlet' />">
+        	<input type = "hidden" name = "id" value = "${music.id}">
+        	<button type = "submit">編集</button>
+        </form>
+     	
        <form action="CheeseDeleteMusicServlet" method="POST" style="display:inline;" onsubmit="return confirm('本当に削除しますか？');">
-        <input type="hidden" name="id" value="${music.id}">
-        <button type="submit">削除</button>
+       		<input type="hidden" name="id" value="${music.id}">
+        	<button type="submit">削除</button>
        </form>
+      </div>
       
-      <!-- フレーズ一覧 -->
-      <div class="phrase-list">
-      <div>${phrase.name}</div>
-        <!--  /c:forEach-->
        </div>
      </div>
-    </div>
   </c:forEach>
 </c:if>
     
