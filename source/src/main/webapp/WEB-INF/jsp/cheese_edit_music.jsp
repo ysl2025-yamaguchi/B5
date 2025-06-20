@@ -28,8 +28,7 @@
 <jsp:include page="cheese_header.jsp" />
 
 <!-- 曲名入力フォーム -->
-<h1 for="songName">曲名：</h1>
-<input type="text" id="songName" name="songName" value="${song.name}" />
+<h1 for="songName">曲名：${music.name}</h1>
 
 <!-- ボタン群 -->
 <div class="actionButtons">
@@ -59,7 +58,14 @@
     <div class="phraseBox" data-index="${status.index}">
       <h3>${status.index + 1}.</h3>
       
-      <input type="file" name="phrases[0].audioFile">
+      
+      <div class="audioSelect">
+  <input type="hidden" name="audioId" class="audioId">
+  <span class="selectedAudioName">未選択</span>
+  <button type="button" class="selectAudioBtn">音声選択</button>
+  <button type="button" class="playAudioBtn" disabled>▶</button>
+</div>
+      
       
       <input type="hidden" name="musicId" value="${song.id}" />
       
