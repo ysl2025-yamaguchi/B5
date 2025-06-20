@@ -17,25 +17,25 @@
  <c:if test="${not empty result}">
     <p style="color: green;">${result}</p>
 </c:if>
- <form method="POST" action="<c:url value='/CheesePhraseEditServlet' />">
-
-     <div class="phrase">
+ <form method="post" action="<c:url value='/CheesePhraseEditServlet' />">
+        <div class="phrase">
  
         <input type="hidden" name="phraseId" value="${phrase.id}" />
         <input type="text" name="phraseName" placeholder="名前" value="${phrase.name}"><br>
         <input type="text" name="phraseRemarks" placeholder="メモ" value="${phrase.remarks}"><br>
          
-     </div>
-
-     <div>
+      </div>
+      <div>
        <span>タグの追加</span> <br>
-         <input type = "radio" id = "registed" name = "tag_registed" value = "registed" checked />
-         <label for = "registed">登録済み</label>
+            <input type = "radio" id = "registed" name = "tag_registed" value = "registed" checked />
+            <label for = "registed">登録済み</label>
             <input type = "radio" id = "new" name = "tag_registed" value = "new">
-         <label for = "new">新規</label>  <br>
+            <label for = "new">新規</label>  <br>
             <div id ="tag_input_box">
                <select id = "select_tag">
-                 
+                  <option value = "0" >タグA</option >
+                  <option value = "0" >タグB</option >
+                  <option value = "0">タグC</option >
                   <c:forEach var="tag" items="${tagList}">
                      <option value = "${tag.id}"><c:out value = "${tag.name} "/></option>
                   </c:forEach>
@@ -44,17 +44,15 @@
                <button type = "button" id = "add_tag_button">追加</button>
             </div>
             <div id = "added_tag_list">
-            	<c:forEach var="tag" items="${phraseTagList}">
+            <c:forEach var="tag" items="${phraseTagList}">
             		<div class = "tag_item">
             			<span><c:out value = "${tag.name}"/></span>
             			<button class = "unassign_button">✕</button>
             		</div>
                 </c:forEach>
             </div>
-        </div>
-     <div>
-       <input type ="submit" id="regist_button" name="regist" value = "登録">
-     </div>
-  </form>
+         </div>
+         <input type = "submit" id = "regist_button" name = "regist" value = "登録">
+ </form>
 </body>
 </html>

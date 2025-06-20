@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import dao.CheesePhraseDao;
 import dao.CheesePhraseTagDao;
 import dao.CheeseTagDao;
 import dto.CheesePhrase;
+import dto.CheesePhraseTag;
 import dto.CheeseTag;
 
 /**
@@ -40,7 +42,12 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		List<Integer> phraseTagIdList = list.selectPhraseTagInfo(1);
 		List<CheeseTag> phraseTagList = tagDao.select(phraseTagIdList);
 		
-		//int phraseId=1;
+		List<CheesePhrase> phraseList;
+		CheesePhraseDao phraseDao =  new CheesePhraseDao();
+		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+		request.setAttribute("phraseList", phraseList);
+		
+		
 		//int phraseId = Integer.parseInt(request.getParameter("phraseId"));
 	    //CheesePhraseDao phraseDao = new CheesePhraseDao();
 	   // CheesePhrase phrase = phraseDao.findById(phraseId);
@@ -73,16 +80,16 @@ public class CheesePhraseEditServlet extends HttpServlet {
 //			int userId= Integer.parseInt(request.getParameter("userId"));
 //			int tagId= Integer.parseInt(request.getParameter("tagId"));
 //			String tagName=request.getParameter("tagName");
-	//	    String[] tagName = request.getParameterValues("tag_name");
+   
 			
-			int id=8;
-			int phraseId= 2;
+			int id=9;
+			int phraseId= 1;
 			String phraseName="A";
 		    String phraseRemarks="B";
 			String phrasePath="/path/to/phraseA.wav";
 			int userId=1;
 			int tagId=1;
-			String tagName="f";
+			String tagName="d";
 	 
 		    
 			
@@ -95,29 +102,37 @@ public class CheesePhraseEditServlet extends HttpServlet {
 
 			// フレーズ更新
 			if ("登録".equals(request.getParameter("regist"))) {
-			    boolean phraseUpdated = pDao.update(
+				boolean phraseUpdated = pDao.update(
 			        new CheesePhrase(phraseId, phraseName, phraseRemarks, phrasePath, userId, "", "")
 			    );
+				 boolean tagInserted = tDao.insert(
+					        new CheeseTag(tagId, tagName, userId, "", "")
+			    );
+				 boolean phraseTagInserted= ptDao.insert(
+							new CheesePhraseTag(id, phraseId, tagId, "", "")
+					);
+				boolean phraseTagUpdated= ptDao.update(
+						new CheesePhraseTag(id, phraseId, tagId, "", "")
+				);
 
 			    if (phraseUpdated) {
 			        result.append("フレーズ更新成功！<br>");
 			    } else {
 			        result.append("フレーズ更新失敗！<br>");
 			    }
-			}else {
-				if (tagName != null && !tagName.isEmpty()) {
-				    boolean tagInserted = tDao.insert(
-				        new CheeseTag(tagId, tagName, userId, "", "")
-				    );
-
-				    if (tagInserted) {
-				        result.append("タグ登録成功！<br>");
-				    } else {
-				        result.append("タグ登録失敗！<br>");
-				    }
-				}
-				}
-			
+			    if (tagInserted) {
+			        result.append("タグ追加成功！<br>");
+			    } else {
+			        result.append("タグ追加失敗！<br>");
+			    }
+//			    if (phraseTagUpdated) {
+//			        result.append("フレーズ更新成功！<br>");
+//			    } else {
+//			        result.append("フレーズ更新失敗！<br>");
+//			    }
+			}
+				
+	
 
 			// タグ登録（新規タグがあれば）
 			
@@ -136,9 +151,9 @@ public class CheesePhraseEditServlet extends HttpServlet {
 			request.setAttribute("result", result.toString());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_phrase.jsp");
 			dispatcher.forward(request, response);
-		}	
+			
 }
-
+}
 	          
             
            
