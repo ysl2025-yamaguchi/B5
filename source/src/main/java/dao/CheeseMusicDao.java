@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.CheeseMusic;
+import dto.CheesePhrase;
 
 public class CheeseMusicDao {
 	
@@ -243,4 +244,51 @@ public class CheeseMusicDao {
 			// 結果を返す
 			return result;
 		}	
+		
+		public List<CheesePhrase> findByMusicId(int musicId) {
+		    List<CheesePhrase> phraseList = new ArrayList<>();
+		    Connection conn = null;
+
+		    try {
+		        Class.forName("com.mysql.cj.jdbc.Driver");
+		        conn = DriverManager.getConnection(
+		            "jdbc:mysql://localhost:3306/b5?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+		            "root", "password"
+		        );
+
+		        String sql = "SELECT p.id, p.name, p.remarks, p.path, p.user_id, p.created_at, p.updated_at " +
+		                     "FROM phrases p " +
+		                     "JOIN musics_phrases mp ON p.id = mp.phrase_id " +
+		                     "WHERE mp.music_id = ? " +
+		                     "ORDER BY mp.phrase_order IS NULL, mp.phrase_order";
+
+		        PreparedStatement pStmt = conn.prepareStatement(sql);
+		        pStmt.setInt(1, musicId);
+		        ResultSet rs = pStmt.executeQuery();
+
+		        while (rs.next()) {
+		            CheesePhrase phrase = new CheesePhrase(
+		                rs.getInt("id"),
+		                rs.getString("name"),
+		                rs.getString("remarks"),
+		                rs.getString("path"),
+		                rs.getInt("user_id"),
+		                rs.getString("created_at"),
+		                rs.getString("updated_at")
+		            );
+		            phraseList.add(phrase);
+		        }
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        try {
+		            if (conn != null) conn.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return phraseList;
+		}
 }

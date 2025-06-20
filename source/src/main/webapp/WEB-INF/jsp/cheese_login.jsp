@@ -6,11 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン/新規登録</title>
+<!-- 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
-<script src="<c:url value='/js/cheese_common.js' />"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_login.css">
+ -->
+
+<!--  
+<script src="<c:url value='/js/cheese_login.js' />"></script>
+-->
+
 
 </head>
 <body>
+
 <!--  
 <div class="cheese-icon">
 <img src="<c:url value='/img/blackcheese.png' />" width="30" height="30" alt="CHEESE" id="themeImage">
@@ -28,6 +36,7 @@
 
 <input type="hidden" name="selected_theme" id="selected_theme">
 <header class="header">
+<!--  
 <div class="cheese-menu">
 	<form id = "change_thema" method = "POST" action = "/CheeseChengeThemaServlet">
 	  <img src="<c:url value='/img/blackcheese.png' />" id="themeImage" alt="テーマ切替" width="30" height="30"> <br>
@@ -39,6 +48,7 @@
 	  </select>
   </form>
 </div>
+-->
 
 	<div class="logo">
 		<a href="<c:url value='/CheeseLoginServlet' />">
@@ -46,36 +56,48 @@
 		</a>
 	</div>
 </header>
-	<div class="container">
-        <!-- 切り替えボタン -->
-        <button onclick="showLogin()">ログイン画面</button>
-        <button onclick="showRegister()">新規登録画面</button>
+
+
+<div class="noheader">
+  <div class="card-container">
+    <div class="switch-buttons">
+      <button type="button" id="loginBtn" class="active" onclick="showLogin()">ログイン画面</button>
+      <button type="button" id="registerBtn" onclick="showRegister()">新規登録画面</button>
     </div>
 
- <form method="POST" action="CheeseLoginServlet">
- 	
-	<!-- ログインフォーム -->
-	<div id="loginForm" class="form-container">
-	    <h2>ログイン</h2>
-	    <span id="loginError_message" class="error-message"></span>
-	    <input type="text" id="login_username" name="login_username" placeholder="ユーザー名"><br>
-	    <input type="password" id="login_password" name="login_password" placeholder="パスワード"><br>
-	    <button onclick="validateLogin()">ログイン</button>
-	</div>
-	
-	<!-- 新規登録フォーム -->
-	<div id="registerForm" class="form-container">
-	    <h2>新規登録</h2>
-	    <span id="registError_message" class="error-message"></span>
-	    <input type="text" id="register_username" name="register_username" placeholder="ユーザー名"><br>
-	    <input type="password" id="register_password" name="register_password" placeholder="パスワード"><br>
-	    <input type="password" id="register_rePassword" name="register_rePassword" placeholder="パスワード（確認用）"><br>
-	    <button onclick="validateRegister()">新規登録</button>
-	</div>
- 
- </form>
-<script src="<c:url value='/js/cheese_login.js' />"></script>
-<script src="<c:url value='/js/cheese_common.js' />"></script>
+
+<c:if test="${not empty sessionScope.register_success}">
+  <div class="success-message">${sessionScope.register_success}</div>
+  <c:remove var="register_success" scope="session" />
+</c:if>
+
+
+
+    <!-- ログインフォーム -->
+    <form method="POST" action="CheeseLoginServlet">
+    <div id="loginForm" class="form-section active">
+      <span id="loginError" class="error-message"></span>
+      <input type="text" id="loginUser" name="loginUser" placeholder="ユーザー名">
+      <input type="password" id="loginPass" name="loginPass" placeholder="パスワード">
+      <input type="submit" class="submit-button" value="ログイン">
+    </div>
+    </form>
+    
+    
+    <!-- 新規登録フォーム -->
+    <form method="POST" action="CheeseRegistUserServlet">
+    <div id="registerForm" class="form-section">
+      <span id="registerError" class="error-message"></span>
+      <input type="text" id="regUser" name="regUser" placeholder="ユーザー名">
+      <input type="password" id="regPass" name="regPass" placeholder="パスワード">
+      <input type="password" id="regPassConfirm" name="regPassConfirm" placeholder="パスワード確認">
+		<button type="button" class="submit-button" onclick="validateRegister()">登録</button>
+    </div>
+    </form>
+    
+  </div>
+ </div>
+
 
 </body>
 </html>

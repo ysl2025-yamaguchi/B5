@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CheeseMusicDao;
+import dao.CheesePhraseDao;
 import dto.CheeseMusic;
+import dto.CheesePhrase;
 
 /**
  * Servlet implementation class CheeseMusicListServlet
@@ -40,11 +42,21 @@ public class CheeseMusicListServlet extends HttpServlet {
 		
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("cardList", cardList);
-		
+		List<CheesePhrase> phraseList;
+		CheesePhraseDao phraseDao =  new CheesePhraseDao();
+		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+		request.setAttribute("phraseList", phraseList);
 		// 曲ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_music.jsp");
 		dispatcher.forward(request, response);
+		
 	}
+//	request.setAttribute("musicMap", musicMap);
+//	List<CheesePhrase> phraseList;
+//	CheesePhraseDao phraseDao =  new CheesePhraseDao();
+//	phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+//	request.setAttribute("phraseList", phraseList);
+//	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

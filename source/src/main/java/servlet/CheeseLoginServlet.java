@@ -28,8 +28,8 @@ public class CheeseLoginServlet extends HttpServlet{
 			throws ServletException, IOException {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String username = request.getParameter("login_username");
-		String pw = request.getParameter("login_password");
+		String username = request.getParameter("loginUser");
+		String pw = request.getParameter("loginPass");
 		
 		// ログイン処理を行う
 		CheeseUserDao iDao = new CheeseUserDao();
@@ -40,7 +40,7 @@ public class CheeseLoginServlet extends HttpServlet{
 			user = iDao.getUserInfo(user);
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
-			session.setAttribute("login_user", user);
+			session.setAttribute("loginUser", user);
 
 			// メニューサーブレットにリダイレクトする
 			response.sendRedirect(request.getContextPath() + "/CheesePhraseListServlet");

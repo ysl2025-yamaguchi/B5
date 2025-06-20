@@ -42,9 +42,9 @@ window.addEventListener('DOMContentLoaded', function() {
       const unassignButton = document.createElement('button');
       unassignButton.textContent = '✕';
       unassignButton.classList.add('unassign_button');
-      /*unassignButton.addEventListener('click', function() {
+      unassignButton.addEventListener('click', function() {
          tagListDiv.removeChild(tagItem);
-      });*/
+      });
       tagItem.appendChild(tagText);
       tagItem.appendChild(unassignButton);
       tagListDiv.appendChild(tagItem);
@@ -63,15 +63,6 @@ window.addEventListener('DOMContentLoaded', function() {
       }
       errorMessageObj.textContent = null;
    });
-   
-   tagsContainer.addEventListener('click', function (e) {
-	  if (e.target && e.target.classList.contains('unassign_button')) {
-	    const tagDiv = e.target.closest('.addedTag, .tag_item'); // 両対応（JSTLとJS）
-	    if (tagDiv) {
-	      tagDiv.remove();
-	    }
-	  }
-	});
 });
 document.addEventListener('DOMContentLoaded',pageLoad)
 // テキストボックス内でエンターキーを押したら追加ボタンを起動

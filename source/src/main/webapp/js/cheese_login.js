@@ -1,58 +1,86 @@
-document.getElementById("loginForm").style.display = "block";
+document.addEventListener("DOMContentLoaded", function () {
+	//読み込みタイミングを DOMContentLoaded に遅らせ
+	
+	
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+  const loginBtn = document.getElementById("loginBtn");
+  const registerBtn = document.getElementById("registerBtn");
+  const loginSubmitBtn = document.querySelector("#loginForm .submit-button");
+  const registerSubmitBtn = document.querySelector("#registerForm .submit-button");
 
-        function showLogin() {
-            document.getElementById("loginForm").style.display = "block";
-            document.getElementById("registerForm").style.display = "none";
-        }
+  loginBtn.addEventListener("click", showLogin);
+  registerBtn.addEventListener("click", showRegister);
+  loginSubmitBtn.addEventListener("click", validateLogin);
+  registerSubmitBtn.addEventListener("click", validateRegister);
 
-        function showRegister() {
-            document.getElementById("loginForm").style.display = "none";
-            document.getElementById("registerForm").style.display = "block";
-        }
+  function showLogin() {
+    loginForm.classList.add("active");
+    registerForm.classList.remove("active");
+    loginBtn.classList.add("active");
+    registerBtn.classList.remove("active");
+  }
 
+  function showRegister() {
+    registerForm.classList.add("active");
+    loginForm.classList.remove("active");
+    registerBtn.classList.add("active");
+    loginBtn.classList.remove("active");
+  }
 
+// ログインバリデーション
 function validateLogin() {
-            let username = document.getElementById("login_username").value;
-            let password = document.getElementById("login_password").value;
-            let errorMessage = document.getElementById("loginError_message");
+  const user = document.getElementById("loginUser").value.trim();
+  const pass = document.getElementById("loginPass").value.trim();
+  const error = document.getElementById("loginError");
 
-            if (!username || !password)
-            {
-                event.preventDefault()
-                if (!username && !password) {
-                    errorMessage.textContent = "ユーザー名とパスワードを入力してください";
-                } else if(!username && password) {
-                    errorMessage.textContent = "ユーザー名を入力してください";
-                } else if(username && !password) {
-                    errorMessage.textContent = "パスワードを入力してください";
-                } else {
-                    errorMessage.textContent = ""; // エラー解除
-                    alert("ログイン処理を開始！");
-                }
-            }
-        }
+  if (!user || !pass) {
+    if (!user && !pass) {
+      error.textContent = "ユーザー名とパスワードを入力してください";
+    } else if (!user) {
+      error.textContent = "ユーザー名を入力してください";
+    } else {
+      error.textContent = "パスワードを入力してください";
+    }
+    blinkErrorElement("loginError");
+    return false;
+  }
 
-        function validateRegister() {
-            let username = document.getElementById("register_username").value;
-            let password = document.getElementById("register_password").value;
-            let rePassword = document.getElementById("register_rePassword").value;
-            let errorMessage = document.getElementById("registError_message");
+  error.textContent = "";
+  document.querySelector("form").submit(); // ログイン成功で送信
+  return true;
+}
 
-            if (!username || !password || !rePassword)
-            {
-                event.preventDefault()
-                if (!username && !password && !rePassword) {
-                    errorMessage.textContent = "全ての項目を入力してください";
-                } else if(!username && password) {
-                    errorMessage.textContent = "ユーザー名を入力してください";
-                } else if(username && !password) {
-                    errorMessage.textContent = "パスワードを入力してください";
-                } else if (password !== rePassword) {
-                    errorMessage.textContent = "パスワードが一致しません！";
-                } else {
-                    errorMessage.textContent = ""; // エラー解除
-                    alert("新規登録処理を開始！");
-                }
-            }
-        }
-        
+// 新規登録バリデーション
+function validateRegister() {
+  const user = document.getElementById("regUser").value.trim();
+  const pass = document.getElementById("regPass").value.trim();
+  const confirm = document.getElementById("regPassConfirm").value.trim();
+  const error = document.getElementById("registerError");
+
+  if (!user || !pass || !confirm || pass !== confirm) {
+    if (!user || !pass || !confirm) {
+      error.textContent = "全ての項目を入力してください";
+    } else {
+      error.textContent = "パスワードが一致しません！";
+    }
+    blinkErrorElement("registerError");
+    return false;
+  }
+
+  error.textContent = "";
+  document.querySelector("form").submit(); // 登録成功で送信
+  return true;
+}
+
+// 点滅アニメーション
+function blinkErrorElement(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.classList.remove("blink-error");
+    void el.offsetWidth;
+    el.classList.add("blink-error");
+  }
+}
+
+});
