@@ -29,6 +29,8 @@
 
 <!-- 曲名入力フォーム -->
 <h1 for="songName">曲名：${music.name}</h1>
+<input type="hidden" id="songName" name="songName" value="${music.name}" />
+
 
 <!-- ボタン群 -->
 <div class="actionButtons">
@@ -54,17 +56,23 @@
 
 <!-- フレーズリスト -->
 <div id="phraseContainer">
-  <c:forEach var="phrase" items="${phraseList}" varStatus="status">
+<c:forEach var="phrase" items="${phraseList}" varStatus="status"> 
     <div class="phraseBox" data-index="${status.index}">
       <h3>${status.index + 1}.</h3>
       
       
-      <div class="audioSelect">
-  <input type="hidden" name="audioId" class="audioId">
-  <span class="selectedAudioName">未選択</span>
-  <button type="button" class="selectAudioBtn">音声選択</button>
-  <button type="button" class="playAudioBtn" disabled>▶</button>
+ <!-- フレーズ選択＋再生 -->
+<div class="phrase-audio-section">
+  <label>フレーズ選択：
+    <select class="phraseSelect" name="phrase_id">
+      <c:forEach var="p" items="${phraseList}">
+        <option value="${p.id}" data-path="${p.path}">${p.name}</option>
+      </c:forEach>
+    </select>
+  </label>
+  <audio class="phrasePlayer" controls style="display:none;"></audio>
 </div>
+ 
       
       
       <input type="hidden" name="musicId" value="${song.id}" />
@@ -87,7 +95,7 @@
         <button class="deleteBtn" type="button">×</button>
       </div>
     </div>
-  </c:forEach>
+</c:forEach> 
 </div>
 
 </form>

@@ -9,10 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import dao.CheesePhraseDao;
 import dao.CheesePhraseTagDao;
 import dao.CheeseTagDao;
+import dto.CheesePhrase;
 import dto.CheeseTag;
 
 /**
@@ -26,46 +27,127 @@ public class CheesePhraseEditServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");	
+		request.setCharacterEncoding("UTF-8");
+		
 		
 		List<CheeseTag> tagList;
 		CheeseTagDao tagDao = new CheeseTagDao();
 		tagList= tagDao.selectALL(1); 
 		request.setAttribute("tagList", tagList);
-//		int phraseId = Integer.parseInt(request.getParameter("phraseId"));
-	
-		CheesePhraseTagDao list = new CheesePhraseTagDao();
+		
+		
+	    CheesePhraseTagDao list = new CheesePhraseTagDao();
 		List<Integer> phraseTagIdList = list.selectPhraseTagInfo(1);
 		List<CheeseTag> phraseTagList = tagDao.select(phraseTagIdList);
-	    request.setAttribute("phraseTagList", phraseTagList);
+		
+		//int phraseId=1;
+		//int phraseId = Integer.parseInt(request.getParameter("phraseId"));
+	    //CheesePhraseDao phraseDao = new CheesePhraseDao();
+	   // CheesePhrase phrase = phraseDao.findById(phraseId);
+	   // request.setAttribute("phrase", phrase);
+		
+
+		request.setAttribute("phraseTagList", phraseTagList);
+		
 		
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_phrase.jsp");
         dispatcher.forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 HttpSession session = request.getSession();
+//		 HttpSession session = request.getSession();
 //		    
-//if (session.getAttribute("id") == null) {
+//       if (session.getAttribute("id") == null) {
 //		        response.sendRedirect("/B5/CheeseLoginServlet");
 //		        return;
 //		    }
-//		 request.setCharacterEncoding("UTF-8");
-//
-//		    // Get parameters from the form
+		 request.setCharacterEncoding("UTF-8");
+
+	    // Get parameters from the form
 //			int id= Integer.parseInt(request.getParameter("id"));
 //			int phraseId= Integer.parseInt(request.getParameter("phraseId"));
-//			int tagId= Integer.parseInt(request.getParameter("tagId"));
+//			String phraseName=request.getParameter("phraseName");
+//		    String phraseRemarks=request.getParameter("phraseRemarks");
+//			String phrasePath=request.getParameter("phrasePath");
 //			int userId= Integer.parseInt(request.getParameter("userId"));
-//			String phraseName = request.getParameter("phraseName");
-//			String phraseRemarks = request.getParameter("phraseRemarks");
-//			String phrasePath = request.getParameter("phrasePath");
-//			String tagName = request.getParameter("tagName");
-//            String updated_at = request.getParameter("updated_at");
-//			String created_at = request.getParameter("created_at");
-//		    // Prepare DAO and model
-//		    CheesePhraseTagDao dao = new CheesePhraseTagDao();
+//			int tagId= Integer.parseInt(request.getParameter("tagId"));
+//			String tagName=request.getParameter("tagName");
+	//	    String[] tagName = request.getParameterValues("tag_name");
+			
+			int id=8;
+			int phraseId= 2;
+			String phraseName="A";
+		    String phraseRemarks="B";
+			String phrasePath="/path/to/phraseA.wav";
+			int userId=1;
+			int tagId=1;
+			String tagName="f";
+	 
+		    
+			
+		   
+			CheesePhraseTagDao ptDao=new CheesePhraseTagDao();
+			CheesePhraseDao pDao=new CheesePhraseDao();
+			CheeseTagDao tDao=new CheeseTagDao();
+			// 変数準備
+			StringBuilder result = new StringBuilder();
+
+			// フレーズ更新
+			if ("登録".equals(request.getParameter("regist"))) {
+			    boolean phraseUpdated = pDao.update(
+			        new CheesePhrase(phraseId, phraseName, phraseRemarks, phrasePath, userId, "", "")
+			    );
+
+			    if (phraseUpdated) {
+			        result.append("フレーズ更新成功！<br>");
+			    } else {
+			        result.append("フレーズ更新失敗！<br>");
+			    }
+			}else {
+				if (tagName != null && !tagName.isEmpty()) {
+				    boolean tagInserted = tDao.insert(
+				        new CheeseTag(tagId, tagName, userId, "", "")
+				    );
+
+				    if (tagInserted) {
+				        result.append("タグ登録成功！<br>");
+				    } else {
+				        result.append("タグ登録失敗！<br>");
+				    }
+				}
+				}
+			
+
+			// タグ登録（新規タグがあれば）
+			
+			// フレーズとタグの関連更新
+//			boolean phraseTagUpdated = ptDao.update(
+//			    new CheesePhraseTag(id, phraseId, tagId, "", "")
+//			);
+//
+//			if (phraseTagUpdated) {
+//			    result.append("フレーズとタグの関連付け成功！<br>");
+//			} else {
+//			    result.append("フレーズとタグの関連付け失敗！<br>");
+//			}
+
+			// 結果をセットして画面へ
+			request.setAttribute("result", result.toString());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_phrase.jsp");
+			dispatcher.forward(request, response);
+		}	
+}
+
+	          
+            
+           
+            
+            
+           
+//		    if(request.getParameter("submit").equals("更新")) {
+//		    	
+//		    }
 //		    CheesePhraseDao pDao=new CheesePhraseDao();
 //		    CheeseTagDao tDao=new CheeseTagDao();
 //			if (request.getParameter("submit").equals("更新")) {
@@ -79,6 +161,6 @@ public class CheesePhraseEditServlet extends HttpServlet {
 //		    // Forward to result page
 //		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_phrase.jsp");
 //		    dispatcher.forward(request, response);
-	}
+	
 
-}
+
