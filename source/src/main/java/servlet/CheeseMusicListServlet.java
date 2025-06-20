@@ -44,7 +44,14 @@ public class CheeseMusicListServlet extends HttpServlet {
 		// 曲ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_music.jsp");
 		dispatcher.forward(request, response);
+		
 	}
+//	request.setAttribute("musicMap", musicMap);
+//	List<CheesePhrase> phraseList;
+//	CheesePhraseDao phraseDao =  new CheesePhraseDao();
+//	phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+//	request.setAttribute("phraseList", phraseList);
+//	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
