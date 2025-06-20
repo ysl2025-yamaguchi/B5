@@ -7,28 +7,32 @@
 <meta charset="UTF-8">
 <title>フレーズ編集画面</title>
  <link rel="stylesheet" type="text/css" href="css/cheese_edit_phrase.css">
-   <!-- <script src = "js/cheese_home.js"></script> -->
-  <script src="<c:url value='/js/cheese_edit_phrase.js' />"></script>
+ <script src="<c:url value='/js/cheese_edit_phrase.js'/>"></script>
 
 </head>
 <body>
     
 
  <jsp:include page="cheese_header.jsp" />
+ <c:if test="${not empty result}">
+    <p style="color: green;">${result}</p>
+</c:if>
  <form method="POST" action="<c:url value='/CheesePhraseEditServlet' />">
 
-    <div class="phrase">
-      <input type="hidden" name="phraseId" value="${phrases.id}" />
-      <input type="text" name="phraseName" placeholder="名前" value="${phrases.name}"><br>
-      <input type="text" name="phraseRemarks" placeholder="メモ" value="${phrases.remarks}"><br>
-    </div>
+     <div class="phrase">
+ 
+        <input type="hidden" name="phraseId" value="${phrase.id}" />
+        <input type="text" name="phraseName" placeholder="名前" value="${phrase.name}"><br>
+        <input type="text" name="phraseRemarks" placeholder="メモ" value="${phrase.remarks}"><br>
+         
+     </div>
 
      <div>
-            <span>タグの追加</span> <br>
-            <input type = "radio" id = "registed" name = "tag_registed" value = "registed" checked />
-            <label for = "registed">登録済み</label>
+       <span>タグの追加</span> <br>
+         <input type = "radio" id = "registed" name = "tag_registed" value = "registed" checked />
+         <label for = "registed">登録済み</label>
             <input type = "radio" id = "new" name = "tag_registed" value = "new">
-            <label for = "new">新規</label>  <br>
+         <label for = "new">新規</label>  <br>
             <div id ="tag_input_box">
                <select id = "select_tag">
                  
@@ -47,15 +51,10 @@
             		</div>
                 </c:forEach>
             </div>
-         </div>
-
-   
-
-    <div>
-     <input type = "button" id = "regist_button" name = "regist" value = "登録">
-    </div>
+        </div>
+     <div>
+       <input type ="submit" id="regist_button" name="regist" value = "登録">
+     </div>
   </form>
- 
-
 </body>
 </html>
