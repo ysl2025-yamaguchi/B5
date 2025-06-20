@@ -23,7 +23,7 @@
          <input type = "text" name = "name" placeholder = "フレーズ名"> <br>
          <input type = "text" name = "remarks" placeholder = "メモ"> <br>
          <div>
-            <span>タグの追加</span> <br>
+            <span>タグの追加aaa</span> <br>
             <input type = "radio" id = "registed" name = "tag_registed" value = "registed" checked />
             <label for = "registed">登録済み</label>
             <input type = "radio" id = "new" name = "tag_registed" value = "new">
