@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CheeseMusicPhraseDao;
+import dao.CheesePhraseDao;
 import dto.CheeseMusicPhrase;
+import dto.CheesePhrase;
 
 
 @WebServlet("/CheeseEditMusicServlet")
@@ -23,6 +27,17 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		// 曲編集画面にフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
 		dispatcher.forward(request, response);
+		
+		List<CheesePhrase> phraseList;
+		CheesePhraseDao phraseDao =  new CheesePhraseDao();
+		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+		request.setAttribute("phraseList", phraseList);
+		
+//		// CheeseEditMusicServlet の doGet 内
+//		CheeseMusicPhraseDao phraseDao = new CheeseMusicPhraseDao();
+//		List<CheeseMusicPhrase> phraseOptions = phraseDao.findAll(); // ユーザーIDに応じて絞るなら別途条件追加
+//		request.setAttribute("phraseOptions", phraseOptions);
+
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
