@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.querySelectorAll('input[name^="phrases["]').forEach(el => el.remove());
 
     phraseBoxes.forEach((box, index) => {
-      const title = box.querySelector('input[name="title"]').value;
+      const title = box.querySelector('input[name="title"]').value; 
       const memo = box.querySelector('textarea[name="memo"]').value;
       const phraseId = box.querySelector('select[name="phraseSelect"]').value || "";
 
@@ -267,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
       inputTitle.name = `phrases[${index}].title`;
       inputTitle.value = title;
       form.appendChild(inputTitle);
+      
 
       const inputMemo = document.createElement('input');
       inputMemo.type = 'hidden';
@@ -295,6 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
     phraseBox.className = 'phraseBox';
     phraseBox.dataset.index = newIndex;
 
+
     phraseBox.innerHTML = `
       <h3>${newIndex + 1}.</h3>
       <input type="text" name="title" placeholder="タイトル">
@@ -303,10 +305,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       <!-- ▼ 音声フレーズ選択欄（追加） -->
       <div>
-        <select name="phraseSelect" class="phrase-select">
+    
+      <select name="phraseSelect" class="phrase-select">
           <option value="">-- フレーズを選択 --</option>
         </select>
         <button type="button" class="playBtn">▶</button>
+        
       </div>
 
       <select name="tags" multiple>
@@ -326,6 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
     attachControlEvents(phraseBox);
     populatePhraseOptions(phraseBox); // ← 音声一覧取得処理
   });
+  
 
   // ↑ ↓ × イベントを設定
   function attachControlEvents(box) {
