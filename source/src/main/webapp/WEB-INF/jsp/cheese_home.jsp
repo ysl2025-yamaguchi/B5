@@ -67,7 +67,7 @@
                <c:out value = "${phrase.name}" />
             </summary>
             <div>
-               <audio controls src="${phrase.path}"></audio><br>
+               <audio controls src="<c:url value='/uploded/${phrase.path}' />"></audio><br>
                <table>
                   <tr>
                      <td>
