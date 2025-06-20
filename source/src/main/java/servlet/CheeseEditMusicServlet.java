@@ -24,15 +24,15 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 曲編集画面にフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
-		dispatcher.forward(request, response);
 		
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
 		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
 		request.setAttribute("phraseList", phraseList);
 		
+		// 曲編集画面にフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
+				dispatcher.forward(request, response);
 //		// CheeseEditMusicServlet の doGet 内
 //		CheeseMusicPhraseDao phraseDao = new CheeseMusicPhraseDao();
 //		List<CheeseMusicPhrase> phraseOptions = phraseDao.findAll(); // ユーザーIDに応じて絞るなら別途条件追加

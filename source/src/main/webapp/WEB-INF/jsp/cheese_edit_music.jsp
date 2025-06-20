@@ -27,6 +27,14 @@
 
 <jsp:include page="cheese_header.jsp" />
 
+<!--  
+  <select class="phraseSelect" name="phrase_id">
+      <c:forEach var="p" items="${phraseList}">
+        <option value="${p.id}" data-path="${p.path}">${p.name}</option>
+      </c:forEach>
+    </select>
+-->
+
 <!-- 曲名入力フォーム -->
 <h1 for="songName">曲名：${music.name}</h1>
 <input type="hidden" id="songName" name="songName" value="${music.name}" />
@@ -56,7 +64,7 @@
 
 <!-- フレーズリスト -->
 <div id="phraseContainer">
-<c:forEach var="phrase" items="${phraseList}" varStatus="status"> 
+<c:forEach var="phrase" items="${phraseList2}" varStatus="status"> 
     <div class="phraseBox" data-index="${status.index}">
       <h3>${status.index + 1}.</h3>
       
@@ -65,7 +73,7 @@
 <div class="phrase-audio-section">
   <label>フレーズ選択：
     <select class="phraseSelect" name="phrase_id">
-      <c:forEach var="p" items="${phraseList}">
+      <c:forEach var="p" items="${phraseList2}">
         <option value="${p.id}" data-path="${p.path}">${p.name}</option>
       </c:forEach>
     </select>
