@@ -30,9 +30,6 @@
             <label for = "new">新規</label>  <br>
             <div id ="tag_input_box">
                <select id = "select_tag">
-                  <option value = "0">タグA</option>
-                  <option value = "0">タグB</option>
-                  <option value = "0">タグC</option>
                   <c:forEach var="tag" items="${tagList}">
                      <option value = "${tag.id}"><c:out value = "${tag.name} "/></option>
                   </c:forEach>
@@ -70,7 +67,7 @@
                <c:out value = "${phrase.name}" />
             </summary>
             <div>
-               <audio controls src="phrase_audio/sample.m4a"></audio><br>
+               <audio controls src="${phrase.path}"></audio><br>
                <table>
                   <tr>
                      <td>
@@ -86,7 +83,7 @@
                         タグ：
                      </td>
                      <td>
-                        <c:forEach var="tag" items="${tagList[phrase.id]}">
+                        <c:forEach var="tag" items="${phraseTagList[phrase.id]}">
                            <c:out value = "${tag.name} " />
                         </c:forEach>
                      </td>

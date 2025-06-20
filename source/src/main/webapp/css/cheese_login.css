@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+.noheader {
+      font-family: "Helvetica Neue", sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 360px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .switch-buttons {
+      margin-bottom: 20px;
+    }
+
+    .switch-buttons button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ccc;
+      cursor: pointer;
+    }
+
+    .switch-buttons button.active {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="password"]{
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .submit-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+}
+
+@keyframes blinkError {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.blink-error {
+  animation: blinkError 0.3s ease-in-out 2;
+}
+
+.success-message {
+  background-color: #e6ffec;
+  border: 1px solid #33aa66;
+  padding: 10px;
+  border-radius: 6px;
+  color: #228855;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  animation: fadeIn 0.4s ease-in;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

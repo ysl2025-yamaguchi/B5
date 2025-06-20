@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import dao.CheesePhraseDao;
+import dto.CheesePhrase;
 
 /**
  * Servlet implementation class CheeseRegistPhraseServlet
@@ -38,6 +40,13 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		
+		CheesePhraseDao phraseDao = new CheesePhraseDao();
+		CheesePhrase phrase = new CheesePhrase();
+		
+		String phraseName = request.getParameter("name");
+		String phraseRemarks = request.getParameter("remarks");
+		
+		
 		// 音声ファイルを取得
 		Part part = request.getPart("uploded_file");
 		if (part != null) {
@@ -51,19 +60,36 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 			// 保存時のファイル名を決定
 			CheesePhraseDao dao = new CheesePhraseDao();
 			String fileName = "phrase_" + dao.getNextId() + extension;
+			String filePath;
 			
 			try {
 				if (testFlag) {
-//					if (!Files.exists("c:/plusdojo2025/B5/uploded/")) {
-//						
-//					}
-			    	part.write("c:/plusdojo2025/B5/uploded/" + fileName);
+					File dir = new File("c:/plusdojo2025/B5/uploded/");
+					if (!dir.exists()) {
+						dir.mkdir();
+					}
+					filePath = "c:/plusdojo2025/B5/uploded/" + fileName;
+			    	part.write(filePath);
 				}
 				else {
-			    	part.write(request.getContextPath() + "/uploded/" + fileName);
+					File dir = new File(request.getContextPath() + "/uploded/");
+					if (!dir.exists()) {
+						dir.mkdir();
+					}
+					filePath = request.getContextPath() + "/uploded/" + fileName;
+			    	part.write(filePath);
 				}
-				request.setAttribute("result", "登録が成功しました!!!!!!!!!!!!!!!!!!!!!!!!");
-					
+				
+				phrase.setName(phraseName);
+				phrase.setRemarks(phraseRemarks);
+				phrase.setPath(filePath);
+				phrase.setUserId(1);
+				if (phraseDao.insert(phrase)) {
+					request.setAttribute("result", "登録が成功しました!!!!!!!!!!!!!!!!!!!!!!!!");
+				}
+				else {
+					throw new IOException();
+				}
 			}
 			catch (IOException e ) {
 				request.setAttribute("result", "登録登録に失敗しました");
