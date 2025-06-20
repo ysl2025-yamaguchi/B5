@@ -36,6 +36,7 @@ public class CheeseMusicListServlet extends HttpServlet {
 //		response.sendRedirect("/CheeseLoginServlet");
 //		return;
 //	}
+		
 		List<String> searchWordList = new ArrayList<String>();
 		CheeseMusicDao bDao = new CheeseMusicDao();
 		List<CheeseMusic> cardList = bDao.select(searchWordList, "", 1);
@@ -46,6 +47,7 @@ public class CheeseMusicListServlet extends HttpServlet {
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
 		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
 		request.setAttribute("phraseList", phraseList);
+		
 		// 曲ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_music.jsp");
 		dispatcher.forward(request, response);
