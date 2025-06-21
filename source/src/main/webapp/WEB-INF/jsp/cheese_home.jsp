@@ -90,7 +90,7 @@
                   </tr>
                </table>
                <div>
-                  <form method = "POST" action = "B5/CheeseEditPhraseervlet">
+                  <form method = "POST" action = "B5/CheesePhraseEditServlet">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "編集">
                   </form>
