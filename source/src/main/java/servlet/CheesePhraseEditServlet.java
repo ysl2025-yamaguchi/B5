@@ -127,59 +127,35 @@ public class CheesePhraseEditServlet extends HttpServlet {
 			    if (phraseUpdated) {
 			        result.append("フレーズ更新成功！<br>");
 
-			     
-			        
-			        // 2. タグ追加・新規登録・更新
 			        String[] addedTags = request.getParameterValues("addedTags");
 			        String[] tagModes = request.getParameterValues("tagMode");
-			        
-			      
-			   
-			 
-			        if (addedTags != null && tagModes != null) {
+
+			        if (addedTags != null && tagModes != null && addedTags.length == tagModes.length) {
+			            ptDao.delete(phraseId); // 中間テーブルから既存関連を削除
+
 			            for (int i = 0; i < addedTags.length; i++) {
-			            	
-			            	
 			                String tagName = addedTags[i];
 			                String mode = tagModes[i];
-			                
-			                if ("registed".equals(mode)) {
-			                
-			                	
-			                	ptDao.delete(phraseId);
-			                    CheeseTag tag = tDao.findByName(tagName);
-			                  
-			                    if (tag != null) {
-			           
-			                    	ptDao.insert(phraseId, tag.getId());
-				                   
-			                        }
-			                } else if ("new".equals(mode)) {
-			                   
-			                	
-			                    CheeseTag existing = tDao.findByName(tagName);
-			                    CheeseTag tag;
-			                    
-			                   
-			                    if (existing != null) {
-			                    	
-			                        tag = existing;
-			                        
-			                    } else {
-			                    	
-			                        tag = tDao.insertAndReturn(tagName, userId);
-			                    	
-			                    }
+			                CheeseTag tag = null;
 
-			                    if (tag != null) {
-			                    	
-			                        ptDao.insert(phraseId, tag.getId());
+			                if ("registed".equals(mode)) {
+			                    tag = tDao.findByName(tagName);
+
+			                } else if ("new".equals(mode)) {
+			                    CheeseTag existing = tDao.findByName(tagName);
+			                    if (existing != null) {
+			                        tag = existing;
+			                    } else {
+			                        tag = tDao.insertAndReturn(tagName, userId); // 新規タグ挿入
 			                    }
 			                }
-			            }
+
+			                if (tag != null) {
+			                    ptDao.insert(phraseId, tag.getId()); // 中間テーブルに関連付け
+			                }
 			            
-			        
-			
+			        }
+
 
 			        }
 			    } else {

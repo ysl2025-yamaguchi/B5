@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class CheeseTagDao {
 			return result;
 	}
 	
-	public boolean delete(int phraseId) {
+	public boolean delete(int tagId) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -77,7 +78,7 @@ public class CheeseTagDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, phraseId);
+			pStmt.setInt(1, tagId);
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -233,9 +234,9 @@ public class CheeseTagDao {
 
 	        // ① 既にタグが存在するかチェック
 	        String sql = "SELECT * FROM tags WHERE name = ?";
-	        PreparedStatement selectStmt = conn.prepareStatement(sql);
-	        selectStmt.setString(1, tagName);
-	        ResultSet rs = selectStmt.executeQuery();
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setString(1, tagName);
+	        ResultSet rs = pStmt.executeQuery();
 
 	        if (rs.next()) {
 	            // 見つかった場合 → そのタグを返す
@@ -264,7 +265,6 @@ public class CheeseTagDao {
 	    return cheeseTag;
 	}
 	public CheeseTag insertAndReturn(String tagName, int userId) {
-	   
 	    Connection conn = null;
 	    CheeseTag cheeseTag = null;
 
@@ -275,23 +275,23 @@ public class CheeseTagDao {
 	            "root", "password"
 	        );
 
-	        // ① 既にタグが存在するかチェック
+	        // ✅ Statement.RETURN_GENERATED_KEYS を指定！
 	        String sql = "INSERT INTO tags (name, user_id, created_at, updated_at) VALUES (?, ?, NOW(), NOW())";
-	        PreparedStatement pStmt = conn.prepareStatement(sql);
-	        pStmt .setString(1, tagName);
-	        pStmt .setInt(2, userId);
-	        
+	        PreparedStatement pStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+	        pStmt.setString(1, tagName);
+	        pStmt.setInt(2, userId);
 
 	        int affectedRows = pStmt.executeUpdate();
+
 	        if (affectedRows > 0) {
 	            try (ResultSet rs = pStmt.getGeneratedKeys()) {
 	                if (rs.next()) {
 	                    int id = rs.getInt(1);
-	                    return new CheeseTag(id, tagName, userId, "", "");
+	                    cheeseTag = new CheeseTag(id, tagName, userId, "", "");
 	                }
 	            }
 	        }
-	        
 
 	    } catch (SQLException | ClassNotFoundException e) {
 	        e.printStackTrace();
@@ -307,6 +307,8 @@ public class CheeseTagDao {
 
 	    return cheeseTag;
 	}
+	
+	
 }
 		
 	

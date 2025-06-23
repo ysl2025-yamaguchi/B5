@@ -327,5 +327,53 @@ public class CheesePhraseDao {
 		// 結果を返す
 		return nextId;
 	}
-	
-}
+	public CheesePhrase findById(int id) {
+	    Connection conn = null;
+	    CheesePhrase phrase = null;
+
+	    try {
+	        // JDBCドライバを読み込む
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+
+	        // データベースに接続する
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
+	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	                "root", "password");
+
+	        // SQL文を準備する
+	        String sql = "SELECT * FROM phrases WHERE id = ?";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setInt(1, id);
+
+	        // 実行して結果を取得
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            phrase = new CheesePhrase(
+	                rs.getInt("id"),
+	                rs.getString("name"),
+	                rs.getString("remarks"),
+	                rs.getString("path"),
+	                rs.getInt("user_id"),
+	                rs.getString("created_at"),
+	                rs.getString("updated_at")
+	            );
+	        }
+
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        // データベース切断
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return phrase;
+	}
+	}
+
+
