@@ -31,6 +31,8 @@ public class CheeseLoginServlet extends HttpServlet{
 		String username = request.getParameter("loginUser");
 		String pw = request.getParameter("loginPass");
 		
+		System.out.println(username + pw);
+		
 		// ログイン処理を行う
 		CheeseUserDao iDao = new CheeseUserDao();
 		CheeseUser user = new CheeseUser();

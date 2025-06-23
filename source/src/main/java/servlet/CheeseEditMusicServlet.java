@@ -63,21 +63,29 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		String updated_at = request.getParameter("updated_at");
 		String created_at = request.getParameter("created_at");
 		
-		// 更新または削除を行う
+		String name = request.getParameter("name");
+		String path = request.getParameter("path");
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		
+		
+		// 保存を行う
 		CheeseMusicPhraseDao bDao = new CheeseMusicPhraseDao();
 		if (request.getParameter("submit").equals("更新")) {
 			if (bDao.update(new CheeseMusicPhrase(id, music_id, phrase_id, title, remarks, phrase_order, updated_at, created_at))) { // 更新成功
-				request.setAttribute("result", "レコードを登録しました。");
+				request.setAttribute("result", "保存しました。");
 			} else { // 更新失敗
 				request.setAttribute("result", "失敗");
 			}
-		} else {
-			if (bDao.delete(new CheeseMusicPhrase(id, music_id, phrase_id, title, remarks, phrase_order, updated_at, created_at))) { // 削除成功
-				request.setAttribute("result", "レコードを削除しました。");
-			} else { // 削除失敗
+		} 
+		
+		CheesePhraseDao cDao = new CheesePhraseDao();
+		if (request.getParameter("submit").equals("更新")) {
+			if (cDao.update(new CheesePhrase(id, name, remarks, path, userId, updated_at, created_at))) { // 更新成功
+				request.setAttribute("result", "保存しました。");
+			} else { // 更新失敗
 				request.setAttribute("result", "失敗");
 			}
-		}
+		} 
 		
 		// 結果ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
