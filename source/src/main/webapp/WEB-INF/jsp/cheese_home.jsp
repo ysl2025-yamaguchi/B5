@@ -67,7 +67,7 @@
                <c:out value = "${phrase.name}" />
             </summary>
             <div>
-               <audio controls src="${phrase.path}"></audio><br>
+               <audio controls src="<c:url value='/uploded/${phrase.path}' />"></audio><br>
                <table>
                   <tr>
                      <td>
@@ -90,7 +90,7 @@
                   </tr>
                </table>
                <div>
-                  <form method = "POST" action = "B5/CheeseEditPhraseervlet">
+                  <form method = "POST" action = "CheesePhraseEditServlet">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "編集">
                   </form>

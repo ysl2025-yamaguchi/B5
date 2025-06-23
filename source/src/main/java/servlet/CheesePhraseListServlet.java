@@ -51,7 +51,9 @@ public class CheesePhraseListServlet extends HttpServlet {
 		CheeseTagDao TagDao = new CheeseTagDao();
 		for (CheesePhrase phrase : phraseList) {
 			List<Integer> TagIdList = phraseTagDao.selectPhraseTagInfo(phrase.getId());
-			phraseTagMap.put(phrase.getId(), TagDao.select(TagIdList));
+			if (TagIdList.size() != 0) {
+				phraseTagMap.put(phrase.getId(), TagDao.select(TagIdList));
+			}
 		}
 		
 		// ユーザーが登録したことのあるタグを取得
@@ -103,7 +105,9 @@ public class CheesePhraseListServlet extends HttpServlet {
 		CheeseTagDao TagDao = new CheeseTagDao();
 		for (CheesePhrase phrase : phraseList) {
 			List<Integer> TagIdList = phraseTagDao.selectPhraseTagInfo(phrase.getId());
-			phraseTagMap.put(phrase.getId(), TagDao.select(TagIdList));
+			if (TagIdList.size() != 0) {
+				phraseTagMap.put(phrase.getId(), TagDao.select(TagIdList));
+			}
 		}
 		
 		// ユーザーが登録したことのあるタグを取得
@@ -116,7 +120,6 @@ public class CheesePhraseListServlet extends HttpServlet {
         request.setAttribute("order", order);
         request.setAttribute("phraseTagList", phraseTagMap);
         request.setAttribute("tagList", tagList);
-        System.out.println(phraseTagMap);
 		
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_home.jsp");

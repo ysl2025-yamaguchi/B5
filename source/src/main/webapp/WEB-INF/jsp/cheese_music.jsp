@@ -52,7 +52,8 @@
       <div id="music_${music.id}" class="toggle-section">
      <!-- フレーズ一覧 -->
      <ul>
-       <c:forEach var="phrase" items="${phraseList}">
+       <c:forEach var="phrase" items="${musicPhraseMap[music.id]}">
+       <input type="hidden" name="phraseId" value="${phrase.id}" />
        <li><c:out value="${phrase.name}" /></li>
        </c:forEach>
      </ul>

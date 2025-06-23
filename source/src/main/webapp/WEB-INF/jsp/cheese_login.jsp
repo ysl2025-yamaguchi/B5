@@ -6,14 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン/新規登録</title>
-<!-- 
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_login.css">
- -->
 
-<!--  
+
 <script src="<c:url value='/js/cheese_login.js' />"></script>
--->
 
 
 </head>
@@ -91,7 +89,8 @@
       <input type="text" id="regUser" name="regUser" placeholder="ユーザー名">
       <input type="password" id="regPass" name="regPass" placeholder="パスワード">
       <input type="password" id="regPassConfirm" name="regPassConfirm" placeholder="パスワード確認">
-		<button type="button" class="submit-button" onclick="validateRegister()">登録</button>
+       <input type="submit" class="submit-button" value="登録">
+		
     </div>
     </form>
     

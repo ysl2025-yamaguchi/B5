@@ -47,7 +47,6 @@ function validateLogin() {
   }
 
   error.textContent = "";
-  document.querySelector("form").submit(); // ログイン成功で送信
   return true;
 }
 
@@ -69,7 +68,6 @@ function validateRegister() {
   }
 
   error.textContent = "";
-  document.querySelector("form").submit(); // 登録成功で送信
   return true;
 }
 

@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import dao.CheeseUserDao;
 import dto.CheeseUser;
@@ -16,58 +15,32 @@ import dto.CheeseUser;
 @WebServlet("/CheeseRegistUserServlet")
 public class CheeseRegistUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/B5/CheeseLoginServlet");
-			return;
-		}
-		
-		// 登録ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_login.jsp");
-		dispatcher.forward(request, response);
-	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/B5/CheeseLoginUserServlet");
-			return;
-		}
-		
+	        throws ServletException, IOException {
+	
 		// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String username = request.getParameter("regUser");
-		String pw = request.getParameter("regPass");
-		
-		// 登録処理を行う
-		CheeseUserDao bDao = new CheeseUserDao();
-		CheeseUser user = new CheeseUser();
-		user.setName(username);
-		user.setPassword(pw);
-		if (bDao.isRegistOK(user)){ // 登録成功
-			request.setAttribute("result", "登録成功！");
-		} else { // 登録失敗
-			request.setAttribute("result", "登録失敗！");
-
-			// 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheeseLogin.jsp");
-			dispatcher.forward(request, response);
-		}
-		
-		if (bDao.isRegistOK(user)) { // 登録成功
-		    // セッションスコープに登録成功メッセージを入れる
-		    session.setAttribute("register_success", "登録が完了しました");
-		    
-		    // ログイン画面にリダイレクト
-		    response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
-		    return;
-		}
+	    request.setCharacterEncoding("UTF-8");
+	    String username = request.getParameter("regUser");
+	    String pw = request.getParameter("regPass");
+	
+	    // 登録処理を行う
+	    CheeseUserDao bDao = new CheeseUserDao();
+	    CheeseUser user = new CheeseUser();
+	    user.setName(username);
+	    user.setPassword(pw);
+	
+	    if (bDao.isRegistOK(user)) {
+	        // ✅ セッションスコープに成功メッセージを入れて…
+	        request.getSession().setAttribute("register_success", "登録が完了しました！");
+	        
+	        // ✅ リダイレクトでログイン画面に戻す
+	        response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+	    } else {
+	        // 失敗時はフォワードでメッセージ表示
+	        request.setAttribute("result", "登録失敗！");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_login.jsp");
+	        dispatcher.forward(request, response);
+	    }
 	}
-
 }
