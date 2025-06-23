@@ -96,7 +96,7 @@
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "編集">
                   </form>
-                  <form method = "POST" action = "B5/CheeseDeletePhraseervlet">
+                  <form method = "POST" action = "CheeseDeletePhraseServlet">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "削除">
                   </form>
