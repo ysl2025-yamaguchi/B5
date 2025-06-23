@@ -37,7 +37,7 @@ public class CheeseMusicListServlet extends HttpServlet {
 //		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 //		HttpSession session = request.getSession();
 //		if (session.getAttribute("id") == null) {
-//		response.sendRedirect("/CheeseLoginServlet");
+//		response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 //		return;
 //	}
 		
@@ -99,7 +99,7 @@ public class CheeseMusicListServlet extends HttpServlet {
 //		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 //		HttpSession session = request.getSession();
 //		if (session.getAttribute("id") == null) {
-//			response.sendRedirect("/CheeseLoginServlet");
+//			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 //			return;
 //		}
 		

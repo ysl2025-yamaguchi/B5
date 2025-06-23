@@ -1,118 +1,155 @@
 @charset "UTF-8";
 
- #addMusicSection {
-	display:none;
-    margin-top: 10px;
+ main {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
 }
 
- #openMusicSection {
-      display:none;
-      margin-top: 10px;
-}
-    /* body {
-      font-family: Arial Black, sans-serif;
-      margin: 20px;
-    } */
-
-header.header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid #ccc;
-      margin-bottom: 20px;
-      position: relative;
-    }
-    .logo {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-
-    .header nav ul{
-      display: flex; /* 横並びにする */
-      text-align: center;
-      font-size: 20px;
-      padding: 0 5%;
-      padding-top: 0px;
-      margin-top: 2px;
-      list-style: none;
-      /* gap: 40px; */
-      text-align: center;
-      /* border-left: 1px solid black; */
-    }
-
-    .line-right{
-      margin-left: 40px;
-    }
-
-    .line-left{
-      margin-left: 40px;
-    }
-
-    .nav ul {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav ul li {
-      position: relative;
-      padding: 0 10px;
-    }
-
-    .nav ul li a {
-      text-decoration: none;
-      color: #000;
-      font-size: 18px;
-      padding: 8px 12px;
-      display: inline-block;
-      transition: background-color 0.3s ease, color 0.3s ease;
+#addMusic, label {
+  vertical-align: middle;
+  margin-right: 5px;
 }
 
-    .nav ul li a:hover {
-      background-color: #ffffbf;
-      border-radius: 5px;
-      color: #000;
+/* 曲追加フォーム */
+#addMusicSection,
+.music-box,
+section {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-top: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
-    .line-right{
-      border-right: 1px solid black;
+#addMusicSection form,
+section form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px; 
+  margin: 0;
+  padding: 0;
 }
-    section {
-      margin-top: 30px;
-    }
-    .box {
-      border: 1px solid #ccc;
-      background-color: #f7f7f7;
-      padding: 15px;
-      margin-top: 10px;
-    }
-    .song-list {
-      border: 1px solid #ccc;
-      margin-top: 20px;
-    }
-    .song-header {
-      background-color: #eee;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .phrases {
-      padding: 10px;
-    }
-    input[type="text"] {
-      width: 200px;
-      padding: 5px;
-    }
-    button {
-      padding: 5px 10px;
-    }
-    .radio-group {
-      margin-top: 10px;
-    }
-    .radio-group label {
-      display: block;
-    }
+
+#output {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  height: 0; 
+  font-size: 12px;
+  color: red;
+}
+
+.add-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* 曲名入力 */
+#regist_music input[type="text"],
+input[name="search_str_line"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  width: 60%;
+  border-radius: 4px 0 0 4px;
+  min-width: 200px;
+  max-width: 300px;
+  border-radius: 4px 0 0 4px;
+  box-sizing: border-box;
+}
+
+/* 登録ボタン */
+#regist_music button,
+form button[type="submit"] {
+  padding: 8px 8px;
+  border: 1px solid #ccc;
+  border-left: none;
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* 検索フォーム全体 */
+section form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.search-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+  padding:15px;
+}
+
+/* 検索フォームボタン */
+form button img {
+  vertical-align: middle;
+}
+
+/* プルダウン */
+select {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 60%;
+  max-width: 150px;
+  justify-content: center;
+}
+
+/* 曲ボックスのトグル */
+.toggle-btn {
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+/* フレーズリスト */
+.toggle-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+/* 編集・削除ボタン並び */
+.button-row {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}
+.toggle-section form button {
+  background-color: #f0f0f0;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.toggle-section {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 16px;
+  border-top: 1px solid #ddd;
+  margin-top: 8px;
+}
+
+/* ラベルとアイコンの間隔調整 */
+label img {
+  vertical-align: middle;
+  margin-right: 4px;
+}
