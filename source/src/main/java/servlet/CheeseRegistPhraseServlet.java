@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import dao.CheesePhraseDao;
+import dao.CheesePhraseTagDao;
+import dao.CheeseTagDao;
 import dto.CheesePhrase;
+import dto.CheesePhraseTag;
+import dto.CheeseTag;
 
 /**
  * Servlet implementation class CheeseRegistPhraseServlet
@@ -36,16 +40,18 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean testFlag = true;
 		boolean result = true;
+		int userId = 1;
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		
 		CheesePhraseDao phraseDao = new CheesePhraseDao();
 		CheesePhrase phrase = new CheesePhrase();
+		CheesePhrase uploadedPhrase = new CheesePhrase();
 		
 		String phraseName = request.getParameter("name");
 		String phraseRemarks = request.getParameter("remarks");
-		System.out.println(this.getServletConfig().getServletContext().getRealPath("") + "uploded");
+
 		
 		// 音声ファイルを取得
 		Part part = request.getPart("uploded_file");
@@ -61,14 +67,13 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 				
 				// 保存時のファイルパスの宣言
 				String dirPath;
-				String filePath;
 				
 				try {
 					// データベースへ登録
 					phrase.setName(phraseName);
 					phrase.setRemarks(phraseRemarks);
-					phrase.setUserId(1);
-					filePath = phraseDao.insertWithFile(phrase, extension);
+					phrase.setUserId(userId);
+					uploadedPhrase = phraseDao.insertWithFile(phrase, extension);
 					
 					// ファイルの保存処理
 					if (testFlag) {
@@ -83,7 +88,7 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 					if (!dir.exists()) {
 						dir.mkdir();
 					}
-			    	part.write(dirPath + "/" + filePath);
+			    	part.write(dirPath + "/" + uploadedPhrase.getPath());
 					
 					result = true;
 				}
@@ -95,13 +100,51 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 		else {
 			phrase.setName(phraseName);
 			phrase.setRemarks(phraseRemarks);
-			phrase.setUserId(1);
+			phrase.setUserId(userId);
 			
-			if (!phraseDao.insertWithoutFile(phrase)) {
+			uploadedPhrase = phraseDao.insertWithoutFile(phrase);
+			
+			if (uploadedPhrase != null) {
 				result = true;
 			}
 			else {
 				result = false;
+			}
+		}
+		
+		if (result) {
+			String[] tagIdArray = request.getParameterValues("registed_tag_id");
+			String[] tagNameArray = request.getParameterValues("registed_tag_name");
+			
+			int tagId;
+			String tagName;
+			if (tagIdArray != null && tagNameArray != null) {
+				for (int i = 0; i < tagIdArray.length; i++) {
+					tagId = Integer.parseInt(tagIdArray[i]);
+					
+					if (tagId == 0) {
+						// タグの追加
+						CheeseTagDao tagDao = new CheeseTagDao();
+						CheeseTag tag = new CheeseTag();
+						
+						tagName = tagNameArray[i];
+						tag.setName(tagName);
+						tag.setUserId(userId);
+						
+						tagId = tagDao.insert(tag);
+					}
+					
+					// フレーズとタグの中間テーブルに追加
+					CheesePhraseTagDao phraseTagDao = new CheesePhraseTagDao();
+					CheesePhraseTag phraseTag = new CheesePhraseTag();
+					
+					if (!phraseTagDao.insert(uploadedPhrase.getId(), tagId)) {
+						result = true;
+					}
+					else {
+						result = false;
+					}
+				}
 			}
 		}
 		
