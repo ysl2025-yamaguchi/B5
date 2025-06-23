@@ -108,14 +108,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		        request.setAttribute("phraseTagList", phraseTagMap);
 		        request.setAttribute("tagList", tagList);
 			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			StringBuilder result = new StringBuilder();
+              StringBuilder result = new StringBuilder();
 			
             
 			// フレーズ更新
