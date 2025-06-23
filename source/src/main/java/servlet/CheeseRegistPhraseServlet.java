@@ -35,6 +35,7 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean testFlag = true;
+		boolean result = true;
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -48,62 +49,68 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 		
 		// 音声ファイルを取得
 		Part part = request.getPart("uploded_file");
-		if (part != null) {
+		if (part != null && part.getSize() > 0) {
 			// ファイルのファイル名を取得
 			String uplodedFileName = part.getSubmittedFileName();
 			
 			// ファイルの拡張子を取得
 			int dotPosition = uplodedFileName.lastIndexOf(".");
 			if (dotPosition != -1) {
+				// ファイルの拡張子を取得
 				String extension = uplodedFileName.substring(dotPosition);
 				
-				// 保存時のファイル名を決定
-				CheesePhraseDao dao = new CheesePhraseDao();
-				String fileName = "phrase_" + dao.getNextId() + extension;
+				// 保存時のファイルパスの宣言
+				String dirPath;
 				String filePath;
 				
 				try {
-					if (testFlag) {
-						String dirPath  = this.getServletConfig().getServletContext().getRealPath("") + "uploded";
-//						String dirPath = "C:/plusdojo2025/B5/uploded";
-						File dir = new File(dirPath);
-						if (!dir.exists()) {
-							dir.mkdir();
-						}
-						filePath = dirPath + "\\" + fileName;
-				    	part.write(filePath);
-				    	
-				    	filePath  = fileName;
-					}
-					else {
-						File dir = new File(request.getContextPath() + "/uploded/");
-						if (!dir.exists()) {
-							dir.mkdir();
-						}
-						filePath = request.getContextPath() + "/uploded/" + fileName;
-				    	part.write(filePath);
-					}
-					
+					// データベースへ登録
 					phrase.setName(phraseName);
 					phrase.setRemarks(phraseRemarks);
-					phrase.setPath(filePath);
 					phrase.setUserId(1);
-					if (phraseDao.insert(phrase)) {
-						request.setAttribute("result", "登録が成功しました!!!!!!!!!!!!!!!!!!!!!!!!");
+					filePath = phraseDao.insertWithFile(phrase, extension);
+					
+					// ファイルの保存処理
+					if (testFlag) {
+						dirPath  = this.getServletConfig().getServletContext().getRealPath("") + "/uploded";
+//						String dirPath = "C:/plusdojo2025/B5/uploded";
 					}
 					else {
-						throw new IOException();
+						dirPath = request.getContextPath() + "/uploded";
 					}
+					
+					File dir = new File(dirPath);
+					if (!dir.exists()) {
+						dir.mkdir();
+					}
+			    	part.write(dirPath + "/" + filePath);
+					
+					result = true;
 				}
 				catch (IOException e ) {
-					request.setAttribute("result", "登録登録に失敗しました");
+					result = false;
 				}
 			}
 		}
+		else {
+			phrase.setName(phraseName);
+			phrase.setRemarks(phraseRemarks);
+			phrase.setUserId(1);
+			
+			if (!phraseDao.insertWithoutFile(phrase)) {
+				result = true;
+			}
+			else {
+				result = false;
+			}
+		}
 		
-		response.sendRedirect("CheesePhraseListServlet");
-//    	RequestDispatcher dispatcher = request.getRequestDispatcher("CheesePhraseListServlet");
-//    	dispatcher.forward(request, response);
+		if (result) {
+			response.sendRedirect("CheesePhraseListServlet");
+		}
+		else {
+			response.sendRedirect("CheesePhraseListServlet");
+		}
 	}
 
 }

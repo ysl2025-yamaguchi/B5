@@ -67,7 +67,9 @@
                <c:out value = "${phrase.name}" />
             </summary>
             <div>
-               <audio controls src="<c:url value='/uploded/${phrase.path}' />"></audio><br>
+            	<c:if test = "${!empty phrase.path}">
+               	<audio controls src="<c:url value='/uploded/${phrase.path}' />"></audio><br>
+              	</c:if>
                <table>
                   <tr>
                      <td>

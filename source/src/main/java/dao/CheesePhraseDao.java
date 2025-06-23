@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,7 +122,7 @@ public class CheesePhraseDao {
 		return phraseList;
 	}
 	
-	public boolean insert(CheesePhrase phrase) {
+	public boolean insertWithoutFile(CheesePhrase phrase) {
 		Connection conn = null;
 		boolean result = false;
 		try {
@@ -134,7 +135,7 @@ public class CheesePhraseDao {
 					"root", "password");
 
 			// SQL文を準備する
-			String sql = "INSERT INTO phrases (name, remarks, path, user_id) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO phrases (name, remarks, user_id) VALUES (?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -148,15 +149,10 @@ public class CheesePhraseDao {
 			} else {
 				pStmt.setString(2, "");
 			}
-			if (phrase.getPath() != null) {
-				pStmt.setString(3, phrase.getPath());
+			if (phrase.getUserId() != 0) {
+				pStmt.setInt(3, phrase.getUserId());
 			} else {
 				pStmt.setString(3, "");
-			}
-			if (phrase.getUserId() != 0) {
-				pStmt.setInt(4, phrase.getUserId());
-			} else {
-				pStmt.setString(4, "");
 			}
 			
 			// SQL文を実行する
@@ -179,6 +175,101 @@ public class CheesePhraseDao {
 		}
 		
 		return result;
+	}
+	
+	public String insertWithFile(CheesePhrase phrase, String extension) {
+		Connection conn = null;
+		String filePath = "";
+		
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "INSERT INTO phrases (name, remarks, user_id) VALUES (?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			// SQL文を完成させる
+			if (phrase.getName() != null) {
+				pStmt.setString(1, phrase.getName());
+			} else {
+				pStmt.setString(1, "");
+			}
+			if (phrase.getRemarks() != null) {
+				pStmt.setString(2, phrase.getRemarks());
+			} else {
+				pStmt.setString(2, "");
+			}
+			if (phrase.getUserId() != 0) {
+				pStmt.setInt(3, phrase.getUserId());
+			} else {
+				pStmt.setString(3, "");
+			}
+			
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				// created_atとuser_idを取得
+				ResultSet rs;
+				rs = pStmt.getGeneratedKeys();
+				int phraseId = 0;
+				if (rs.next()) {
+					phraseId = rs.getInt(1);
+				}
+				
+				// sql文を準備する
+				String sql2 = "SELECT created_at, user_id FROM phrases WHERE id = ?";
+				PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+				
+				// SQL文を完成させる
+				if (phraseId != 0) {
+					pStmt2.setInt(1, phraseId);
+				}
+				
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs2;
+				rs2 = pStmt2.executeQuery();
+				
+				// 結果表をコレクションにコピーする
+				if (rs2.next()) {
+					filePath = rs2.getInt("user_id") + "_" + rs2.getString("created_at").replaceAll("[-| |:|.]", "_") + extension;
+				}
+				
+				// filePathをセットする
+				// SQL文を準備する
+				String sql3 = "UPDATE phrases SET path = ? WHERE id = ?";
+				PreparedStatement pStmt3 = conn.prepareStatement(sql3);
+				
+				// SQL文を完成させる
+				pStmt3.setString(1, filePath);
+				pStmt3.setInt(2, phraseId);
+				
+				// SQL文を実行する
+				pStmt3.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			filePath = "";
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			filePath = "";
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					filePath = "";
+				}
+			}
+		}
+		
+		return filePath;
 	}
 	
 	// 引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
