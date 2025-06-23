@@ -20,12 +20,22 @@ window.addEventListener('DOMContentLoaded', function() {
    document.getElementById('add_tag_button').addEventListener('click', function () {
       const isRegisted = document.getElementById('registed').checked;
       let value = '';
+      let id = 0;
 
       if (isRegisted) {
          const select = document.getElementById('select_tag');
          value = select.options[select.selectedIndex].text.trim();
+         id = select.value;
       } else {
          value = document.getElementById('input_tag').value.trim();
+         
+         const options = document.getElementById("select_tag");
+         for (const option of options) {
+				console.log()
+				if (value === option.textContent.trim()) {
+					id = option.value;
+				}
+			}
       }
 
       if (value === '') {
@@ -42,10 +52,20 @@ window.addEventListener('DOMContentLoaded', function() {
       const tagListDiv = document.getElementById('added_tag_list');
       const tagItem = document.createElement('div');
       tagListDiv.appendChild(tagItem);
-      tagItem.classList.add('tag_item')
+      tagItem.classList.add('tag_item');
 
       const tagText = document.createElement('span');
       tagText.textContent = value;
+      
+      const inputTagId = document.createElement('input');
+      inputTagId.type = 'hidden';
+      inputTagId.value = id;
+      inputTagId.name = 'registed_tag_id';
+      
+      const inputTagName = document.createElement('input');
+      inputTagName.type = 'hidden';
+      inputTagName.value = value;
+      inputTagName.name = 'registed_tag_name';
 
       const unassignButton = document.createElement('button');
       unassignButton.textContent = '✕';
@@ -56,6 +76,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
       tagItem.appendChild(tagText);
       tagItem.appendChild(unassignButton);
+      tagItem.appendChild(inputTagId);
+      tagItem.appendChild(inputTagName);
+      
       tagListDiv.appendChild(tagItem);
 
       value = document.getElementById('input_tag').value = '';

@@ -13,9 +13,9 @@ import dto.CheeseTag;
 
 public class CheeseTagDao {
 	
-	public boolean insert(CheeseTag card) {
+	public int insert(CheeseTag card) {
 		Connection conn = null;
-		boolean result = false;
+		int id = 0;
 	
 		try {
 			// JDBCドライバを読み込む
@@ -27,8 +27,8 @@ public class CheeseTagDao {
 					"root", "password");
 			
 			// SQL文を準備する
-			String sql = "INSERT INTO tags (id, name, user_id) VALUES (0, ?, 0)";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			String sql = "INSERT INTO tags (id, name, user_id) VALUES (0, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			// SQL文を完成させる
 			if (card.getName() != null) {
@@ -36,28 +36,36 @@ public class CheeseTagDao {
 			} else {
 			pStmt.setString(1, "");
 			}
+			
+			pStmt.setInt(2,  card.getUserId());
 
-				// SQL文を実行する
-				if (pStmt.executeUpdate() == 1) {
-					result = true;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-			     // データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				// idを取得
+				ResultSet rs;
+				rs = pStmt.getGeneratedKeys();
+				if (rs.next()) {
+					id = rs.getInt(1);
 				}
 			}
+				
+		} catch (SQLException e) {
+				e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+		     // データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		
-			// 結果を返す
-			return result;
+		// 結果を返すs
+		return id;
 	}
 	
 	public boolean delete(int tagId) {

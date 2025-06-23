@@ -23,7 +23,7 @@
          <input type = "text" name = "name" placeholder = "フレーズ名"> <br>
          <input type = "text" name = "remarks" placeholder = "メモ"> <br>
          <div>
-            <span>タグの追加aaa</span> <br>
+            <span>タグの追加</span> <br>
             <input type = "radio" id = "registed" name = "tag_registed" value = "registed" checked />
             <label for = "registed">登録済み</label>
             <input type = "radio" id = "new" name = "tag_registed" value = "new">
@@ -67,7 +67,9 @@
                <c:out value = "${phrase.name}" />
             </summary>
             <div>
-               <audio controls src="<c:url value='/uploded/${phrase.path}' />"></audio><br>
+            	<c:if test = "${!empty phrase.path}">
+               	<audio controls src="<c:url value='/uploded/${phrase.path}' />"></audio><br>
+              	</c:if>
                <table>
                   <tr>
                      <td>
@@ -94,7 +96,7 @@
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "編集">
                   </form>
-                  <form method = "POST" action = "B5/CheeseDeletePhraseervlet">
+                  <form method = "POST" action = "CheeseDeletePhraseServlet">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "削除">
                   </form>

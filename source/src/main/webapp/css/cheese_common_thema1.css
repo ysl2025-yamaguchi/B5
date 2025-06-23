@@ -128,11 +128,19 @@ header .header nav {
   position: absolute;
   top: 10px;
   right: 10px;
+  display: flex;
+  align-items: center;
 }
 .cheese-menu img {
   cursor: pointer;
   width: 30px;
   height: 30px;
+  margin-right: 8px;
+}
+
+.select_thema {
+  font-size: 14px;
+  padding: 4px;
 }
 /* ドロップダウンメニュー */
 .dropdown {
