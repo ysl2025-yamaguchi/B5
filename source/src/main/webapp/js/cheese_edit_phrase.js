@@ -1,6 +1,7 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-document.querySelectorAll('input[name="tag_registed"]').forEach(function (radio) {
+
+  // ラジオボタン切り替え
+  document.querySelectorAll('input[name="tag_registed"]').forEach(function (radio) {
     radio.addEventListener('change', function () {
       const isRegisted = (this.value === 'registed');
       document.getElementById('select_tag').style.display = isRegisted ? 'inline' : 'none';
@@ -8,9 +9,7 @@ document.querySelectorAll('input[name="tag_registed"]').forEach(function (radio)
     });
   });
 
-
-
-
+  // タグ追加ボタン処理
   document.getElementById('add_tag_button').addEventListener('click', function () {
     const isRegisted = document.getElementById('registed').checked;
     let tagName = "";
@@ -28,7 +27,7 @@ document.querySelectorAll('input[name="tag_registed"]').forEach(function (radio)
 
     if (tagName === "") return;
 
-   
+    // タグ表示ブロック作成
     const tagListDiv = document.getElementById('added_tag_list');
     const tagItem = document.createElement('div');
     tagItem.classList.add('tag_item');
@@ -43,7 +42,7 @@ document.querySelectorAll('input[name="tag_registed"]').forEach(function (radio)
       tagListDiv.removeChild(tagItem);
     });
 
-    
+    // hidden inputs
     const hiddenTagInput = document.createElement('input');
     hiddenTagInput.type = 'hidden';
     hiddenTagInput.name = 'addedTags';
@@ -54,18 +53,22 @@ document.querySelectorAll('input[name="tag_registed"]').forEach(function (radio)
     hiddenModeInput.name = 'tagMode';
     hiddenModeInput.value = isRegisted ? 'registed' : 'new';
 
-    
+    // 要素を追加
     tagItem.appendChild(tagText);
     tagItem.appendChild(removeBtn);
     tagItem.appendChild(hiddenTagInput);
     tagItem.appendChild(hiddenModeInput);
     tagListDiv.appendChild(tagItem);
 
-   
+    // 入力欄リセット
     if (!isRegisted) {
       document.getElementById('input_tag').value = "";
     }
- });
- 
+
+  });
 
 });
+
+
+
+
