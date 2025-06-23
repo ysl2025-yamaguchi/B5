@@ -1,240 +1,4 @@
-
-/*document.addEventListener('DOMContentLoaded', function () {
-  const saveBtn = document.getElementById('saveBtn');
-  const messageArea = document.getElementById('messageArea');
-  const addPhraseBtn = document.getElementById('addPhraseBtn');
-  const phraseContainer = document.getElementById('phraseContainer');
-
-  // 保存ボタンの処理
-  saveBtn.addEventListener('click', function () {
-    const songName = document.getElementById('songName').value;
-    if (!songName || songName.trim() === '') {
-      messageArea.textContent = '曲タイトルを入力してください';
-      messageArea.style.color = 'red';
-      return;
-    }
-
-    // 保存処理に必要なデータ収集（ここはfetchで送る処理にあとで拡張可）
-    const phraseBoxes = document.querySelectorAll('.phraseBox');
-    const phrases = Array.from(phraseBoxes).map((box, index) => {
-      return {
-        title: box.querySelector('input[name="title"]').value,
-        author: box.querySelector('input[name="author"]').value,
-        memo: box.querySelector('textarea[name="memo"]').value,
-        order: index
-      };
-    });
-
-    console.log('保存データ:', {
-      songName: songName,
-      phrases: phrases
-    });
-
-    messageArea.textContent = '保存しました！（仮処理）';
-    messageArea.style.color = 'green';
-  });
-
-  // ＋ボタンの処理：フレーズ欄追加
-  addPhraseBtn.addEventListener('click', function () {
-    const phraseBoxes = document.querySelectorAll('.phraseBox');
-    const newIndex = phraseBoxes.length;
-
-    // 元のテンプレートから複製
-    const newBox = document.createElement('div');
-    newBox.className = 'phraseBox';
-    newBox.dataset.index = newIndex;
-    newBox.innerHTML = `
-      <h3>${newIndex + 1}.</h3>
-      <input type="text" name="title" placeholder="タイトル">
-      <input type="text" name="author" placeholder="名前">
-      <textarea name="memo"></textarea>
-      <div class="controls">
-        <button class="moveUp" type="button">↑</button>
-        <button class="moveDown" type="button">↓</button>
-        <button class="deleteBtn" type="button">×</button>
-      </div>
-    `;
-
-    phraseContainer.appendChild(newBox);
-    attachControlEvents(newBox); // イベント付け直し
-  });
-
-  // 全ての既存のphraseBoxにイベント付け
-  document.querySelectorAll('.phraseBox').forEach(box => {
-    attachControlEvents(box);
-  });
-
-  // ↑↓×ボタンのイベントを1つの関数で設定
-  function attachControlEvents(box) {
-    const deleteBtn = box.querySelector('.deleteBtn');
-    const moveUpBtn = box.querySelector('.moveUp');
-    const moveDownBtn = box.querySelector('.moveDown');
-
-    deleteBtn.addEventListener('click', function () {
-      box.remove();
-      updatePhraseIndices();
-    });
-
-    moveUpBtn.addEventListener('click', function () {
-      const prev = box.previousElementSibling;
-      if (prev && prev.classList.contains('phraseBox')) {
-        phraseContainer.insertBefore(box, prev);
-        updatePhraseIndices();
-      }
-    });
-
-    moveDownBtn.addEventListener('click', function () {
-      const next = box.nextElementSibling;
-      if (next && next.classList.contains('phraseBox')) {
-        phraseContainer.insertBefore(next, box);
-        updatePhraseIndices();
-      }
-    });
-  }
-
-  // 番号をリセット（1. 2. ...）
-  function updatePhraseIndices() {
-    const boxes = document.querySelectorAll('.phraseBox');
-    boxes.forEach((box, i) => {
-      box.dataset.index = i;
-      const heading = box.querySelector('h3');
-      if (heading) heading.textContent = `${i + 1}.`;
-    });
-  }
-});
-*/
 /*
-document.addEventListener('DOMContentLoaded', function () {
-  const saveBtn = document.getElementById('saveBtn');
-  const messageArea = document.getElementById('messageArea');
-  const phraseContainer = document.getElementById('phraseContainer');
-  const addPhraseBtn = document.getElementById('addPhraseBtn');
-
-  // 保存ボタン処理
-  saveBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    const songName = document.getElementById('songName').value;
-    if (!songName || songName.trim() === '') {
-      messageArea.textContent = '曲タイトルを入力してください';
-      messageArea.style.color = 'red';
-      return;
-    }
-
-    // form に hidden input を追加して submit する
-    const form = document.getElementById('editForm');
-    const phraseBoxes = document.querySelectorAll('.phraseBox');
-
-    // 古い hidden input を削除
-    form.querySelectorAll('input[name^="phrases["]').forEach(el => el.remove());
-
-    phraseBoxes.forEach((box, index) => {
-      const title = box.querySelector('input[name="title"]').value;
-      const memo = box.querySelector('textarea[name="memo"]').value;
-
-      const inputTitle = document.createElement('input');
-      inputTitle.type = 'hidden';
-      inputTitle.name = `phrases[${index}].title`;
-      inputTitle.value = title;
-      form.appendChild(inputTitle);
-
-      const inputMemo = document.createElement('input');
-      inputMemo.type = 'hidden';
-      inputMemo.name = `phrases[${index}].memo`;
-      inputMemo.value = memo;
-      form.appendChild(inputMemo);
-
-      // タグ複数選択も hidden input として追加（必要なら）
-      const selectedTags = Array.from(box.querySelectorAll('select[name="tags"] option:checked'))
-        .map(opt => opt.value);
-
-      selectedTags.forEach((tag, tagIndex) => {
-        const inputTag = document.createElement('input');
-        inputTag.type = 'hidden';
-        inputTag.name = `phrases[${index}].tags[${tagIndex}]`;
-        inputTag.value = tag;
-        form.appendChild(inputTag);
-      });
-    });
-
-    // 正常表示
-    messageArea.style.color = 'green';
-    messageArea.textContent = '保存しました（送信中）';
-
-    form.submit();
-  });
-
-  // ＋ボタン：フレーズ追加
-  addPhraseBtn.addEventListener('click', function () {
-    const newIndex = phraseContainer.children.length;
-
-    const phraseBox = document.createElement('div');
-    phraseBox.className = 'phraseBox';
-    phraseBox.dataset.index = newIndex;
-
-    phraseBox.innerHTML = `
-      <h3>${newIndex + 1}.</h3>
-
-      <input type="text" name="title" placeholder="タイトル">
-      <input type="text" name="author" placeholder="名前">
-      <textarea name="memo"></textarea>
-      <select name="tags" multiple>
-        <option value="恋愛">恋愛</option>
-        <option value="日常">日常</option>
-        <option value="人生">人生</option>
-      </select>
-      <div class="controls">
-        <button class="moveUp">↑</button>
-        <button class="moveDown">↓</button>
-        <button class="deleteBtn">×</button>
-      </div>
-    `;
-
-    phraseContainer.appendChild(phraseBox);
-    attachControlEvents(phraseBox);
-  });
-
-  // ↑ ↓ × イベントを設定
-  function attachControlEvents(box) {
-    box.querySelector('.moveUp').addEventListener('click', function () {
-      const prev = box.previousElementSibling;
-      if (prev) phraseContainer.insertBefore(box, prev);
-    });
-
-    box.querySelector('.moveDown').addEventListener('click', function () {
-      const next = box.nextElementSibling;
-      if (next) phraseContainer.insertBefore(next, box);
-    });
-
-    box.querySelector('.deleteBtn').addEventListener('click', function () {
-      phraseContainer.removeChild(box);
-    });
-  }
-
-  // 初期表示分にもイベント付与
-  document.querySelectorAll('.phraseBox').forEach(attachControlEvents);
-  
-});
-
- // 重複チェック処理
-  document.getElementById("checkDuplicates").addEventListener("click", function () {
-    const inputs = document.querySelectorAll(".phrase-name");
-    const params = [];
-    inputs.forEach((el, i) => {
-      if (el.value.trim() !== "") {
-        params.push("phrase" + i + "=" + encodeURIComponent(el.value.trim()));
-      }
-    });
-    fetch("CheeseCheckMusicServlet", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.join("&")
-    })
-    .then(res => res.text())
-    .then(msg => alert(msg));
-  });
-   */
-   
 document.addEventListener('DOMContentLoaded', function () {
   const saveBtn = document.getElementById('saveBtn');
   const messageArea = document.getElementById('messageArea');
@@ -303,21 +67,16 @@ document.addEventListener('DOMContentLoaded', function () {
       <input type="text" name="author" placeholder="名前">
       <textarea name="memo"></textarea>
 
-      <!-- ▼ 音声フレーズ選択欄（追加） -->
-      <div>
-    
-      <select name="phraseSelect" class="phrase-select">
-          <option value="">-- フレーズを選択 --</option>
-        </select>
-        <button type="button" class="playBtn">▶</button>
-        
-      </div>
-
-      <select name="tags" multiple>
-        <option value="恋愛">恋愛</option>
-        <option value="日常">日常</option>
-        <option value="人生">人生</option>
+		  <!-- ▼ 音声フレーズ選択欄（ここを修正） -->
+  <div class="phrase-audio-section">
+    <label>フレーズ選択：
+      <select class="phrase-select" name="phraseSelect">
+        <option value="">-- フレーズを選択 --</option>
+        <!-- JSでpopulatePhraseOptions()が追加してくれる -->
       </select>
+    </label>
+    <button type="button" class="playBtn">▶</button>
+  </div>
 
       <div class="controls">
         <button class="moveUp" type="button">↑</button>
@@ -407,5 +166,135 @@ document.getElementById("checkDuplicates").addEventListener("click", function ()
   .then(res => res.text())
   .then(msg => alert(msg));
 });
+*/
+
+/*
+let phraseBox = document.getElementById("phraseBox");
+// 複製
+let clone_element = phraseBox.cloneNode(true);
+// 複製した要素の属性を編集
+clone_element.id = "phraseBox2";
+// 複製した要素の子孫要素を編集
+let h2_element = clone_element.querySelector("h2");
+h2_element.textContent = '複製した要素';
+let h2_element = clone_element.querySelector("p");
+h2_element.textContent = '複製した要素のテキスト';
+// 複製したHTML要素をページに挿入
+phraseBox.after(clone_element);
+*/
+
+document.addEventListener("DOMContentLoaded", function () {
+  const phraseContainer = document.getElementById("phraseContainer");
+  const addBtn = document.getElementById("addPhraseBtn");
+
+  // 最初の1個目をテンプレートとして使う
+  const templateBox = document.querySelector(".phraseBox");
+
+  // 枠の番号をふりなおす
+  function renumberBoxes() {
+    const boxes = phraseContainer.querySelectorAll(".phraseBox");
+    boxes.forEach((box, index) => {
+      box.setAttribute("data-index", index);
+      const h3 = box.querySelector("h3");
+      if (h3) h3.textContent = `${index + 1}.`;
+    });
+  }
+
+  // 削除・並び替えボタンのイベントをセット
+  function setControls(box) {
+    const deleteBtn = box.querySelector(".deleteBtn");
+    const moveUpBtn = box.querySelector(".moveUp");
+    const moveDownBtn = box.querySelector(".moveDown");
+
+    if (deleteBtn) {
+      deleteBtn.addEventListener("click", () => {
+        box.remove();
+        renumberBoxes();
+      });
+    }
+
+    if (moveUpBtn) {
+      moveUpBtn.addEventListener("click", () => {
+        const prev = box.previousElementSibling;
+        if (prev && prev.classList.contains("phraseBox")) {
+          phraseContainer.insertBefore(box, prev);
+          renumberBoxes();
+        }
+      });
+    }
+
+    if (moveDownBtn) {
+      moveDownBtn.addEventListener("click", () => {
+        const next = box.nextElementSibling;
+        if (next && next.classList.contains("phraseBox")) {
+          phraseContainer.insertBefore(next, box);
+          renumberBoxes();
+        }
+      });
+    }
+  }
+
+  // セレクトボックスにフレーズを追加
+  function populatePhraseOptions(selectEl) {
+    // JSP側で渡された phraseList を使う
+    if (typeof phraseList === "undefined") return;
+
+    phraseList.forEach(p => {
+      const option = document.createElement("option");
+      option.value = p.id;
+      option.textContent = p.name;
+      option.setAttribute("data-path", p.path);
+      selectEl.appendChild(option);
+    });
+  }
+
+  // ＋ボタンが押された時の処理
+  addBtn.addEventListener("click", () => {
+    const clone = templateBox.cloneNode(true);
+
+    // 入力初期化
+    const title = clone.querySelector('input[name="title"]');
+    if (title) title.value = "";
+
+    const memo = clone.querySelector('textarea[name="memo"]');
+    if (memo) memo.value = "";
+
+    const select = clone.querySelector('select[name="phraseSelect"]');
+    if (select) {
+      select.innerHTML = '<option value="">-- フレーズを選択 --</option>';
+      populatePhraseOptions(select);
+    }
+
+    // ボタンイベント再セット
+    setControls(clone);
+
+    // 最後に追加
+    phraseContainer.appendChild(clone);
+    renumberBoxes();
+  });
+
+  // 初期表示の1個目にもイベントつける
+  setControls(templateBox);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

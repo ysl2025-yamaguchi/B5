@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>曲画面 | MUSIC CHEESE</title>
+<link rel="stylesheet" href="<c:url value='/css/cheese_music.css' />">
 </head>
 <body>
 <jsp:include page="cheese_header.jsp" />
@@ -21,8 +22,10 @@
 	<label>曲を追加</label>
 	<div id="addMusicSection">
 	<form method="POST" id="regist_music" action="<c:url value='/CheeseRegistMusicServlet' />">
+		<div class="add-row">
 		<input type="text" name="name" placeholder="曲名" id="music_name">
 		<button type="submit" value="登録">追加</button>
+		</div>
 		<p id="output" style="color: red;"></p>
 	</form>
 	</div>
@@ -30,10 +33,12 @@
 <section>
 <label><img src="<c:url value='/img/blackcheese.png' />" width="25" height="25">曲検索</label>
 <form method="POST" action="<c:url value='/CheeseMusicListServlet' />">
+	<div class="search-row">
 	<input type="text" name="search_str_line" placeholder="キーワード" value="${searchStrLine}" autocomplete="off">
 	<button type="submit">
 		<img src="<c:url value='/img/search.png' />" width="15" height="15">
 	</button><br>
+	</div>
 	<select name="sort">
 		<option value = "created_desc" <c:if test = "${sort == 'created_desc'}">selected</c:if>>登録が新しい順</option>
             <option value = "created_asc" <c:if test = "${sort == 'created_asc'}">selected</c:if>>登録が古い順</option>
@@ -52,12 +57,12 @@
       <div id="music_${music.id}" class="toggle-section">
      <!-- フレーズ一覧 -->
      <ul>
-       <c:forEach var="phrase" items="${phraseList}">
+       <c:forEach var="phrase" items="${musicPhraseMap[music.id]}">
        <input type="hidden" name="phraseId" value="${phrase.id}" />
        <li><c:out value="${phrase.name}" /></li>
        </c:forEach>
      </ul>
-     <div style="display: flex; gap: 8px;">
+     <div class="button-row" style="display: flex; gap: 8px;">
      	<form method = "GET" action = "<c:url value='/CheeseEditMusicServlet' />">
         	<input type = "hidden" name = "id" value = "${music.id}">
         	<button type = "submit">編集</button>
