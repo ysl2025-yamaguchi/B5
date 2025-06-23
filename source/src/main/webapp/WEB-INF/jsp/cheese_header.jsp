@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>MUSIC CHEESE</title>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
+	<link rel="stylesheet" href="<c:url value='/css/cheese_common_thema1.css' />">
 	<script src="<c:url value='/js/cheese_common.js' />"></script>
 </head>
 <body>
@@ -14,8 +14,8 @@
 <header class="header">
 <div class="cheese-menu">
 	<form id = "change_thema" method = "POST" action = "/CheeseChengeThemaServlet">
-	  <img src="blackcheese.png" id="themeImage" alt="テーマ切替" width="30" height="30"> <br>
-	  <select class = "select_thema" id = "select_thema">
+	  <img src="<c:url value='/img/blackcheese.png' />" id="themeImage" alt="テーマ切替" width="30" height="30" style="margin-right: 8px;">
+	  <select class = "select_thema" id = "select_thema" name="selected_theme">
 		<option value = "light">ライト</option>
 		<option value = "dark">ダーク</option>
 		<option value = "ocean">オーシャン</option>

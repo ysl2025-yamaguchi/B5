@@ -22,7 +22,7 @@ public class CheeseLogoutServlet extends HttpServlet {
 		session.invalidate();
 
 		// ログインページにリダイレクトする
-		response.sendRedirect("/webappMeisi/LoginServlet");
+		response.sendRedirect("/CheeseLoginServlet");
 	}
 
 }

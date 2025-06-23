@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class CheeseSettingServlet
@@ -30,12 +30,12 @@ public class CheeseCheckMusicServlet extends HttpServlet {
             if (p == null) break;
             phrases.add(p.trim());
         
-            // 重複許可数をアプリケーションスコープから取得（なければ3をデフォルト）
-            ServletContext context = getServletContext();
-            int limit = context.getAttribute("duplicateCount") != null
-                ? (int) context.getAttribute("duplicateCount")
+         // セッションスコープから取得（なければ3をデフォルト）
+    		HttpSession session = request.getSession();
+            int limit = session.getAttribute("duplicateCount") != null
+                ? (int) session.getAttribute("duplicateCount")
                 : 3;
-
+         // フレーズ重複カウント処理
         Map<String, Integer> map = new HashMap<>();
             for (String ph : phrases) {
                 map.put(ph, map.getOrDefault(ph, 0) + 1);
