@@ -39,13 +39,7 @@ public class CheesePhraseTagDao {
 	        
 	           while (rs.next()) {
 	        	   list.add(rs.getInt("tag_id"));
-	            	  
-//	        	   CheesePhraseTag dto = new CheesePhraseTag(rs.getInt("id"), rs.getInt("phrase_id"), rs.getInt("tag_id"), "","");
-//	            	        dto.setPhraseName(rs.getString("phrase_name"));
-//	            	        dto.setPhraseRemarks(rs.getString("phrase_remarks"));
-//	            	        dto.setTagName(rs.getString("tag_name"));
-//	                   list.add(dto);
-	            	}
+	            }
 	               } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -121,7 +115,7 @@ public class CheesePhraseTagDao {
     			    pStmt.setInt(1, phraseId);
     			    pStmt.setInt(2, tagId);
     			    pStmt.setInt(3, id);
-    			// SQL文を完成させる
+    		
     			
     			// SQL文を実行する
     			if (pStmt.executeUpdate() == 1) {
@@ -205,8 +199,7 @@ public class CheesePhraseTagDao {
       			// SQL文を準備する
       		  String sql = "SELECT 1 FROM phrases_tags WHERE tag_id = ? LIMIT 1";
       			PreparedStatement pStmt = conn.prepareStatement(sql);
-      			// SQL文を完成させる
-      		
+      			
       			
       	        pStmt.setInt(1, tagId);  
       			
@@ -233,8 +226,4 @@ public class CheesePhraseTagDao {
       		// 結果を返す
       		return result;
       	}
-       
-		
-    
-    	
-}
+   }

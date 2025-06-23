@@ -232,14 +232,14 @@ public class CheeseTagDao {
 	            "root", "password"
 	        );
 
-	        // ① 既にタグが存在するかチェック
+	      
 	        String sql = "SELECT * FROM tags WHERE name = ?";
 	        PreparedStatement pStmt = conn.prepareStatement(sql);
 	        pStmt.setString(1, tagName);
 	        ResultSet rs = pStmt.executeQuery();
 
 	        if (rs.next()) {
-	            // 見つかった場合 → そのタグを返す
+	          
 	            cheeseTag = new CheeseTag(
 	                rs.getInt("id"),
 	                rs.getString("name"),
@@ -275,7 +275,7 @@ public class CheeseTagDao {
 	            "root", "password"
 	        );
 
-	        // ✅ Statement.RETURN_GENERATED_KEYS を指定！
+	       
 	        String sql = "INSERT INTO tags (name, user_id, created_at, updated_at) VALUES (?, ?, NOW(), NOW())";
 	        PreparedStatement pStmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
