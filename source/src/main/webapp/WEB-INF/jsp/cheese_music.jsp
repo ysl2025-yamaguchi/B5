@@ -53,6 +53,7 @@
      <!-- フレーズ一覧 -->
      <ul>
        <c:forEach var="phrase" items="${phraseList}">
+       <input type="hidden" name="phraseId" value="${phrase.id}" />
        <li><c:out value="${phrase.name}" /></li>
        </c:forEach>
      </ul>
