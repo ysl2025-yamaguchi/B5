@@ -21,8 +21,16 @@ public class CheeseRegistUserServlet extends HttpServlet {
 	
 		// リクエストパラメータを取得する
 	    request.setCharacterEncoding("UTF-8");
-	    String username = request.getParameter("regUser");
+	    String username =request.getParameter("regUser");
 	    String pw = request.getParameter("regPass");
+
+//	    if(username=="") {
+//	    	username="null";
+//	    }
+//	    if(pw=="") {
+//	    	pw="null";
+//	    }
+
 	
 	    // 登録処理を行う
 	    CheeseUserDao bDao = new CheeseUserDao();

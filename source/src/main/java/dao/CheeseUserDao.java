@@ -159,4 +159,44 @@ public class CheeseUserDao {
 		// 結果を返す
 		return user;
 	}
+	
+	// テーマを更新するメソッド
+	public boolean updateThema(int userId, int themaId) {
+	    Connection conn = null;
+	    boolean result = false;
+
+	    try {
+	    	// JDBCドライバを読み込む
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        
+	        // データベースに接続する
+	        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
+	                + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	                "root", "password");
+
+	        String sql = "UPDATE users SET thema = ?, updated_at = NOW() WHERE id = ?";
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setInt(1, themaId);
+	        pStmt.setInt(2, userId);
+
+	        int rows = pStmt.executeUpdate();
+	        if (rows == 1) {
+	            result = true;
+	        }
+
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (conn != null) {
+	            try {
+	                conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+
+	    return result;
+	}
+
 }
