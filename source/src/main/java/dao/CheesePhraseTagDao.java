@@ -7,13 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import dto.CheesePhraseTag;
 public class CheesePhraseTagDao {
 	 private Connection getConnection() throws SQLException, ClassNotFoundException {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        return DriverManager.getConnection(
-	            "jdbc:mysql://localhost:3306/B5?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+	            "jdbc:mysql://localhost:3306/b5?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
 	            "root", "password"
 	        );
 	    }
@@ -57,7 +55,7 @@ public class CheesePhraseTagDao {
 
 
         //insert Phrasetag
-        public boolean insert(CheesePhraseTag phraseTag) {
+        public boolean insert(int phraseId, int tagId) {
     		Connection conn = null;
     		boolean result = false;
 
@@ -66,7 +64,7 @@ public class CheesePhraseTagDao {
     			Class.forName("com.mysql.cj.jdbc.Driver");
 
     			// データベースに接続する
-    			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
+    			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
     					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
     					"root", "password");
 
@@ -75,8 +73,8 @@ public class CheesePhraseTagDao {
     			PreparedStatement pStmt = conn.prepareStatement(sql);
     			// SQL文を完成させる
     		
-    			pStmt.setInt(1, phraseTag.getPhraseId());  
-    			pStmt.setInt(2, phraseTag.getTagId());     
+    			pStmt.setInt(1, phraseId);
+    	        pStmt.setInt(2, tagId);  
     			
 
     			// SQL文を実行する
@@ -103,7 +101,7 @@ public class CheesePhraseTagDao {
     	}
      
         //update Phrasetag
-    	public boolean update(CheesePhraseTag card) {
+    	public boolean update(int id,int phraseId,int tagId) {
     		Connection conn = null;
     		boolean result = false;
 
@@ -112,7 +110,7 @@ public class CheesePhraseTagDao {
     			Class.forName("com.mysql.cj.jdbc.Driver");
 
     			// データベースに接続する
-    			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
+    			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
     					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
     					"root", "password");
 
@@ -120,9 +118,9 @@ public class CheesePhraseTagDao {
     			String sql ="UPDATE phrases_tags SET phrase_id = ?, tag_id = ? WHERE id = ?";
     			
     			PreparedStatement pStmt = conn.prepareStatement(sql);
-    			    pStmt.setInt(1, card.getPhraseId());
-    			    pStmt.setInt(2, card.getTagId());
-    			    pStmt.setInt(3, card.getId());
+    			    pStmt.setInt(1, phraseId);
+    			    pStmt.setInt(2, tagId);
+    			    pStmt.setInt(3, id);
     			// SQL文を完成させる
     			
     			// SQL文を実行する
@@ -148,7 +146,7 @@ public class CheesePhraseTagDao {
     		return result;
     	}
 
-    	public boolean delete(CheesePhraseTag card) {
+    	public boolean delete(int phraseId) {
     		Connection conn = null;
     		boolean result = false;
 
@@ -157,17 +155,18 @@ public class CheesePhraseTagDao {
     			Class.forName("com.mysql.cj.jdbc.Driver");
 
     			// データベースに接続する
-    			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
+    			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
     					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
     					"root", "password");
 
     			// SQL文を準備する
-    			String sql = "DELETE FROM phrases_tags WHERE id = ?";
+    			String sql = "DELETE FROM phrases_tags WHERE phrase_id = ?";
     			PreparedStatement pStmt = conn.prepareStatement(sql);
 
     			// SQL文を完成させる
-    			pStmt.setInt(1, card.getId());
-
+    			pStmt.setInt(1, phraseId);
+    	       
+    			
     			// SQL文を実行する
     			if (pStmt.executeUpdate() == 1) {
     				result = true;
@@ -190,15 +189,7 @@ public class CheesePhraseTagDao {
     		// 結果を返す
     		return result;
     	}
-    	// 新しいタグを挿入するメソッド
-//        public void insertNewTag(String tagName) throws SQLException {
-//            String sql = "INSERT INTO tags (name) VALUES (?)";
-//            try (Connection conn = getConnection(); 
-//            		PreparedStatement ps = conn.prepareStatement(sql)) {
-//                ps.setString(1, tagName);
-//                ps.executeUpdate();
-//            }
-//        }
+
 		
     
     	
