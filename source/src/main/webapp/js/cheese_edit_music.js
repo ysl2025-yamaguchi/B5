@@ -303,21 +303,16 @@ document.addEventListener('DOMContentLoaded', function () {
       <input type="text" name="author" placeholder="名前">
       <textarea name="memo"></textarea>
 
-      <!-- ▼ 音声フレーズ選択欄（追加） -->
-      <div>
-    
-      <select name="phraseSelect" class="phrase-select">
-          <option value="">-- フレーズを選択 --</option>
-        </select>
-        <button type="button" class="playBtn">▶</button>
-        
-      </div>
-
-      <select name="tags" multiple>
-        <option value="恋愛">恋愛</option>
-        <option value="日常">日常</option>
-        <option value="人生">人生</option>
+		  <!-- ▼ 音声フレーズ選択欄（ここを修正） -->
+  <div class="phrase-audio-section">
+    <label>フレーズ選択：
+      <select class="phrase-select" name="phraseSelect">
+        <option value="">-- フレーズを選択 --</option>
+        <!-- JSでpopulatePhraseOptions()が追加してくれる -->
       </select>
+    </label>
+    <button type="button" class="playBtn">▶</button>
+  </div>
 
       <div class="controls">
         <button class="moveUp" type="button">↑</button>

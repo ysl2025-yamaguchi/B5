@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Edit Music</title>
+<title>Cheese Edit Music</title>
 <style>
   .phraseBox {
     border: 1px solid #ccc;
@@ -27,13 +27,13 @@
 
 <jsp:include page="cheese_header.jsp" />
 
-<!--  
+
   <select class="phraseSelect" name="phrase_id">
       <c:forEach var="p" items="${phraseList}">
         <option value="${p.id}" data-path="${p.path}">${p.name}</option>
       </c:forEach>
     </select>
--->
+
 
 <!-- 曲名入力フォーム -->
 <h1 for="songName">曲名：${music.name}</h1>
@@ -70,6 +70,7 @@
       
       
  <!-- フレーズ選択＋再生 -->
+ <!--  
 <div class="phrase-audio-section">
   <label>フレーズ選択：
     <select class="phraseSelect" name="phrase_id">
@@ -80,7 +81,7 @@
   </label>
   <audio class="phrasePlayer" controls style="display:none;"></audio>
 </div>
- 
+ -->
       
       
       <input type="hidden" name="musicId" value="${song.id}" />
@@ -88,14 +89,15 @@
       <input type="text" name="title" value="${phrase.title}" placeholder="タイトル">
       <input type="text" name="author" value="${phrase.author}" placeholder="名前">
       <textarea name="memo">${phrase.memo}</textarea>
-      <!-- タグ入力欄 -->
+      
+      <!-- タグ入力欄 
 <div class="tag-section">
   <input type="text" name="tagInput" class="tagInput" placeholder="タグを入力（例：#ラブソング）">
   <button type="button" class="addTagBtn">タグ追加</button>
-  <div class="tagList"></div> <!-- 追加されたタグが表示される -->
+  <div class="tagList"></div> 
 </div>
-      
-
+     -->
+     
       <!-- コントロールボタン -->
       <div class="controls">
         <button class="moveUp" type="button">↑</button>
