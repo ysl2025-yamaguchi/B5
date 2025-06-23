@@ -328,4 +328,46 @@ public class CheesePhraseDao {
 		return nextId;
 	}
 	
+	public CheesePhrase findById(int id) {
+	    CheesePhrase phrase = null;
+	    Connection conn = null;
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        conn = DriverManager.getConnection(
+	                "jdbc:mysql://localhost:3306/b5?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+	                "root", "password");
+
+	        String sql = "SELECT * FROM phrases WHERE id = ?";
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setInt(1, id);
+
+	        ResultSet rs = pStmt.executeQuery();
+
+	        if (rs.next()) {
+	            phrase = new CheesePhrase(
+	                    rs.getInt("id"),
+	                    rs.getString("name"),
+	                    rs.getString("remarks"),
+	                    rs.getString("path"),
+	                    rs.getInt("user_id"),
+	                    rs.getString("created_at"),
+	                    rs.getString("updated_at")
+	            );
+	        }
+
+	    } catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	        phrase = null;
+	    } finally {
+	        try {
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return phrase;
+	}
+	
 }
