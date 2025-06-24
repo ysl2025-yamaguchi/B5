@@ -1,0 +1,171 @@
+@charset "UTF-8";
+body.dark {
+  background-color: #000000;  
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+body.dark header.header {
+
+  color: #ffffff;
+}
+
+
+body.dark .nav ul li a {
+  color: #bbbbbb;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+body.dark .nav ul li a:hover {
+  color: #ffab40;
+  background-color: transparent;
+}
+
+
+body.dark .line-right {
+  border-right: 1px solid #333333;
+}
+
+body.dark .line-left {
+  margin-left: 40px;
+  border-left: 1px solid #333333;
+}
+
+
+body.dark form {
+  background-color: #515151;
+  color: #eeeeee;
+  
+ 
+  border-radius: 10px;
+ 
+
+}
+
+
+body.dark img {
+  color: yellow;
+}
+
+
+body.dark div#added_tag_list {
+  color: #f0f0f0;
+
+}
+
+body.dark .tag_item {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  color: black;
+  padding: 4px 10px;
+  margin: 3px;
+  border-radius: 20px;
+}
+
+body.dark .tag_item span {
+  margin-right: 8px;
+  color: black;
+}
+
+
+body.dark button.unassign_button {
+  background-color: #e0e0e0;
+  border: none;
+  box-shadow: none;
+  color: black;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+body.dark form input,
+body.dark form textarea,
+body.dark form select {
+  background-color: #515151;
+  color: #f0f0f0;
+  border: 1px solid #888;
+  border-radius: 8px;
+
+  
+  box-sizing: border-box;
+}
+
+body.dark form input::placeholder,
+body.dark form textarea::placeholder {
+  color: #777777;
+}
+
+body.dark form input:focus,
+body.dark form textarea:focus,
+body.dark form select:focus {
+  border-color: #ffab40;
+  box-shadow: 0 0 8px #ffab40;
+  background-color: #3a3a3a;
+  outline: none;
+}
+
+
+body.dark #add_tag_button {
+  padding: 8px 12px;
+ 
+  background-color: #333333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+body.dark #add_tag_button:hover {
+  background-color: #555555;
+}
+body.dark div#tag_input_box {
+  border: none;
+  background-color: transparent;
+}
+
+
+body.dark main#addMusicSection {
+  background-color: transparent;
+  color: white;
+}
+
+
+body.dark form button,
+body.dark input[type="submit"],
+body.dark input[type="button"] {
+  background-color: #333333;
+  color: white;
+  border: none;
+ 
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark form button:hover,
+body.dark input[type="submit"]:hover,
+body.dark input[type="button"]:hover {
+  background-color: #444444;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+body.dark #addMusicSection,
+body.dark .music-box,
+body.dark section {
+  background-color: #515151;
+  color: white;
+  border-radius: 8px;
+  padding: 10px;
+}
+body.dark label{
+	color:#bbbb;
+}
