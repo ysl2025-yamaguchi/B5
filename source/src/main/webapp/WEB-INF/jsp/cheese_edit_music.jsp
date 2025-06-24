@@ -64,7 +64,10 @@
         <!-- ▼ 音声フレーズ選択欄 -->
         <div class="phrase-audio-section">
           <label>フレーズ選択：
-            <select class="phrase-select" name="phraseSelect">
+            <select>
+              <c:forEach var="p" items="${phraseList}">
+                <option value="${p.id}">${p.name}</option>
+              </c:forEach>
               <option value="">-- フレーズを選択 --</option>
               <!-- JSでpopulatePhraseOptions()が追加 -->
             </select>
