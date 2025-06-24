@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+#cheese{
+      position: absolute;
+      margin: 0 auto;
+      max-width: 700px;
+      padding: 20px;
+    }
+
+body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: Segoe UI , sans-serif;
+      background-color: #02b340;
+    }
+
+main {
+      flex: 1;
+      margin: 0 auto;
+      max-width: 700px;
+      padding: 20px;
+}
+
+header.header {
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      padding: 20px 0;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+.logo {
+  background-image: url('images/whitelogo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 300px;
+  height: 100px;
+  margin: 0 auto 30px auto;
+  /*z-index: 9999;*/
+  position: relative; 
+}
+
+header .header nav {
+	  display: flex;
+  	  justify-content: center;
+      
+	}
+	
+.header nav ul{
+      display: flex; /* 横並びにする */
+      text-align: center;
+      font-size: 20px;
+      list-style: none;
+      gap: 40px;
+      padding: 0 5%;
+      padding-left: 75px;
+      padding-top: 0px;
+      margin: 0 auto;
+      margin-top: 2px;
+      max-width: fit-content;
+    }
+
+    .line-right{
+      margin-left: 40px;
+    }
+
+    .line-left{
+      margin-left: 40px;
+    }
+	
+    .nav ul li a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
+      padding: 8px 12px;
+      display: inline-block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+   .header nav ul li a:hover {
+      background-color: #ffff33;
+      border-radius: 5px;
+}
+
+    .line-right{
+      border-right: 1px solid #ffffff;
+}
+    section {
+      margin-top: 30px;
+    }
