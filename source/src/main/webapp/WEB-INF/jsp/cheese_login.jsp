@@ -19,30 +19,24 @@
 </div>
 
 
-
 <input type="hidden" name="selected_theme" id="selected_theme">
 <header class="header">
-<!--
-<div class="cheese-menu">
-	<form id = "change_thema" method = "POST" action = "/CheeseChengeThemaServlet">
-	  <img src="<c:url value='/img/blackcheese.png' />" id="themeImage" alt="テーマ切替" width="30" height="30"> <br>
-	  <select class = "select_thema" id = "select_thema">
-		<option value = "light">ライト</option>
-		<option value = "dark">ダーク</option>
-		<option value = "ocean">オーシャン</option>
-		<option value = "sunset">サンセット</option>
-	  </select>
-  </form>
-</div>
--->
+
 	<div class="logo">
 		<a href="<c:url value='/CheeseLoginServlet' />">
 			<img src="<c:url value='/img/logo.png' />" width="300" height="100" alt="MUSIC CHEESE">
 		</a>
 	</div>
 </header>
+
+ 
+
+
 <div class="noheader">
   <div class="card-container">
+  <div class="login-header-message">
+  <h2>ログイン/新規登録はこちら</h2>
+  </div>
     <div class="switch-buttons">
       <button type="button" id="loginBtn" class="active">ログイン画面</button>
       <button type="button" id="registerBtn">新規登録画面</button>
@@ -78,6 +72,28 @@
     </form>
   </div>
  </div>
+ 
+<div class="feature-section">
+  <div class="feature">
+  	<p><font size="16">1🧀</font></p><br>
+    <font size="10" class="moji">思いついたフレーズの録音は？</font>
+    <h2>ボイスメモで録音した音声を名前付きで登録</h2>
+    <h2>歌詞も一緒に添付可能</h2>
+  </div>
+  <div class="feature">
+  	<p><font size="16">2🧀</font></p><br>
+    <font size="10" class="moji">フレーズに様々な条件を付与</font>
+    <h2>フレーズの曲調やキー、リズムなどもメモへ保存</h2>
+    <h2>さらにタグによるフレーズの管理・検索も可能</h2>
+  </div>
+  <div class="feature">
+  	<p><font size="16">3🧀</font></p><br>
+    <font size="10" class="moji">作曲ソフトへの架け橋</font>
+    <h2>曲ごとにフレーズを組み合わせることで構想案を整理</h2>
+    <h2>（曲のイメージを可視化）</h2>
+  </div>
+</div>
+ 
  <script src="<c:url value='/js/cheese_login.js' />" defer></script>
 </body>
 </html>
