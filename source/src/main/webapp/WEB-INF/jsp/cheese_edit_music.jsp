@@ -50,12 +50,13 @@
   <!-- ▼ フレーズ入力欄リスト -->
   <div id="phraseContainer">
 
-    <c:forEach var="phrase" items="${assignedPhraseList}" varStatus="status">
-      <div class="phraseBox" data-index="${status.index}">
-        <h3>${status.index + 1}.</h3>
 
-        <input type="text" name="title" value="${musicPhrase.title}" placeholder="タイトル">
-        <textarea name="remarks">${musicPhrase.remarks}</textarea>
+    <c:forEach var = "i" begin = "0" end = "${assignedPhraseList.size() - 1}">
+      <div class="phraseBox" data-index="${i}">
+        <h3>${i + 1}.</h3>
+
+        <input type="text" name="title" value="${assignedMusicPhrase[i].title}" placeholder="タイトル">
+        <textarea name="remarks">${assignedMusicPhrase[i].remarks}</textarea>
 
         <!-- ▼ 音声フレーズ選択欄 -->
         <div class="phrase-audio-section">

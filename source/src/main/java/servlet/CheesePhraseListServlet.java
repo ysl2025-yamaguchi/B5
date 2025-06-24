@@ -32,7 +32,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 //		HttpSession session = request.getSession();
-//		if (session.getAttribute("login_user") == null) {
+//		if (session.getAttribute("loginUser") == null) {
 //			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 //			return;
 //		}

@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.CheeseMusicPhrase;
 import dto.CheesePhrase;
 
 public class CheesePhraseDao {
@@ -94,6 +95,80 @@ public class CheesePhraseDao {
 						rs.getInt("phrases.user_id"), 
 						rs.getString("phrases.created_at"),
 						rs.getString("phrases.updated_at")
+						);
+				phraseList.add(cheesePhrase);
+			}
+			
+		}
+		catch (SQLException e) {
+		e.printStackTrace();
+			phraseList = null;
+		} 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			phraseList = null;
+		} 
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					phraseList = null;
+				}
+			} 
+		}
+		
+		return phraseList;
+	}
+	
+	// キーワードもしくはタグ名で検索
+	public List<CheesePhrase> select(List<CheeseMusicPhrase> musicPhraseList) {
+		Connection conn = null;
+		List<CheesePhrase> phraseList = new ArrayList<CheesePhrase>();
+		
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/b5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+			
+			// SQL文を準備する
+			StringBuilder sql = new StringBuilder();
+			sql.setLength(0);
+			for (int i = 0; i < musicPhraseList.size(); i++) {
+				if (i != 0) {
+					sql.append(" union all ");
+				}
+				sql.append("SELECT * FROM phrases where id = ?");
+			}
+			
+			PreparedStatement pStmt;
+			pStmt = conn.prepareStatement(sql.toString());
+			
+			musicPhraseList.sort((o1, o2) -> Integer.compare(o1.getPhraseOrder(), o2.getPhraseOrder()));
+			for (int i = 0; i < musicPhraseList.size(); i++) {
+				pStmt.setInt(i + 1, musicPhraseList.get(i).getPhraseId());
+			}
+			
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs;
+			rs = pStmt.executeQuery();
+			
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				CheesePhrase cheesePhrase = new CheesePhrase(
+						rs.getInt("id"), 
+						rs.getString("name"), 
+						rs.getString("remarks"),
+						rs.getString("path"),
+						rs.getInt("user_id"), 
+						rs.getString("created_at"),
+						rs.getString("updated_at")
 						);
 				phraseList.add(cheesePhrase);
 			}

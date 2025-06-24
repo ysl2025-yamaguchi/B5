@@ -39,7 +39,13 @@ public class CheeseDeletePhraseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+//		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+//		HttpSession session = request.getSession();
+//		if (session.getAttribute("id") == null) {
+//		response.sendRedirect("/b5/CheeseLoginServlet");
+//		return;
+//	}
+		
 		int id= Integer.parseInt(request.getParameter("id"));
 		String name= request.getParameter("name");
 		String remarks = request.getParameter("remarks");

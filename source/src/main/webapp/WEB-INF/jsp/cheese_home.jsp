@@ -68,7 +68,7 @@
             </summary>
             <div>
             	<c:if test = "${!empty phrase.path}">
-               	<audio controls src="<c:url value='/uploded/${phrase.path}' />"></audio><br>
+               	<audio controls src="<c:url value='/upload/${phrase.path}' />"></audio><br>
               	</c:if>
                <table>
                   <tr>

@@ -201,6 +201,58 @@ public class CheeseMusicDao {
 	    return cardList;
 	}        
 	
+	// 引数musicIdよりmusicデータを返す
+	public CheeseMusic select(int musicId) {
+	    Connection conn = null;
+	    CheeseMusic music = null;
+	    
+	    try {
+	    	// JDBCドライバを読み込む
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        
+	        // データベースに接続する
+	        conn = DriverManager.getConnection(
+	            "jdbc:mysql://localhost:3306/b5?"
+	            + "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9",
+	            "root", "password"
+	        		);
+	        
+	        // SQL文を準備する    
+	        String sql = "SELECT * FROM musics WHERE id = ? ";
+	        
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        
+	        // SQL文を完成させる
+	        pStmt.setInt(1, musicId);
+	        
+	        
+	        ResultSet rs = pStmt.executeQuery();
+	        // SQL文を実行する
+	        while (rs.next()) {
+	            music = new CheeseMusic(
+	                rs.getInt("id"),
+	                rs.getString("name"),
+	                rs.getInt("user_id"),
+	                rs.getString("created_at"),
+	                rs.getString("updated_at"));
+        	}   
+	    } 
+	    catch (SQLException | ClassNotFoundException e) {
+	        e.printStackTrace();
+	        music = null;
+	    } 
+	    finally {
+	        try {
+	            if (conn != null) conn.close();
+	        } 
+	        catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return music;
+	}
+	
 	// 引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
 		public boolean deleteById(int id) {
 			Connection conn = null;
