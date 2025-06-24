@@ -15,7 +15,6 @@ import dao.CheesePhraseDao;
 import dao.CheesePhraseTagDao;
 import dao.CheeseTagDao;
 import dto.CheesePhrase;
-import dto.CheesePhraseTag;
 import dto.CheeseTag;
 
 /**
@@ -140,7 +139,6 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 					
 					// フレーズとタグの中間テーブルに追加
 					CheesePhraseTagDao phraseTagDao = new CheesePhraseTagDao();
-					CheesePhraseTag phraseTag = new CheesePhraseTag();
 					
 					if (!phraseTagDao.insert(uploadedPhrase.getId(), tagId)) {
 						result = true;

@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CheesePhraseDao;
-import dto.CheesePhrase;
 
 /**
  * Servlet implementation class CheeseDeletePhraseServlet
@@ -46,28 +46,39 @@ public class CheeseDeletePhraseServlet extends HttpServlet {
 //		return;
 //	}
 		
-		int id= Integer.parseInt(request.getParameter("id"));
-		String name= request.getParameter("name");
-		String remarks = request.getParameter("remarks");
-		String path = request.getParameter("path");
-		int userId= Integer.parseInt(request.getParameter("userId"));
-		String updated_at = request.getParameter("updated_at");
-		String created_at = request.getParameter("created_at");
-		 
-			//削除を行う
-		if (request.getParameter("submit").equals("削除")) {
-			CheesePhraseDao dao = new CheesePhraseDao();
-			boolean success = dao.delete(new CheesePhrase(id,name,remarks,path,userId,updated_at,created_at));
-			if (success) { // 削除成功
-				request.getSession().setAttribute("result", "削除成功しました！");
-			} else { // 削除失敗
-				request.getSession().setAttribute("result", "削除失敗しました。");
+		int phraseId= Integer.parseInt(request.getParameter("id"));
+		String fileName = request.getParameter("path");
+		boolean fileDeleteFlag = true;
+		
+		// ファイルの削除
+		if (fileName != null && !fileName.isEmpty()) {
+			String dirPath = getServletContext().getRealPath("/upload");
+			String fullPath = dirPath + File.separator + fileName;
+			File file = new File(fullPath);
+			
+			if (!file.delete()) {
+				fileDeleteFlag = false;
 			}
 		}
-			// 同じJSPにリダイレクトする
-			response.sendRedirect("CheesePhraseListServlet"); 
-			return;
+		
+		String redirectMessage;
+		// データベースの削除
+		if (fileDeleteFlag) {
+			CheesePhraseDao dao = new CheesePhraseDao();
+			if (dao.delete(phraseId)) { // 削除成功
+				redirectMessage = "?deleteResult=successed";
+			} else { // 削除失敗
+				redirectMessage = "?deleteResult=failed";
+			}
 		}
+		else {
+			redirectMessage = "?deleteResult=failed";
+		}
+		
+		// 同じJSPにリダイレクトする
+		response.sendRedirect("CheesePhraseListServlet" + redirectMessage); 
+		return;
 	}
+}
 
 

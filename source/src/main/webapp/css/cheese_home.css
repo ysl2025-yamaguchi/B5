@@ -1,7 +1,348 @@
+@charset "UTF-8";
+
 #tag_input_box {
    display: flex;
 }
 
 #added_tag_list {
    display: flex;
+}
+
+ body {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+
+section {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-top: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+#regist_phrase_form {
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 30px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  margin: 30px auto;
+  /*width: 90%;
+  max-width: 600px;*/
+}
+
+/* 入力欄 */
+#regist_phrase_form input[type="text"],
+#regist_phrase_form input[type="file"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#regist_phrase_form input[name="name"],
+#regist_phrase_form input[name="remarks"] {
+  width: 100%;
+  max-width: 270px; 
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* タグ追加エリア */
+#tag_input_box_container {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+#tag_input_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  /*
+  justify-content: space-between;
+  */
+}
+
+
+#select_tag {
+  width: 60%;
+  min-width: 150px;
+  max-width: 200px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#tag_input_box {
+  background-color: #fff;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#select_tag, #input_tag {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 0;   
+  /*
+  margin-top: 10px;
+  margin-bottom: 10px; max-width: 200px; 
+  */
+}
+
+#add_tag_button {
+  padding: 8px 12px;
+  margin-left: 8px;
+  background-color: #ffcc00;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#add_tag_button:hover {
+  background-color: #e6b800;
+}
+
+.tag_item {
+  display: inline-flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size:12px;
+}
+
+.tag_item span {
+  margin-right: 8px;
+}
+
+.unassign_button {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #555;
+}
+
+
+/* 登録ボタン */
+#regist_button {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#regist_phrase_form {
+  position: relative;
+}
+
+
+/* エラーメッセージ */
+#error_message {
+  color: red;
+  font-size: 12px;
+  text-align: center;
+}
+
+
+/* 検索フォーム全体 */
+.search_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.search-box input[type="text"] {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search_box .search-input-group {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 300px;
+  gap: 0; 
+}
+
+/* 共通の横並びレイアウト（テキストボックス＋ボタン） */
+.input-with-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* テキストボックス（検索・曲名・タグ） */
+.input-with-button input[type="text"] {
+  width: 270px;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  box-sizing: border-box;
+}
+
+/* ボタン（検索・追加） */
+.input-with-button button,
+.input-with-button input[type="submit"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  height: 100%;
+  text-align: center;
+  line-height: 1;
+  /*
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 40px;
+  border: 1px solid #ccc;
+  border-left: none;
+  background-color: #eee;
+  */
+}
+
+/* 検索フォームボタン */
+form button img {
+  vertical-align: middle;
+}
+
+/* 並び順プルダウン */
+.search_box select {
+  display: block;
+  margin: 0 auto;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-width: 150px;
+}
+
+/* フレーズリスト */
+.phrase_list details {
+  background-color: #c6ced9;
+  margin: 16px auto;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  position: relative;
+}
+
+.phrase_list summary {
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.phrase_list audio {
+  display: block;
+  margin: 0 auto 16px auto;
+  width: 80%;
+}
+
+.phrase_list .meta {
+  text-align: left;
+  margin-bottom: 40px; 
+}
+
+.phrase_list table {
+  width: 80%;
+  margin: 0 auto 40px auto;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.phrase_list td {
+  padding: 4px 8px;
+  vertical-align: top;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.phrase_list td:nth-child(2) {
+  width: 100%;
+  white-space: normal;
+}
+
+.phrase_list td span,
+.phrase_list td c\:out,
+.phrase_list td * {
+  display: inline;
+  text-align: left;
+}
+
+/* 編集・削除ボタン並び */
+.button-row {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+}
+.phrase_list form {
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.phrase_list input[type="submit"] {
+	
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ラベルとアイコンの間隔 */
+label img {
+  vertical-align: middle;
+  margin-right: 4px;
 }

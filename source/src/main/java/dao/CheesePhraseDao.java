@@ -376,7 +376,7 @@ public class CheesePhraseDao {
 	}
 	
 	// 引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
-	public boolean delete(CheesePhrase phrase) {
+	public boolean delete(int phraseId) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -394,7 +394,7 @@ public class CheesePhraseDao {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-			pStmt.setInt(1, phrase.getId());
+			pStmt.setInt(1, phraseId);
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
@@ -521,6 +521,7 @@ public class CheesePhraseDao {
 		// 結果を返す
 		return nextId;
 	}
+	
 	public CheesePhrase findById(int id) {
 	    Connection conn = null;
 	    CheesePhrase phrase = null;
@@ -568,6 +569,6 @@ public class CheesePhraseDao {
 
 	    return phrase;
 	}
-	}
+}
 
 

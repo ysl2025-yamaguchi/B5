@@ -230,4 +230,74 @@ public class CheeseMusicPhraseDao {
 			return result;
 		}
 	
+		public boolean save(int musicId, int phraseIdArray[], String titleArray[], String remarksArray[]) {
+			Connection conn = null;
+			boolean result = false;
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+
+				// SQL文を準備する
+				String sql = "DELETE FROM musics_phrases WHERE music_id=?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+				pStmt.setInt(1, musicId);
+				
+				// SQL文を実行する
+				pStmt.executeUpdate();
+
+				// SQL文を準備する
+				StringBuilder sql2 = new StringBuilder();
+				sql2.append( "INSERT INTO musics_phrases (music_id, phrase_id, title, remarks, phrase_order) VALUES ");
+				for (int i = 0; i < phraseIdArray.length; i++) {
+					sql2.append(" (?, ?, ?, ?, ?)");
+					if (i != phraseIdArray.length - 1) {
+						sql2.append(", ");
+					}
+				}
+				
+				
+				PreparedStatement pStmt2 = conn.prepareStatement(sql2.toString());
+
+				// SQL文を完成させる
+				for (int i = 0; i < phraseIdArray.length; i++) {
+					pStmt2.setInt(5 * i + 1, musicId);
+					pStmt2.setInt(5 * i + 2, phraseIdArray[i]);
+					pStmt2.setString(5 * i + 3, titleArray[i]);
+					pStmt2.setString(5 * i + 4, remarksArray[i]);
+					pStmt2.setInt(5 * i + 5, i + 1);
+				}
+				System.out.println(pStmt2);
+
+				// SQL文を実行する
+				pStmt2.executeUpdate();
+				
+				result = true;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+			// 結果を返す
+			return result;
+		}
+		
 }

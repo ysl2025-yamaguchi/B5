@@ -45,7 +45,7 @@
 <!-- ▼ フォーム -->
 <form id="editForm" method="post" action="CheeseEditMusicServlet">
 
-<input type="hidden" name="songId" value="${music.id}" />
+<input type="hidden" name="music_id" value="${musicId}" />
 
   <!-- ▼ フレーズ入力欄リスト -->
   <div id="phraseContainer">
@@ -53,15 +53,21 @@
 
     <c:forEach var = "i" begin = "0" end = "${assignedPhraseList.size() - 1}">
       <div class="phraseBox" data-index="${i}">
-        <h3>${i + 1}.</h3>
+        <input type = "hidden" name = "phrase_id" value = "${assignedPhraseList[i].id}">
+        <h3>${i + 1}. </h3>
 
-        <input type="text" name="title" value="${assignedMusicPhrase[i].title}" placeholder="タイトル">
-        <textarea name="remarks">${assignedMusicPhrase[i].remarks}</textarea>
+		<c:out value = "${assignedPhraseList[i].name}"/>
+
+        <input type="text" name="title" value="${assignedMusicPhraseList[i].title}" placeholder="タイトル">
+        <textarea name="remarks">${assignedMusicPhraseList[i].remarks}</textarea>
 
         <!-- ▼ 音声フレーズ選択欄 -->
         <div class="phrase-audio-section">
           <label>フレーズ選択：
-            <select class="phrase-select" name="phraseSelect">
+            <select>
+              <c:forEach var="p" items="${phraseList}">
+                <option value="${p.id}">${p.name}</option>
+              </c:forEach>
               <option value="">-- フレーズを選択 --</option>
               <!-- JSでpopulatePhraseOptions()が追加 -->
             </select>
