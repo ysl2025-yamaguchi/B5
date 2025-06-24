@@ -274,7 +274,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 初期表示の1個目にもイベントつける
-  setControls(templateBox);
+  // setControls(templateBox)
+  // 全ての要素にイベントをつける
+  document.querySelectorAll(".phraseBox").forEach(setControls);
 });
 
 
