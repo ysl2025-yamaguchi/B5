@@ -9,7 +9,18 @@ document.querySelectorAll('input[name="tag_registed"]').forEach(function (radio)
   });
 
 
-
+   document.getElementById('regist_button').addEventListener('click', function() {
+      const phraseName = document.getElementById('updatePhrase');
+      const errorMessageObj = document.getElementById('error_message');
+      if (!phraseName.name.value) {
+         errorMessageObj.textContent = 'フレーズ名を入力してください';
+         return false;
+      }
+      else{
+         this.form.submit();
+      }
+      errorMessageObj.textContent = null;
+   });
 
   document.getElementById('add_tag_button').addEventListener('click', function () {
     const isRegisted = document.getElementById('registed').checked;

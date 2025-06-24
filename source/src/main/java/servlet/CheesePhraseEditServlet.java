@@ -109,13 +109,13 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		    	    if ((phraseName == null || phraseName.trim().isEmpty()) &&
 		    	        (phraseRemarks == null || phraseRemarks.trim().isEmpty())) {
 
-		    	        result.append("フレーズ名とメモの両方を入力してください<br>");
+		    	        result.append("フレーズ名とメモの両方を入力してください");
 
 		    	    } else if (phraseName == null || phraseName.trim().isEmpty()) {
-		    	        result.append("フレーズ名を入力してください<br>");
+		    	        result.append("フレーズ名を入力してください");
 
 		    	    } else if (phraseRemarks == null || phraseRemarks.trim().isEmpty()) {
-		    	        result.append("フレーズメモを入力してください<br>");
+		    	        result.append("フレーズメモを入力してください");
 
 		    	    } else {
 		    	    	//update phrase
@@ -124,7 +124,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		    	        );
 
 		    	        if (phraseUpdated) {
-		    	            result.append("フレーズ更新成功！<br>");
+		    	            result.append("フレーズ更新成功！");
                         //add tags
 		    	            String[] addedTags = request.getParameterValues("addedTags");
 		    	            String[] tagModes = request.getParameterValues("tagMode");
@@ -155,7 +155,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		    	            }
 
 		    	        } else {
-		    	            result.append("フレーズ更新失敗！<br>");
+		    	            result.append("フレーズ更新失敗！");
 		    	        }
 		    	    }
 		    	}
