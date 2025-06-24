@@ -14,6 +14,14 @@
 <body>
 
 
+
+<div class="feature-scroll-icon">
+  <a href="#featureSection">
+    <img src="<c:url value='/img/musictoha.png' />" alt="特徴へ移動" width="180" height="30">
+  </a>
+</div>
+
+
 <div id="introScreen" class="intro-screen">
   <h1 class="intro-logo">MUSIC CHEESE</h1>
 </div>
@@ -22,14 +30,13 @@
 <input type="hidden" name="selected_theme" id="selected_theme">
 <header class="header">
 
+
 	<div class="logo">
 		<a href="<c:url value='/CheeseLoginServlet' />">
 			<img src="<c:url value='/img/logo.png' />" width="300" height="100" alt="MUSIC CHEESE">
 		</a>
 	</div>
 </header>
-
- 
 
 
 <div class="noheader">
@@ -73,26 +80,36 @@
   </div>
  </div>
  
-<div class="feature-section">
+ 
+<div id="featureSection" class="feature-section">
+<div class="feature">
   <div class="feature">
   	<p><font size="16">1🧀</font></p><br>
-    <font size="10" class="moji">思いついたフレーズの録音は？</font>
+    <h1><font size="10" class="moji">思いついたフレーズの録音は？</font></h1>
     <h2>ボイスメモで録音した音声を名前付きで登録</h2>
     <h2>歌詞も一緒に添付可能</h2>
   </div>
   <div class="feature">
   	<p><font size="16">2🧀</font></p><br>
-    <font size="10" class="moji">フレーズに様々な条件を付与</font>
+    <h1><font size="10" class="moji">フレーズに様々な条件を付与</font></h1>
     <h2>フレーズの曲調やキー、リズムなどもメモへ保存</h2>
     <h2>さらにタグによるフレーズの管理・検索も可能</h2>
   </div>
   <div class="feature">
   	<p><font size="16">3🧀</font></p><br>
-    <font size="10" class="moji">作曲ソフトへの架け橋</font>
+    <h1><font size="10" class="moji">作曲ソフトへの架け橋</font></h1>
     <h2>曲ごとにフレーズを組み合わせることで構想案を整理</h2>
-    <h2>（曲のイメージを可視化）</h2>
+    <h2 class="cheese-h2">（曲のイメージを可視化）</h2>
   </div>
 </div>
+</div>
+
+ <footer>
+ <div class="gotop">
+            <a href="#top"><img src="<c:url value='/img/gotop.png' />" width="60" height="60" alt="ページトップに戻る"></a>
+        </div>
+        <p class="copyright">&copy; the cheese</p>
+    </footer>
  
  <script src="<c:url value='/js/cheese_login.js' />" defer></script>
 </body>
