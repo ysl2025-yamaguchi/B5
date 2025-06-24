@@ -115,3 +115,30 @@
   to { opacity: 0; visibility: hidden; }
 }
 
+
+.moji {
+  margin-bottom: 50px;
+  color: #4CAF50;
+}
+
+.login-header-message {
+  padding: 10px 20px;
+  text-align: center;
+ 
+}
+
+.feature-section {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.feature-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+p {
+	margin: 120px auto 2px auto;
+}

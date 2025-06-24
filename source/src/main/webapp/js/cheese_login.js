@@ -101,4 +101,21 @@ document.addEventListener("DOMContentLoaded", function () {
       el.classList.add("blink-error");
     }
   }
+
+
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const feature = document.querySelector(".feature-section");
+
+  window.addEventListener("scroll", function () {
+    const trigger = window.innerHeight * 0.8;
+    const featureTop = feature.getBoundingClientRect().top;
+
+    if (featureTop < trigger) {
+      feature.classList.add("visible");
+    }
+  });
 });

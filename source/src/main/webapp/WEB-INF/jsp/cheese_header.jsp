@@ -7,7 +7,10 @@
 	<meta charset="UTF-8">
 	<title>MUSIC CHEESE</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema2.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema3.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common.css">
+	
 	
 </head>
 <body>
