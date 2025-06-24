@@ -162,13 +162,13 @@ public class CheesePhraseDao {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				CheesePhrase cheesePhrase = new CheesePhrase(
-						rs.getInt("phrases.id"), 
-						rs.getString("phrases.name"), 
-						rs.getString("phrases.remarks"),
-						rs.getString("phrases.path"),
-						rs.getInt("phrases.user_id"), 
-						rs.getString("phrases.created_at"),
-						rs.getString("phrases.updated_at")
+						rs.getInt("id"), 
+						rs.getString("name"), 
+						rs.getString("remarks"),
+						rs.getString("path"),
+						rs.getInt("user_id"), 
+						rs.getString("created_at"),
+						rs.getString("updated_at")
 						);
 				phraseList.add(cheesePhrase);
 			}

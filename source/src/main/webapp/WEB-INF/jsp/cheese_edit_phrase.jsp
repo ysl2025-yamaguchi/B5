@@ -12,7 +12,7 @@
 <body>
  <jsp:include page="cheese_header.jsp" />
 
-<span id = "error_message"><c:out value = "${result}"/></span> <br>
+<span id = "error_message" ><c:out value = "${result}"/></span> <br>
  <form method="post" action="<c:url value='/CheesePhraseEditServlet' />" id="updatePhrase">
       <!-- phrase -->
       <div class="phrase">
