@@ -162,9 +162,13 @@ public class CheesePhraseTagDao {
     	       
     			
     			// SQL文を実行する
-    			if (pStmt.executeUpdate() == 1) {
-    				result = true;
-    			}
+    			pStmt.executeUpdate();
+    			
+    			sql = "DELETE FROM tags WHERE id NOT IN (SELECT tag_id FROM phrases_tags)";
+    			pStmt = conn.prepareStatement(sql);
+    			pStmt.executeUpdate();
+    			
+    			result = true;
     		} catch (SQLException e) {
     			e.printStackTrace();
     		} catch (ClassNotFoundException e) {
@@ -184,4 +188,4 @@ public class CheesePhraseTagDao {
     		return result;
     	}
     	
-   }
+}

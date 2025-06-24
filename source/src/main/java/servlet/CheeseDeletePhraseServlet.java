@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CheesePhraseDao;
+import dao.CheesePhraseTagDao;
 
 /**
  * Servlet implementation class CheeseDeletePhraseServlet
@@ -64,8 +65,9 @@ public class CheeseDeletePhraseServlet extends HttpServlet {
 		String redirectMessage;
 		// データベースの削除
 		if (fileDeleteFlag) {
-			CheesePhraseDao dao = new CheesePhraseDao();
-			if (dao.delete(phraseId)) { // 削除成功
+			CheesePhraseDao phraseDao = new CheesePhraseDao();
+			CheesePhraseTagDao phraseTagDao = new CheesePhraseTagDao();
+			if (phraseDao.delete(phraseId) && phraseTagDao.delete(phraseId)) { // 削除成功
 				redirectMessage = "?deleteResult=successed";
 			} else { // 削除失敗
 				redirectMessage = "?deleteResult=failed";
