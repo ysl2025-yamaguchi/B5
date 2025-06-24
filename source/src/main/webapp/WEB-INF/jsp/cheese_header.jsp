@@ -7,76 +7,7 @@
 	<meta charset="UTF-8">
 	<title>MUSIC CHEESE</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
-	<script src="<c:url value='/js/cheese_common.js' />"></script>
-	
-	
-	  <style>
-    body.light { background: #ffffff; color: #222; }
-    body.dark { background: #111; color: #fff; }
-    body.ocean { background: #006e7f; color: #fff; }
-    body.sunset { background: #ff6f61; color: #fff; }
-
-    #themeIcon {
-      cursor: pointer;
-      width: 60px;
-      transition: transform 0.3s;
-    }
-    #themeIcon:hover {
-      transform: scale(1.1);
-    }
-
-    #themeModal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #themeModal .modal-content {
-      background: #fff;
-      color: #000;
-      padding: 1em 2em;
-      border-radius: 12px;
-    }
-
-    .theme-option {
-      margin: 8px;
-      cursor: pointer;
-      padding: 6px 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      transition: background 0.3s;
-    }
-
-    .theme-option:hover {
-      background: #f0f0f0;
-    }
-    
-    .cheese-menu {
-  position: fixed;           /* ページ右上に固定表示 */
-  top: 15px;
-  right: 15px;
-  z-index: 1000;
-}
-
-.cheese-menu img {
-  width: 30px;               /* 小さくしてアイコンっぽく */
-  height: 45px;
-  border-radius: 50%;        /* 円形にしてChrome風 */
-  border: 2px solid #ccc;    /* 境界線つけてそれっぽく */
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  transition: transform 0.2s;
-}
-
-.cheese-menu img:hover {
-  transform: scale(1.1);     /* ホバーでちょい拡大 */
-}
-  </style>
-	
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common.css">
 	
 </head>
 <body>
@@ -118,6 +49,7 @@
       if (e.target === modal) modal.style.display = "none";
     });
   </script>
+  <script src="<c:url value='/js/cheese_common.js' />" defer></script>
 	
 	<div class="logo">
 		<a href="<c:url value='/CheesePhraseListServlet' />">
