@@ -77,11 +77,11 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 					
 					// ファイルの保存処理
 					if (testFlag) {
-						dirPath  = getServletContext().getRealPath("/upload/");
+						dirPath  = getServletContext().getRealPath("/upload");
 //						String dirPath = "C:/plusdojo2025/B5/uploded";
 					}
 					else {
-						dirPath = request.getContextPath() + "/upload/";
+						dirPath = request.getContextPath() + "/upload";
 					}
 					System.out.println(dirPath);
 					
