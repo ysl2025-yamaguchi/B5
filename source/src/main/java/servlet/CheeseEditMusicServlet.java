@@ -12,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CheeseMusicDao;
 import dao.CheeseMusicPhraseDao;
 import dao.CheesePhraseDao;
+import dto.CheeseMusic;
 import dto.CheeseMusicPhrase;
 import dto.CheesePhrase;
+import dto.CheeseUser;
 
 
 @WebServlet("/CheeseEditMusicServlet")
@@ -24,6 +27,12 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
+			response.sendRedirect("/CheeseLoginServlet");
+			return;
+		}
 		
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
@@ -31,8 +40,35 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		request.setAttribute("phraseList", phraseList);
 		
 		// 曲編集画面にフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
-				dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
+		dispatcher.forward(request, response);
+			
+		// musicを作成したuserIdとログイン済みのuserIdが違うならログイン画面へ
+		// musicIdの取得
+		int musicId = Integer.parseInt(request.getParameter("id"));
+		// 曲データの取得
+		CheeseMusicDao musicDao = new CheeseMusicDao();
+		CheeseMusic music = musicDao.select(musicId);
+		 // セッションスコープのuserIdとmusicのuserIdの比較
+		if (user.getId() != music.getUserId()) {
+			// 違うならログイン画面へ
+			response.sendRedirect("/CheeseLoginServlet");
+			return;
+		}
+			
+		CheeseMusicPhraseDao musicPhraseDao = new CheeseMusicPhraseDao();	
+		// music_phrase_tableからデータ取得
+		List<CheeseMusicPhrase> assignedMusicPhraseList = musicPhraseDao.select(musicId)	;
+		// phraseテーブルからデータ取得
+		List<CheesePhrase>  assignedPhraseList = phraseDao.select(assignedMusicPhraseList);
+		
+		// jspへセット
+		request.setAttribute("assignedMusicPhraseList", assignedMusicPhraseList);
+		request.setAttribute("assignedPhraseList", assignedPhraseList);
+				
+			
+				
+				
 //		// CheeseEditMusicServlet の doGet 内
 //		CheeseMusicPhraseDao phraseDao = new CheeseMusicPhraseDao();
 //		List<CheeseMusicPhrase> phraseOptions = phraseDao.findAll(); // ユーザーIDに応じて絞るなら別途条件追加
@@ -44,7 +80,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("loginUser") == null) {
 			response.sendRedirect("/CheeseLoginServlet");
 			return;
 
