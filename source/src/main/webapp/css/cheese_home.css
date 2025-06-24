@@ -147,7 +147,6 @@ section {
 
 /* 登録ボタン */
 #regist_button {
-  position: absolute;
   bottom: 40px;
   right: 40px;
   padding: 8px 16px;
@@ -181,6 +180,7 @@ section {
   background-color: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 8px;
+  margin-bottom: 60px
 }
 
 .search-box input[type="text"] {
@@ -259,7 +259,6 @@ form button img {
 }
 
 .phrase_list summary {
-  position: relative;
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;

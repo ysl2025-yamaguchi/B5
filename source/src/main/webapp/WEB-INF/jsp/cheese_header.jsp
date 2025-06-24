@@ -9,6 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema2.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema3.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema4.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema5.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common.css">
 	
 	
@@ -18,16 +20,17 @@
 <header class="header">
 	
 	<div class="cheese-menu">
-	<img src="<c:url value='/img/blackcheese.png' />" alt="テーマアイコン" id="themeIcon">
+	<img src="<c:url value='/img/blackcheese.png' />" alt="テーマアイコン" id="themeIcon" width="40" height="40">
 	</div>
 
   <div id="themeModal">
     <div class="modal-content">
-      <p>テーマを選択してください:</p>
+      <p>テーマを選択してください</p>
       <div class="theme-option" data-theme="light">ライト</div>
       <div class="theme-option" data-theme="dark">ダーク</div>
       <div class="theme-option" data-theme="ocean">オーシャン</div>
-      <div class="theme-option" data-theme="sunset">サンセット</div>
+      <div class="theme-option" data-theme="pink">ピンク</div>
+      <div class="theme-option" data-theme="green">グリーン</div>
     </div>
   </div>
 
