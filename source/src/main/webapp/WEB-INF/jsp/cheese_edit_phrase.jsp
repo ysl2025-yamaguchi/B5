@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>フレーズ編集画面</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_edit_phrase.css">
+
+<link rel="stylesheet" href="<c:url value='/css/cheese_edit_phrase.css' />">
 </head>
 <body>
  <jsp:include page="cheese_header.jsp" />
@@ -28,11 +29,11 @@
             <label for = "new">新規</label>  <br>
             <div id ="tag_input_box">
               <select id ="select_tag">
-                 <c:forEach var="phrase" items="${phraseList}">
+               
                      <c:forEach var="tag" items="${phraseTagList[phrase.id]}">
                          <option><c:out value = "${tag.name} "/></option>
                       </c:forEach>
-                 </c:forEach>
+                
               </select>
                <input type = "text" name = "tag_name" id = "input_tag" hidden autocomplete="off">
                <button type = "button" id = "add_tag_button">追加</button>
@@ -49,5 +50,6 @@
     
     </form>
  <script src="<c:url value='/js/cheese_edit_phrase.js'/>"></script>
+
 </body>
 </html>
