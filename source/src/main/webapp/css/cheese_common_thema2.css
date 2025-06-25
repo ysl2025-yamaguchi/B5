@@ -11,25 +11,27 @@ body.dark header.header {
   color: #ffffff;
 }
 
-
 body.dark .nav ul li a {
-  color: #bbbbbb;
+  text-decoration: none;
+  color: #ffffff !important;
+  font-size: 18px;
+  padding: 8px 12px;
+  display: inline-block;
   transition: color 0.3s, background-color 0.3s;
 }
 
 body.dark .nav ul li a:hover {
-  color: #ffab40;
-  background-color: transparent;
+  background-color: #ffff33;
+  border-radius: 5px;
 }
 
-
-body.dark .line-right {
-  border-right: 1px solid #333333;
-}
-
+body.dark .line-right,
 body.dark .line-left {
+  border-color: #ffffff !important;
   margin-left: 40px;
-  border-left: 1px solid #333333;
+}
+body.dark .line-right{
+      border-right: 1px solid #ffffff;
 }
 
 
@@ -39,8 +41,6 @@ body.dark form {
   
  
   border-radius: 10px;
- 
-
 }
 
 
@@ -109,6 +109,18 @@ body.dark form select:focus {
   outline: none;
 }
 
+body.dark .phrase_list details {
+  color: #ffffff;
+}
+
+body.dark .phrase_list summary {
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
 
 body.dark #add_tag_button {
   padding: 8px 12px;
@@ -124,7 +136,7 @@ body.dark #add_tag_button {
 body.dark #add_tag_button:hover {
   background-color: #555555;
 }
-body.dark div#tag_input_box {
+body.dark div #tag_input_box {
   border: none;
   background-color: transparent;
 }
@@ -135,12 +147,16 @@ body.dark main#addMusicSection {
   color: white;
 }
 
+body.dark #addMusicSection input[type="submit"] {
+  background-color:  #333333 !important;
+}
+
 
 body.dark form button,
 body.dark input[type="submit"],
 body.dark input[type="button"] {
   background-color: #333333;
-  color: white;
+  color: #fff;
   border: none;
  
   border-radius: 10px;
@@ -168,4 +184,8 @@ body.dark section {
 }
 body.dark label{
 	color:#bbbb;
+}
+
+body.dark .toggle-btn {
+	color: #fff;
 }

@@ -9,6 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema1.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema2.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema3.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema4.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common_thema5.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/cheese_common.css">
 	
 	
@@ -18,39 +20,24 @@
 <header class="header">
 	
 	<div class="cheese-menu">
-	<img src="<c:url value='/img/blackcheese.png' />" alt="テーマアイコン" id="themeIcon">
+	<img src="<c:url value='/img/blackcheese.png' />" alt="テーマアイコン" id="themeIcon" width="40" height="40">
 	</div>
 
-  <div id="themeModal">
-    <div class="modal-content">
-      <p>テーマを選択してください:</p>
-      <div class="theme-option" data-theme="light">ライト</div>
-      <div class="theme-option" data-theme="dark">ダーク</div>
-      <div class="theme-option" data-theme="ocean">オーシャン</div>
-      <div class="theme-option" data-theme="sunset">サンセット</div>
-    </div>
-  </div>
+  <form method = "POST" action = "CheeseChangeThemaServlet" name = "change_thema">
+	  <div id="themeModal">
+	    <input type = "hidden" value = "${loginUser.thema}" name = "thema" id = "thema_number">
+	    <div class="modal-content">
+	      <p>テーマを選択してください</p>
+	      <div class="theme-option" data-theme="light">ライト</div>
+	      <div class="theme-option" data-theme="dark">ダーク</div>
+	      <div class="theme-option" data-theme="ocean">オーシャン</div>
+	      <div class="theme-option" data-theme="pink">ピンク</div>
+	      <div class="theme-option" data-theme="green">グリーン</div>
+	    </div>
+	  </div>
+  </form>
 
-  <script>
-    const modal = document.getElementById("themeModal");
-    const icon = document.getElementById("themeIcon");
-    icon.addEventListener("click", () => {
-      modal.style.display = "flex";
-    });
 
-    document.querySelectorAll(".theme-option").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const theme = btn.getAttribute("data-theme");
-        document.body.className = theme;
-        modal.style.display = "none";
-        // TODO: fetchでサーブレットにPOSTしてDB保存も可能
-      });
-    });
-
-    // モーダル背景をクリックしたら閉じる
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    });
   </script>
   <script src="<c:url value='/js/cheese_common.js' />" defer></script>
 	

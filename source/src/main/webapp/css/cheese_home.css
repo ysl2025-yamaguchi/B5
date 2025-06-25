@@ -26,6 +26,7 @@ section {
 }
 
 #regist_phrase_form {
+  position: relative;
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -36,8 +37,6 @@ section {
   gap: 12px;
   align-items: center;
   margin: 30px auto;
-  /*width: 90%;
-  max-width: 600px;*/
 }
 
 /* 入力欄 */
@@ -78,9 +77,6 @@ section {
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #fff;
-  /*
-  justify-content: space-between;
-  */
 }
 
 
@@ -109,10 +105,6 @@ section {
   border-radius: 5px;
   font-size: 14px;
   margin: 0;   
-  /*
-  margin-top: 10px;
-  margin-bottom: 10px; max-width: 200px; 
-  */
 }
 
 #add_tag_button {
@@ -155,7 +147,6 @@ section {
 
 /* 登録ボタン */
 #regist_button {
-  position: absolute;
   bottom: 40px;
   right: 40px;
   padding: 8px 16px;
@@ -189,6 +180,7 @@ section {
   background-color: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 8px;
+  margin-bottom: 60px
 }
 
 .search-box input[type="text"] {
@@ -239,20 +231,13 @@ section {
   height: 100%;
   text-align: center;
   line-height: 1;
-  /*
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-  white-space: nowrap;
-  width: 40px;
-  border: 1px solid #ccc;
-  border-left: none;
-  background-color: #eee;
-  */
+  border: none;
 }
 
 /* 検索フォームボタン */
 form button img {
   vertical-align: middle;
+  border: none;
 }
 
 /* 並び順プルダウン */
@@ -267,12 +252,12 @@ form button img {
 
 /* フレーズリスト */
 .phrase_list details {
+  position: relative;
   background-color: #c6ced9;
   margin: 16px auto;
   padding: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  position: relative;
 }
 
 .phrase_list summary {

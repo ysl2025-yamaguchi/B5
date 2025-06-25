@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CheesePhraseDao;
 import dao.CheesePhraseTagDao;
@@ -31,14 +32,36 @@ public class CheesePhraseListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("loginUser") == null) {
-//			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
-//			return;
-//		}
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
 //		
 //		List<CheeseTag> tagList;
 //		CheeseTagDao tag = new CheeseTagDao();
+		String deleteResult = request.getParameter("deleteResult");
+		System.out.println(deleteResult);
+		if (deleteResult != null && !deleteResult.isEmpty()) {
+			if (deleteResult.equals("successed")) {
+				request.setAttribute("result", "削除に成功しました");
+			}
+			else {
+				request.setAttribute("result", "削除に失敗しました");
+			}
+		}
+		
+		String registResult = request.getParameter("registResult");
+		System.out.println(registResult);
+		if (registResult != null && !registResult.isEmpty()) {
+			if (registResult.equals("successed")) {
+				request.setAttribute("result", "登録に成功しました");
+			}
+			else {
+				request.setAttribute("result", "登録に失敗しました");
+			}
+		}
+		
 		
 		// 登録済みのフレーズ一覧を取得
 		List<CheesePhrase> phraseList;
@@ -74,6 +97,13 @@ public class CheesePhraseListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
+		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		

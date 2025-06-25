@@ -142,3 +142,63 @@
 p {
 	margin: 120px auto 2px auto;
 }
+
+.cheese-h2 {
+	margin: 0px auto 240px auto;
+}
+
+
+/* フッター */
+/* ページトップに戻るボタンエリア */
+.gotop {
+  text-align: center;
+  margin: 60px auto 40px;
+  width: 100%;
+}
+
+/* ページトップ画像のサイズ調整とアニメーション */
+.gotop img {
+  width: 60px;
+  height: 60px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.gotop img:hover {
+  transform: scale(1.1);
+}
+
+/* フッターのコピーライト表示 */
+.copyright {
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  background-color: #FFFF99;
+  color: #4CAF50;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+
+/* アイコン右上配置 */
+.feature-scroll-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.feature-scroll-icon img {
+  transition: transform 0.3s;
+}
+.feature-scroll-icon img:hover {
+  transform: scale(1.1);
+}
+
+/* スムーズスクロール */
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+#cheese{
+      position: absolute;
+      margin: 0 auto;
+      max-width: 700px;
+      padding: 20px;
+}
+
+body.green {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #009D5B; 
+  color: #ffffff;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.green header.header {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+body .green header nav ul{
+      display: flex; /* 横並びにする */
+      text-align: center;
+      font-size: 20px;
+      list-style: none;
+      gap: 40px;
+      padding: 0 5%;
+      padding-left: 75px;
+      padding-top: 0px;
+      margin: 0 auto;
+      margin-top: 2px;
+      max-width: fit-content;
+    }
+
+body.green .nav ul li a {
+  text-decoration: none;
+  color: #ffffff !important;
+  font-size: 18px;
+  padding: 8px 12px;
+  display: inline-block;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+body.green .nav ul li a:hover {
+  background-color: #ffff33;
+  border-radius: 5px;
+}
+
+body.green .line-right,
+body.green .line-left {
+  border-color: #ffffff !important;
+  margin-left: 40px;
+}
+body.green .line-right{
+      border-right: 1px solid #ffffff;
+}
+
+body.green form {
+  background-color: #f9f9f9;
+  color: #003d2e;
+  border-radius: 10px;
+  margin-bottom: 40px
+}
+
+.green section {
+      margin-top: 30px;
+}
+
+body.green form input,
+body.green form textarea,
+body.green form select {
+  background-color: #f4fdf8;
+  color: #003d2e;
+  border: 1px solid #009D5B;
+  border-radius: 8px;
+}
+
+body.green .tag_item {
+  background-color: #ffffff;
+  color: #009D5B;
+}
+
+body.green .phrase_list details {
+  background-color: #007747;
+  border: 1px solid #005C38;
+  color: #ffffff;
+  margin: 16px auto;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+body.green .phrase_list summary {
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+body.green .phrase_list audio {
+  display: block;
+  margin: 0 auto 16px auto;
+  width: 80%;
+}
+
+body.green .phrase_list table {
+  color: #ffffff;
+}
+
+/* 編集・削除ボタン並び */
+body.green .button-row {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+    .line-left{
+      margin-left: 40px;
+    }
+	
+ body.green .nav ul li a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
+      padding: 8px 12px;
+      display: inline-block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+   .header nav ul li a:hover {
+      background-color: #ffff33;
+      border-radius: 5px;
+}
+
+    .line-right{
+      border-right: 1px solid #ffffff;
+}
+    section {
+      margin-top: 30px;
+}

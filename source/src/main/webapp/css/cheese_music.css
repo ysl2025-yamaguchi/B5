@@ -18,7 +18,7 @@
 .music-box,
 section {
   border: 1px solid #ccc;
-  padding: 16px;
+  padding: 30px;
   margin-top: 16px;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -146,6 +146,15 @@ select {
   padding: 16px;
   border-top: 1px solid #ddd;
   margin-top: 8px;
+}
+
+.music-box,
+section {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-top: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
 /* ラベルとアイコンの間隔調整 */

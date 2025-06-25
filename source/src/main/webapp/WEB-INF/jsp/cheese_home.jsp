@@ -105,6 +105,7 @@
                   </form>
                   <form method = "POST" action = "CheeseDeletePhraseServlet">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
+                     <input type = "hidden" name = "path" value = "${phrase.path}">
                      <input type = "submit" value = "削除">
                   </form>
                </div>
