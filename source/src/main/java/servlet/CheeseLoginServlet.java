@@ -22,7 +22,7 @@ public class CheeseLoginServlet extends HttpServlet{
 		
 		String logoutParam = request.getParameter("logout");
 		if ("true".equals(logoutParam)) {
-		    request.setAttribute("result", "ログアウトしました。");
+		    request.setAttribute("result", "ログアウトしました！");
 		}
 		
 		// ログインページにフォワードする

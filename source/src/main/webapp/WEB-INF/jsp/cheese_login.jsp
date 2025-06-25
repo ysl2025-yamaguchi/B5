@@ -38,7 +38,7 @@
 </header>
 
 <c:if test="${not empty result}">
-    <div class="logout-massage">${result}</div>
+    <div class="logout-message">${result}</div>
 </c:if>
 
 
@@ -69,6 +69,7 @@
     </div>
     </form>
     
+    
     <!-- 新規登録フォーム -->
     <form id="registerForm" class="form-section"  method="POST" action="CheeseRegistUserServlet">
     <div >
@@ -77,7 +78,6 @@
       <input type="password" id="regPass" name="regPass" placeholder="パスワード" >
       <input type="password" id="regPassConfirm" name="regPassConfirm" placeholder="パスワード確認">
       <input type="submit" class="submit-button" value="登録">
-		
     </div>
     </form>
   </div>

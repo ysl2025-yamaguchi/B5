@@ -91,20 +91,21 @@
 }
 
 .logout-message {
-  color: #2c3e50;
-  background-color: #ecf0f1;
-  border-left: 5px solid #3498db;
-  padding: 10px;
-  margin-bottom: 15px;
+  background-color: #E0FFE0;
+  border: 1px solid #55AA55;
+  color: #226622;
+  padding: 10px 14px;
+  border-radius: 6px;
   font-weight: bold;
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: large;
 }
 
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
 }
-
-
 
 
 .intro-screen {
@@ -170,6 +171,7 @@ p {
 
 
 /* フッター */
+
 /* ページトップに戻るボタンエリア */
 .gotop {
   text-align: center;
@@ -191,16 +193,20 @@ p {
 
 /* フッターのコピーライト表示 */
 .copyright {
-  margin-top: 20px;
-  margin-bottom: 0;
-  padding-top: 75px;
-  padding-bottom: 75px;
+  width: 100vw; /* ビューポート全体の幅 */
+  margin: 0 auto;
+  padding: 75px 0;
   background-color: #FFFF99;
   color: #4CAF50;
   text-align: center;
   font-size: 0.9rem;
   font-weight: bold;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
 }
+
 
 
 /* アイコン右上配置 */
