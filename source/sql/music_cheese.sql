@@ -64,3 +64,12 @@ create table musics_phrases(
    created_at datetime default current_timestamp,
    updated_at datetime default current_timestamp on update current_timestamp
 );
+
+-- テスト
+ insert into users (name, password) values ('dojouser1', '#SEplus2025SEplus');
+ insert into users (name, password) values ('dojouser1', '#SEplus2025SEplus');
+ insert into
+ 
+ 
+ 
+ select * from users;
