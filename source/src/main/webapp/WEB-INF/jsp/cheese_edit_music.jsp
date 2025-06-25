@@ -56,19 +56,20 @@
         <input type = "hidden" name = "phrase_id" value = "${assignedPhraseList[i].id}">
         <h3>${i + 1}. </h3>
 
-		<c:out value = "${assignedPhraseList[i].name}"/>
+		
+		<span id ="phraseName"><c:out value = "${assignedPhraseList[i].name}"/></span> <br>
 
         <input type="text" name="title" value="${assignedMusicPhraseList[i].title}" placeholder="タイトル">
-        <textarea name="remarks">${assignedMusicPhraseList[i].remarks}</textarea>
+        <input type="text" name="remarks" value="${assignedMusicPhraseList[i].remarks}"placeholder="メモ">
 
         <!-- ▼ 音声フレーズ選択欄 -->
         <div class="phrase-audio-section">
           <label>フレーズ選択：
             <select>
+            <option value="">-- フレーズを選択 --</option>
               <c:forEach var="p" items="${phraseList}">
                 <option value="${p.id}">${p.name}</option>
               </c:forEach>
-              <option value="">-- フレーズを選択 --</option>
               <!-- JSでpopulatePhraseOptions()が追加 -->
             </select>
           </label>

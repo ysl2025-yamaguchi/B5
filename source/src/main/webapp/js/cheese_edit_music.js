@@ -248,16 +248,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+
   // ＋ボタンが押された時の処理
   addBtn.addEventListener("click", () => {
     const clone = templateBox.cloneNode(true);
 
     // 入力初期化
+     const phrase_id = clone.querySelector('input[name="phrase_id"]');
+    if (phrase_id) phrase_id.value = "";
+    
     const title = clone.querySelector('input[name="title"]');
     if (title) title.value = "";
 
-    const memo = clone.querySelector('textarea[name="memo"]');
-    if (memo) memo.value = "";
+    const remarks = clone.querySelector('input[name="remarks"]');
+    if (remarks) remarks.value = "";
 
     const select = clone.querySelector('select[name="phraseSelect"]');
     if (select) {
