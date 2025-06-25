@@ -262,6 +262,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const remarks = clone.querySelector('input[name="remarks"]');
     if (remarks) remarks.value = "";
+    
+  //  console.log(  clone.querySelector('#phraseName').textContent );
+    clone.querySelector('#phraseName').textContent = '未設定';
 
     const select = clone.querySelector('select[name="phraseSelect"]');
     if (select) {

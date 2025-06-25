@@ -50,8 +50,9 @@
   <!-- ▼ フレーズ入力欄リスト -->
   <div id="phraseContainer">
 
+      
+      <c:forEach var = "i" begin = "0" end= "${assignedPhraseList .size()- 1}" >
 
-    <c:forEach var = "i" items = "${assignedPhraseList}">
       <div class="phraseBox" data-index="${i}">
         <input type = "hidden" name = "phrase_id" value = "${assignedPhraseList[i].id}">
         <h3>${i + 1}. </h3>
