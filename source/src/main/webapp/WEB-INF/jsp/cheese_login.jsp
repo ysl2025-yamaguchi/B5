@@ -38,7 +38,7 @@
 </header>
 
 <c:if test="${not empty result}">
-    <div class="logout-massage">${result}</div>
+    <div class="logout-message">${result}</div>
 </c:if>
 
 
