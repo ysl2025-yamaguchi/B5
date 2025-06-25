@@ -10,10 +10,6 @@ create table users(
    created_at datetime default current_timestamp,
    updated_at datetime default current_timestamp on update current_timestamp
 );
-
--- テスト
- insert into users (name, password) values ('yama', 'password');
- select * from users;
  
 -- フレーズデータ
 create table phrases(
