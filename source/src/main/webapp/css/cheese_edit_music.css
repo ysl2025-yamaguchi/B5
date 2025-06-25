@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+ main {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}

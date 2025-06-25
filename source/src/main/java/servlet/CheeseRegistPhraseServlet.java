@@ -140,12 +140,7 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 					// フレーズとタグの中間テーブルに追加
 					CheesePhraseTagDao phraseTagDao = new CheesePhraseTagDao();
 					
-					if (!phraseTagDao.insert(uploadedPhrase.getId(), tagId)) {
-						result = true;
-					}
-					else {
-						result = false;
-					}
+					result = phraseTagDao.insert(uploadedPhrase.getId(), tagId);
 				}
 			}
 		}

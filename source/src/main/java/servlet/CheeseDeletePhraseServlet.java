@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CheeseMusicPhraseDao;
 import dao.CheesePhraseDao;
 import dao.CheesePhraseTagDao;
 
@@ -47,18 +48,24 @@ public class CheeseDeletePhraseServlet extends HttpServlet {
 //		return;
 //	}
 		
+
+		
 		int phraseId= Integer.parseInt(request.getParameter("id"));
+		
+		CheeseMusicPhraseDao musicPhraseDao = new CheeseMusicPhraseDao();
 		String fileName = request.getParameter("path");
-		boolean fileDeleteFlag = true;
+		boolean fileDeleteFlag = musicPhraseDao.check(phraseId);
 		
 		// ファイルの削除
-		if (fileName != null && !fileName.isEmpty()) {
-			String dirPath = getServletContext().getRealPath("/upload");
-			String fullPath = dirPath + File.separator + fileName;
-			File file = new File(fullPath);
-			
-			if (!file.delete()) {
-				fileDeleteFlag = false;
+		if (fileDeleteFlag) {
+			if (fileName != null && !fileName.isEmpty()) {
+				String dirPath = getServletContext().getRealPath("/upload");
+				String fullPath = dirPath + File.separator + fileName;
+				File file = new File(fullPath);
+				
+				if (!file.delete()) {
+					fileDeleteFlag = false;
+				}
 			}
 		}
 		
