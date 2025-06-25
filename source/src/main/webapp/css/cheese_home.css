@@ -231,11 +231,13 @@ section {
   height: 100%;
   text-align: center;
   line-height: 1;
+  border: none;
 }
 
 /* 検索フォームボタン */
 form button img {
   vertical-align: middle;
+  border: none;
 }
 
 /* 並び順プルダウン */

@@ -7,7 +7,7 @@ body.pink {
   display: flex;
   flex-direction: column;
   background-color: #FFE5ED; 
-  color: #333;
+  color: black;
   min-height: 100vh;
   font-family: Segoe UI Black, sans-serif;
 }
@@ -46,7 +46,7 @@ body.pink .nav ul li a {
 }
 
 body.pink .nav ul li a:hover {
-  background-color: #e0668b;
+  background-color: #a5aeb8;
 }
 
 body.pink .line-right,
@@ -59,28 +59,38 @@ body.pink .line-right {
 }
 
 body.pink form {
-  background-color: #a5aeb8; 
+  background-color: #a5aeb8 !important; 
   color: #000;
   border-radius: 10px;
   margin-bottom: 40px;
 }
 
-body.pink .search_box {
+/*body.pink .search_box {
+  background-color:  #a5aeb8 !important;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  padding: 40px;
+/*  padding: 40px;
   margin: 20px auto;
-  background-color: #a5aeb8;
+  
   color: #000;
-  border: 1px solid #999;
-  border-radius: 10px;
   max-width: 100%;
+}
+*/
+
+body.pink label {
+  color: black;	
 }
 
 body.pink section {
   margin-top: 30px;
+  background-color:  #a5aeb8;
+}
+
+body.pink #addMusicSection {
+  background-color:  #a5aeb8 !important;
 }
 
 body.pink form input,
@@ -95,20 +105,26 @@ body.pink .tag_item {
   color: #d04571;
 }
 
+body.pink .search_box {
+	background-color:  #a5aeb8;
+}
+
 body.pink .search_box input[type="text"],
 body.pink .search_box select {
   background-color: #f7f7f7;
   color: #222;
   padding: 8px;
-  box-sizing: border-box;
   font-size: 14px;
+  border:  none;
 }
 
 body.pink .search_box button,
 body.pink .search_box input[type="submit"] {
   background-color: #EAC8D3;
   color: white;
-  border-radius: 4px;
+  border-radius: 0 4px 4px 0;
+  border: none;
+  border-left: none;
   padding: 8px 12px;
   cursor: pointer;
   transition: background-color 0.3s ease;
