@@ -57,25 +57,25 @@
         <input type = "hidden" name = "phrase_id" value = "${assignedPhraseList[i].id}">
         <h3>${i + 1}. </h3>
 
-		
-		<span id ="phraseName"><c:out value = "${assignedPhraseList[i].name}"/></span> <br>
-
+      <span>フレーズ名:</span>
+      <select name = "phraseSelect">
+      	<option value="">-- フレーズを選択 --</option>
+         	<c:forEach var="p" items="${phraseList}">
+         		<option value="${p.id}" data-path = "<c:url value='/upload/${p.path}'/>"
+         		<c:if test = "${p.name == assignedPhraseList[i].name}">selected</c:if>
+            	>
+            	${p.name}
+            	</option>
+            </c:forEach>
+          	<!-- JSでpopulatePhraseOptions()が追加 -->
+      </select>
+      
+      <audio controls src="<c:url value='/upload/${assignedPhraseList[i].path}'/>"></audio><br>
+			
+        <span>タイトル:</span>	
         <input type="text" name="title" value="${assignedMusicPhraseList[i].title}" placeholder="タイトル">
+        <span>メモ:</span>
         <input type="text" name="remarks" value="${assignedMusicPhraseList[i].remarks}"placeholder="メモ">
-
-        <!-- ▼ 音声フレーズ選択欄 -->
-        <div class="phrase-audio-section">
-          <label>フレーズ選択：
-            <select>
-            <option value="">-- フレーズを選択 --</option>
-              <c:forEach var="p" items="${phraseList}">
-                <option value="${p.id}">${p.name}</option>
-              </c:forEach>
-              <!-- JSでpopulatePhraseOptions()が追加 -->
-            </select>
-          </label>
-          <button type="button" class="playBtn">▶</button>
-        </div>
 
         <!-- ▼ 操作ボタン -->
         <div class="controls">
@@ -97,7 +97,7 @@
         <div class="phrase-audio-section">
           <label>フレーズ選択：
             <select class="phrase-select" name="phraseSelect">
-              <option value="">-- フレーズを選択 --</option>
+              <option value="0">-- フレーズを選択 --</option>
             </select>
           </label>
           <button type="button" class="playBtn">▶</button>
