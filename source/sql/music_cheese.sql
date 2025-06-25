@@ -64,3 +64,45 @@ create table musics_phrases(
    created_at datetime default current_timestamp,
    updated_at datetime default current_timestamp on update current_timestamp
 );
+
+-- テストusers
+ insert into users (name, password) values ('dojouser1', '#SEplus2025SEplus');
+ insert into users (name, password) values ('dojouser1', '#SEplus2025SEplus');
+ 
+-- テストphrases
+ insert into phrases (name, remarks) value ('テスト1', '音声データは入っていません');
+ insert into phrases (name, remarks) value ('テスト2', '音声データは入っていません');
+ insert into phrases (name, remarks) value ('テスト3', '音声データは入っていません');
+ insert into phrases (name, remarks) value ('あの日の悲しみさえ', '音声データは入っていません');
+ insert into phrases (name, remarks) value ('夢ならばどれほどよかったでしょう', '音声データは入っていません');
+ insert into phrases (name, remarks) value ('きっともうこれ以上傷つくことなど', '音声データは入っていません');
+
+-- テストmusics
+ insert into phrases (name) value ('Lemon');
+ insert into phrases (name) value ('テスト曲');
+ 
+-- テストtags
+ insert into tags (name) value ('サビ');
+ insert into tags (name) value ('アップテンポ');
+ insert into tags (name) value ('夏');
+ insert into tags (name) value ('Aメロ');
+ insert into tags (name) value ('BPM180');
+ insert into tags (name) value ('Bメロ');
+ insert into tags (name) value ('柑橘系');
+ 
+-- テストphrases_tags
+ insert into phrases_tags (phrase_id, tag_id) value (1, 4); 
+ insert into phrases_tags (phrase_id, tag_id) value (1, 5); 
+ insert into phrases_tags (phrase_id, tag_id) value (1, 6); 
+ insert into phrases_tags (phrase_id, tag_id) value (2, 7); 
+ insert into phrases_tags (phrase_id, tag_id) value (2, 6); 
+ insert into phrases_tags (phrase_id, tag_id) value (2, 8); 
+ insert into phrases_tags (phrase_id, tag_id) value (3, 9); 
+ insert into phrases_tags (phrase_id, tag_id) value (3, 6); 
+ insert into phrases_tags (phrase_id, tag_id) value (4, 4);
+ insert into phrases_tags (phrase_id, tag_id) value (4, 10);
+ insert into phrases_tags (phrase_id, tag_id) value (5, 7);
+ insert into phrases_tags (phrase_id, tag_id) value (5, 10);
+ insert into phrases_tags (phrase_id, tag_id) value (6, 9);
+ 
+ select * from users;
