@@ -315,7 +315,7 @@ public class CheeseMusicPhraseDao {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "SLECT COUNT(*) FROM musics_phrases WHERE phrase_id=?";
+				String sql = "SELECT count(*) FROM musics_phrases WHERE phrase_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
@@ -325,10 +325,12 @@ public class CheeseMusicPhraseDao {
 				ResultSet rs = pStmt.executeQuery();
 
 				// ユーザー名とパスワードが一致するユーザーがいれば結果をtrueにする
-				rs.next();
-				if (rs.getInt("count(*)") == 0) {
-					result = true;
+				if (rs.next()) {
+					if (rs.getInt("count(*)") == 0) {
+						result = true;
+					}
 				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
