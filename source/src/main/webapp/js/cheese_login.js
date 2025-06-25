@@ -130,5 +130,4 @@ window.addEventListener('DOMContentLoaded', () => {
       }, 3000); // 3秒後に非表示
     }
   });
-
-
+  

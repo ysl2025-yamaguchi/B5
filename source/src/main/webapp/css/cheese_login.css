@@ -171,6 +171,7 @@ p {
 
 
 /* フッター */
+
 /* ページトップに戻るボタンエリア */
 .gotop {
   text-align: center;
@@ -192,16 +193,20 @@ p {
 
 /* フッターのコピーライト表示 */
 .copyright {
-  margin-top: 20px;
-  margin-bottom: 0;
-  padding-top: 75px;
-  padding-bottom: 75px;
+  width: 100vw; /* ビューポート全体の幅 */
+  margin: 0 auto;
+  padding: 75px 0;
   background-color: #FFFF99;
   color: #4CAF50;
   text-align: center;
   font-size: 0.9rem;
   font-weight: bold;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
 }
+
 
 
 /* アイコン右上配置 */
