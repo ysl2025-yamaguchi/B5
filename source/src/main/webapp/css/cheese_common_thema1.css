@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #select_thema {
-    position: absolute;
+    position: relative;
 }
 
 #cheese{
@@ -91,4 +91,5 @@ header .header nav {
 .nav ul li a {
   color: black !important;
 }
+
 
