@@ -37,6 +37,10 @@
 	</div>
 </header>
 
+<c:if test="${not empty result}">
+    <div class="logout-massage">${result}</div>
+</c:if>
+
 
 <div class="noheader">
   <div class="card-container">
@@ -50,8 +54,8 @@
     
     
 <c:if test="${not empty sessionScope.register_success}">
-  <div class="success-message">${sessionScope.register_success}</div>
-  <c:remove var="register_success" scope="session" />
+    <div class="success-message">${sessionScope.register_success}</div>
+    <c:remove var="register_success" scope="session" />
 </c:if>
 
 
