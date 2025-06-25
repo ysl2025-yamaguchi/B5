@@ -135,7 +135,7 @@ public class CheeseUserDao {
 
 			// ユーザー名とパスワードが一致するユーザーがいれば結果をtrueにする
 			if (rs.next()) {
-				user.setId(rs.getInt("user_id"));
+				user.setId(rs.getInt("id"));
 				user.setName(rs.getString("name"));
 				user.setThema(rs.getInt("thema"));
 				user.setUpdatedAt(rs.getString("updated_at"));
