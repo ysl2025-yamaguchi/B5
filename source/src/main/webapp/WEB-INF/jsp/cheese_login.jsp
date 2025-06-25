@@ -14,10 +14,9 @@
 <body>
 
 
-
 <div class="feature-scroll-icon">
   <a href="#featureSection">
-    <img src="<c:url value='/img/musictoha.png' />" alt="特徴へ移動" width="180" height="30">
+    <img src="<c:url value='/img/musictoha.png' />" alt="MUSIC CHEESEとは" width="180" height="30">
   </a>
 </div>
 
@@ -79,7 +78,6 @@
     </form>
   </div>
  </div>
- 
  
 <div id="featureSection" class="feature-section">
 <div class="feature">
