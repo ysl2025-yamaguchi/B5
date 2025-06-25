@@ -45,7 +45,9 @@ public class CheeseChangeThemaServlet extends HttpServlet {
         }
 
         // 元のページにリダイレクト（または固定先へ）
-        response.sendRedirect("CheeseMainServlet"); // メイン画面などへ
+        String referer = request.getHeader("referer");
+        response.sendRedirect(referer);
+//        response.sendRedirect("CheeseMainServlet"); // メイン画面などへ
     }
 }
 
