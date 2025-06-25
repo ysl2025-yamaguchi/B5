@@ -19,6 +19,12 @@ public class CheeseLoginServlet extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String logoutParam = request.getParameter("logout");
+		if ("true".equals(logoutParam)) {
+		    request.setAttribute("result", "ログアウトしました。");
+		}
+		
 		// ログインページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_login.jsp");
 		dispatcher.forward(request, response);
