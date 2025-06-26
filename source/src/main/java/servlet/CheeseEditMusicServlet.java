@@ -84,7 +84,6 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 //		}
 		
 		
-		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		int musicId = Integer.parseInt(request.getParameter("music_id"));
@@ -112,7 +111,6 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		}
 	 
 		
-
 		// 結果ページにフォワードする
 		response.sendRedirect("CheeseEditMusicServlet?id=" + musicId);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
