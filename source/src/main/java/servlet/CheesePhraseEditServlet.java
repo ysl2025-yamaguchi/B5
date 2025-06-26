@@ -89,7 +89,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		request.setAttribute("tagList", tagList);
 		request.setAttribute("assignedTagList", assignedTagList);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_edit_phrase.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_phrase.jsp");
         dispatcher.forward(request, response);
 	}
 	
