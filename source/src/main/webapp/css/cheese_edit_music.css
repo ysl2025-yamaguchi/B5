@@ -1,9 +1,150 @@
 @charset "UTF-8";
 
- main {
-  width: 90%;
-  max-width: 600px;
-  margin: 40px auto;
-  font-family: 'Segoe UI', sans-serif;
+body {
+  font-family: "Segoe UI Black", sans-serif;
+  margin: 0 auto;
+  max-width: 700px;
+  padding: 20px;
+  background-color: #fff;
   color: #333;
+  position: relative;
 }
+
+h1 {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin: 20px 0;
+}
+
+#saveBtn {
+  padding: 6px 12px;
+  background-color: #f0f0a0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+#saveBtn:hover {
+  background-color: #ffffbf;
+}
+
+/* メッセージエリア */
+.message {
+  text-align: center;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.message.red {
+  color: red;
+}
+
+.message.gray {
+  color: gray;
+}
+
+/* ＋ボタン */
+#addPhraseBtn {
+  margin: 15px auto;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  display: block;
+  margin-left: 0;
+  margin-bottom: 20px ;
+}
+
+/* フレーズ入力ブロック */
+.phraseBox {
+  position: relative;
+  text-align: left;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 20px 0;
+  padding: 15px 50px 15px 15px;
+  background-color: #f9f9f9;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.phraseBox h3 {
+  margin: 0 0 10px 0;
+}
+
+/* 入力項目 */
+.phraseBox span {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.phraseBox input[type="text"],
+.phraseBox select {
+  display: block;
+  margin: 0 auto 10px auto;
+  width: 60%;
+  padding: 6px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.phraseBox audio {
+  /*display: block;
+  margin: 10px auto;*/
+  display: block;
+  margin:10px auto 10px 125px;
+  width: 60%;
+  max-width: 400px;
+  /*clear: both;
+  text-align: center;*/
+   
+}
+
+.phraseBox .deleteBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #999;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  font-weight: bold;
+}
+
+.controls {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.controls button {
+  background-color: #ccc;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+

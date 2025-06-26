@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Cheese Edit Music</title>
+<link rel="stylesheet" href="<c:url value='/css/cheese_edit_music.css' />">
 </head>
 <body>
 
@@ -26,9 +27,7 @@
 
 	<!-- ボタン群 -->
 	<div class="actionButtons">
-		<label>重複数チェック: <input type="number" id="duplicateCount"
-			value="3" min="2" max="5"></label>
-		<button id="checkDuplicates" type="button">重複チェック</button>
+		<button id="addPhraseBtn" type="button">＋</button>
 		<button id="saveBtn" form="editForm" type="submit">保存</button>
 	</div>
 
@@ -42,14 +41,14 @@
 	</div>
 
 	<!-- ＋ボタン -->
-	<button id="addPhraseBtn" type="button">＋</button>
+	
 
 	<!--  テンプレート -->
 	<div class = "phraseBox" data-index = "0">
 		<input type="hidden" name="phrase_id"
 			value="">
 		<h3></h3>
-
+		<button class="deleteBtn" type="button">×</button>
 		<span>フレーズ名:</span> <select name="phraseSelect">
 			<option value="">-- フレーズを選択 --</option>
 			<c:forEach var="p" items="${phraseList}">
@@ -72,7 +71,6 @@
 		<div class="controls">
 			<button class="moveUp" type="button">↑</button>
 			<button class="moveDown" type="button">↓</button>
-			<button class="deleteBtn" type="button">×</button>
 		</div>
 	</div>
 
@@ -91,7 +89,7 @@
 						<input type="hidden" name="phrase_id"
 							value="${assignedPhraseList[i].id}">
 						<h3>${i + 1}.</h3>
-
+						<button class="deleteBtn" type="button">×</button>
 						<span>フレーズ名:</span> <select name="phraseSelect">
 							<option value="">-- フレーズを選択 --</option>
 							<c:forEach var="p" items="${phraseList}">
@@ -102,7 +100,7 @@
 							</c:forEach>
 							<!-- JSでpopulatePhraseOptions()が追加 -->
 						</select>
-
+						
 						<audio controls
 							src="<c:url value='/upload/${assignedPhraseList[i].path}'/>"></audio>
 						<br> <span>タイトル:</span> <input type="text" name="title"
@@ -114,7 +112,7 @@
 						<div class="controls">
 							<button class="moveUp" type="button">↑</button>
 							<button class="moveDown" type="button">↓</button>
-							<button class="deleteBtn" type="button">×</button>
+							
 						</div>
 					</div>
 				</c:forEach>
