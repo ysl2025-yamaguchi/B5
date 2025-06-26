@@ -32,6 +32,7 @@ body.green .line-right{
 body.green form {
   background-color: #f9f9f9;
   color: #003d2e;
+  border-radius: 8px;
 }
 
 .green section {
@@ -111,4 +112,12 @@ body.green .button-row {
 }
     section {
       margin-top: 30px;
+}
+
+body.green #phraseContainer {
+	background-color:#009D5B
+}
+
+body.green .search_box {
+	border: none;
 }

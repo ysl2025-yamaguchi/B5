@@ -63,56 +63,73 @@ create table musics_phrases(
 
 -- テストusers
  insert into users (name, password) values ('dojouser1', '#SEplus2025SEplus');
- insert into users (name, password) values ('dojouser1', '#SEplus2025SEplus');
  
 -- テストphrases
  insert into phrases (name, remarks) value ('テスト1', '音声データは入っていません');
  insert into phrases (name, remarks) value ('テスト2', '音声データは入っていません');
  insert into phrases (name, remarks) value ('テスト3', '音声データは入っていません');
- insert into phrases (name, remarks) value ('あの日の悲しみさえ', '音声データは入っていません');
- insert into phrases (name, remarks) value ('夢ならばどれほどよかったでしょう', '音声データは入っていません');
+ insert into phrases (name, remarks) value ('夢ならばどれほどよかったでしょう', '音声データは入っていません'); 
  insert into phrases (name, remarks) value ('きっともうこれ以上傷つくことなど', '音声データは入っていません');
+ insert into phrases (name, remarks) value ('あの日の悲しみさえ', '音声データは入っていません');
 
 -- テストmusics
- insert into phrases (name) value ('Lemon');
  insert into phrases (name) value ('テスト曲');
+ insert into phrases (name) value ('Lemon');
  
 -- テストtags
  insert into tags (name) value ('サビ');
  insert into tags (name) value ('アップテンポ');
  insert into tags (name) value ('夏');
- insert into tags (name) value ('Aメロ');
  insert into tags (name) value ('BPM180');
  insert into tags (name) value ('Bメロ');
+ insert into tags (name) value ('Aメロ');
  insert into tags (name) value ('柑橘系');
+ insert into tags (name) value ('バラード');
+ insert into tags (name) value ('暗い');
+ insert into tags (name) value ('ギター');
+ insert into tags (name) value ('イントロ');
  
 -- テストphrases_tags
- insert into phrases_tags (phrase_id, tag_id) value (1, 4); 
- insert into phrases_tags (phrase_id, tag_id) value (1, 5); 
- insert into phrases_tags (phrase_id, tag_id) value (1, 6); 
- insert into phrases_tags (phrase_id, tag_id) value (2, 7); 
- insert into phrases_tags (phrase_id, tag_id) value (2, 6); 
- insert into phrases_tags (phrase_id, tag_id) value (2, 8); 
- insert into phrases_tags (phrase_id, tag_id) value (3, 9); 
- insert into phrases_tags (phrase_id, tag_id) value (3, 6); 
- insert into phrases_tags (phrase_id, tag_id) value (4, 4);
- insert into phrases_tags (phrase_id, tag_id) value (4, 10);
- insert into phrases_tags (phrase_id, tag_id) value (5, 7);
- insert into phrases_tags (phrase_id, tag_id) value (5, 10);
- insert into phrases_tags (phrase_id, tag_id) value (6, 9);
+ insert into phrases_tags (phrase_id, tag_id) value (7, 13); 
+ insert into phrases_tags (phrase_id, tag_id) value (7, 14); 
+ insert into phrases_tags (phrase_id, tag_id) value (7, 15); 
+ insert into phrases_tags (phrase_id, tag_id) value (8, 15); 
+ insert into phrases_tags (phrase_id, tag_id) value (8, 16); 
+ insert into phrases_tags (phrase_id, tag_id) value (8, 17); 
+ insert into phrases_tags (phrase_id, tag_id) value (9, 18); 
+ insert into phrases_tags (phrase_id, tag_id) value (9, 15); 
+ insert into phrases_tags (phrase_id, tag_id) value (10, 19);
+ insert into phrases_tags (phrase_id, tag_id) value (10, 18);
+ insert into phrases_tags (phrase_id, tag_id) value (11, 17);
+ insert into phrases_tags (phrase_id, tag_id) value (11, 19);
+ insert into phrases_tags (phrase_id, tag_id) value (11, 20);
+ insert into phrases_tags (phrase_id, tag_id) value (12, 13);
+ insert into phrases_tags (phrase_id, tag_id) value (12, 19);
+ insert into phrases_tags (phrase_id, tag_id) value (12, 21);
+ insert into phrases_tags (phrase_id, tag_id) value (13, 22);
+ insert into phrases_tags (phrase_id, tag_id) value (13, 15);
+ insert into phrases_tags (phrase_id, tag_id) value (13, 23);
  
  -- テストmusics_phrases
   insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
-  			  value (2, 2, 'Aメロ（夏風）', 'イントロも込み', 1);
+  			  value (4, 10, 'Aメロ', 'Bメジャーコード、イントロなし、クラップ音', 1);
   insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
-  			  value (2, 3, 'Bメロ', '音声データは入っていません', 2);
+  			  value (4, 11, 'Bメロ', '', 2);
   insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
-  			  value (2, 1, 'サビ（転調）', '音声データは入っていません', 3);
+  			  value (4, 12, 'サビ', 'ストリングス強め', 3);
   insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
-  			  value (1, 5, 'Aメロ', 'Bメジャーコード、イントロなし', 1);
+  			  value (3, 13, 'イントロ', 'ギターソロ', 1);
   insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
-  			  value (1, 6, 'Bメロ', '音声データは入っていません', 2);
+  			  value (3, 9, 'Aメロ', '4-5-6、夏のイメージ', 2);
   insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
-  			  value (1, 4, 'サビ', '音声データは入っていません', 3);  			  
- 
+  			  value (3, 8, 'Bメロ', '', 3);  			  
+  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  			  value (3, 7, 'サビ', '転調', 4); 
+  			  
+  			  
  select * from users;
+ select * from phrases;
+ select * from musics;
+ select * from tags;
+ select * from phrases_tags;
+ select * from musics_phrases;
