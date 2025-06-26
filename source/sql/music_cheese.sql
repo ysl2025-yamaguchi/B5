@@ -101,4 +101,18 @@ create table musics_phrases(
  insert into phrases_tags (phrase_id, tag_id) value (5, 10);
  insert into phrases_tags (phrase_id, tag_id) value (6, 9);
  
+ -- テストmusics_phrases
+  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  			  value (2, 2, 'Aメロ（夏風）', 'イントロも込み', 1);
+  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  			  value (2, 3, 'Bメロ', '音声データは入っていません', 2);
+  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  			  value (2, 1, 'サビ（転調）', '音声データは入っていません', 3);
+  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  			  value (1, 5, 'Aメロ', 'Bメジャーコード、イントロなし', 1);
+  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  			  value (1, 6, 'Bメロ', '音声データは入っていません', 2);
+  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  			  value (1, 4, 'サビ', '音声データは入っていません', 3);  			  
+ 
  select * from users;
