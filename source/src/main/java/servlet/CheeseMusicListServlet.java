@@ -20,6 +20,7 @@ import dao.CheesePhraseDao;
 import dto.CheeseMusic;
 import dto.CheeseMusicPhrase;
 import dto.CheesePhrase;
+import dto.CheeseUser;
 
 /**
  * Servlet implementation class CheeseMusicListServlet
@@ -36,14 +37,16 @@ public class CheeseMusicListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginUser") == null) {
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
+		int userId = user.getId();
 		
 		List<String> searchWordList = new ArrayList<String>();
 		CheeseMusicDao musicDao = new CheeseMusicDao();
-		List<CheeseMusic> cardList = musicDao.select(searchWordList, "", 1);
+		List<CheeseMusic> cardList = musicDao.select(searchWordList, "", userId);
 		
 		// DAO初期化
 	    CheeseMusicPhraseDao musicPhraseDao = new CheeseMusicPhraseDao();
@@ -98,10 +101,12 @@ public class CheeseMusicListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginUser") == null) {
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
+		int userId = user.getId();
 		
 		String result = (String) session.getAttribute("result");
 		if (result != null) {
@@ -128,7 +133,7 @@ public class CheeseMusicListServlet extends HttpServlet {
 		// 検索処理を行う
 		
 		CheeseMusicDao musicDao = new CheeseMusicDao();
-		List<CheeseMusic> cardList = musicDao.select(searchWordList, sort, 1);
+		List<CheeseMusic> cardList = musicDao.select(searchWordList, sort, userId);
 		
 		 // DAO初期化
 	    CheeseMusicPhraseDao musicPhraseDao = new CheeseMusicPhraseDao();

@@ -19,6 +19,7 @@ import dao.CheesePhraseTagDao;
 import dao.CheeseTagDao;
 import dto.CheesePhrase;
 import dto.CheeseTag;
+import dto.CheeseUser;
 
 /**
  * Servlet implementation class CheesePhraseEditServlet
@@ -34,15 +35,17 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginUser") == null) {
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
+		int userId = user.getId();
 		
 		//fetch all phrases
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
-		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", userId);
 		
 		
 		Map<Integer, List<CheeseTag>> phraseTagMap = new HashMap<Integer, List<CheeseTag>>();
@@ -73,15 +76,16 @@ public class CheesePhraseEditServlet extends HttpServlet {
 //		}
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginUser") == null) {
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
+		int userId = user.getId();
 //			
 		    request.setCharacterEncoding("UTF-8");
 		
 	        //get parameters
-		    int userid=1;
 			int phraseId = Integer.parseInt(request.getParameter("id"));
 			String phraseName = request.getParameter("phraseName");
 		    String phraseRemarks = request.getParameter("phraseRemarks");
@@ -95,7 +99,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 			
 			    List<CheesePhrase> phraseList;
 				CheesePhraseDao phraseDao =  new CheesePhraseDao();
-				phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+				phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", userId);
 				
 				
 				Map<Integer, List<CheeseTag>> phraseTagMap = new HashMap<Integer, List<CheeseTag>>();
@@ -134,7 +138,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		    	    } else {
 		    	    	//update phrase
 		    	        boolean phraseUpdated = pDao.update(
-		    	            new CheesePhrase(phraseId, phraseName, phraseRemarks, phrasePath, userid, "", "")
+		    	            new CheesePhrase(phraseId, phraseName, phraseRemarks, phrasePath, userId, "", "")
 		    	        );
 
 		    	        if (phraseUpdated) {
@@ -158,7 +162,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		    	                        if (existing != null) {
 		    	                            tag = existing;
 		    	                        } else {
-		    	                            tag = tDao.insertAndReturn(tagName, userid);
+		    	                            tag = tDao.insertAndReturn(tagName, userId);
 		    	                        }
 		    	                    }
 

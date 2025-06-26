@@ -36,11 +36,12 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		// musicを作成したuserIdとログイン済みのuserIdが違うならログイン画面へ
 		// musicIdの取得
 		int musicId = Integer.parseInt(request.getParameter("id"));
+		int userId = user.getId();
 		// 曲データの取得
 		CheeseMusicDao musicDao = new CheeseMusicDao();
 		CheeseMusic music = musicDao.select(musicId);
 		 // セッションスコープのuserIdとmusicのuserIdの比較
-		if (user.getId() != music.getUserId()) {
+		if (userId != music.getUserId()) {
 			// 違うならログイン画面へ
 			response.sendRedirect("/CheeseLoginServlet");
 			return;
@@ -48,7 +49,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
-		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", userId);
 		request.setAttribute("phraseList", phraseList);
 			
 		CheeseMusicPhraseDao musicPhraseDao = new CheeseMusicPhraseDao();	

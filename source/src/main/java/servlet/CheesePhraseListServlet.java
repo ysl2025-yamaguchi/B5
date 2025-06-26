@@ -19,6 +19,7 @@ import dao.CheesePhraseTagDao;
 import dao.CheeseTagDao;
 import dto.CheesePhrase;
 import dto.CheeseTag;
+import dto.CheeseUser;
 
 /**
  * Servlet implementation class CheesePhraseListServlet
@@ -33,10 +34,12 @@ public class CheesePhraseListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginUser") == null) {
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
+		int userId = user.getId();
 //		
 //		List<CheeseTag> tagList;
 //		CheeseTagDao tag = new CheeseTagDao();
@@ -66,7 +69,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 		// 登録済みのフレーズ一覧を取得
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
-		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", 1);
+		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", userId);
 		
 		// 各フレーズに登録されているタグを取得
 		Map<Integer, List<CheeseTag>> phraseTagMap = new HashMap<Integer, List<CheeseTag>>();
@@ -99,10 +102,12 @@ public class CheesePhraseListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginUser") == null) {
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
+		int userId = user.getId();
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -127,7 +132,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 		} 
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
-		phraseList = phraseDao.select(searchWordList, searchTagList, order, 1);
+		phraseList = phraseDao.select(searchWordList, searchTagList, order, userId);
 		
 		// 各フレーズに登録されているタグを取得
 		Map<Integer, List<CheeseTag>> phraseTagMap = new HashMap<Integer, List<CheeseTag>>();
@@ -141,7 +146,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 		}
 		
 		// ユーザーが登録したことのあるタグを取得
-		List<CheeseTag> tagList = TagDao.selectALL(1);
+		List<CheeseTag> tagList = TagDao.selectALL(userId);
 
 		
         // リクエスト属性にセット
