@@ -86,7 +86,7 @@ public class CheeseDeletePhraseServlet extends HttpServlet {
 		}
 		
 		// 同じJSPにリダイレクトする
-		response.sendRedirect("CheesePhraseListServlet" + redirectMessage); 
+		response.sendRedirect(request.getContextPath() + "/CheesePhraseListServlet" + redirectMessage); 
 		return;
 	}
 }

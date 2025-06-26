@@ -109,7 +109,6 @@ public class CheesePhraseEditServlet extends HttpServlet {
 			return;
 		}
 		int userId = user.getId();
-		System.out.println(userId);
 //			
 	    request.setCharacterEncoding("UTF-8");
 	
@@ -137,7 +136,6 @@ public class CheesePhraseEditServlet extends HttpServlet {
 				if (tagIdArray != null && tagNameArray != null) {
 					for (int i = 0; i < tagIdArray.length; i++) {
 						tagId = Integer.parseInt(tagIdArray[i]);
-						System.out.println(tagId);
 						CheeseTag tag = new CheeseTag();
 						
 						if (tagId == 0) {
@@ -158,10 +156,10 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		}
 		
 		if (result) {
-			response.sendRedirect("CheesePhraseEditServlet?id=" + phraseId + "&editResult=successed");
+			response.sendRedirect(request.getContextPath() + "/CheesePhraseEditServlet?id=" + phraseId + "&editResult=successed");
 		}
 		else {
-			response.sendRedirect("CheesePhraseEditServlet?id=" + phraseId + "&editResult=failed");
+			response.sendRedirect(request.getContextPath() + "/CheesePhraseEditServlet?id=" + phraseId + "&editResult=failed");
 		}
 		
 //		CheesePhrase phrase = pDao.findById(phraseId);
