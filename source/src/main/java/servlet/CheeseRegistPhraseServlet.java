@@ -148,11 +148,15 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 		}
 		
 		if (result) {
-			response.sendRedirect(request.getContextPath() + "/CheesePhraseListServlet?registResult=successed");
+			request.getSession().setAttribute("result", "登録成功しました！");
 		}
 		else {
-			response.sendRedirect(request.getContextPath() + "/CheesePhraseListServlet?registResult=failed");
+			request.getSession().setAttribute("result", "登録に失敗しました。");
 		}
+		
+		// 同じJSPにフォワードする
+		response.sendRedirect(request.getContextPath() + "/CheesePhraseListServlet"); // JSPを表示するサーブレットなど
+	    return;
 	}
 
 }

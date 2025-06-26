@@ -12,15 +12,6 @@
 
 	<jsp:include page="cheese_header.jsp" />
 
-	<!-- ▼ フレーズ一覧（JavaScript用） -->
-	<script>
-  const phraseList = [
-    <c:forEach var="p" items="${phraseList}">
-      { id: ${p.id}, name: "${p.name}", path: "${p.path}" },
-    </c:forEach>
-  ];
-</script>
-
 	<!-- 曲名表示 -->
 	<h1>曲名：${music.name}</h1>
 	<input type="hidden" id="songId" name="songId" value="${music.id}" />
@@ -35,8 +26,9 @@
 	<div id="dupMessageArea" class="message red"></div>
 	<div id="dupSongNames" class="message gray"></div>
 	<div id="messageArea" class="message red">
-		<c:if test="${not empty errorMsg}">
-    ${errorMsg}
+		<c:if test="${not empty result}">
+    	<span id="error_message"><c:out value="${result}" /></span>
+	<br>
   </c:if>
 	</div>
 

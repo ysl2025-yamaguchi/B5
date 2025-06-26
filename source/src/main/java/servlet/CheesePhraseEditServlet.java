@@ -39,15 +39,10 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		}
 		int userId = user.getId();
 		
-		String deleteResult = request.getParameter("editResult");
-		System.out.println(deleteResult);
-		if (deleteResult != null && !deleteResult.isEmpty()) {
-			if (deleteResult.equals("successed")) {
-				request.setAttribute("result", "編集に成功しました");
-			}
-			else {
-				request.setAttribute("result", "編集に失敗しました");
-			}
+		String result = (String) session.getAttribute("result");
+		if (result != null) {
+			request.setAttribute("result", result);
+			session.removeAttribute("result");  // 1回だけ表示
 		}
 		
         //get parameters
@@ -157,11 +152,15 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		}
 		
 		if (result) {
-			response.sendRedirect(request.getContextPath() + "/CheesePhraseEditServlet?id=" + phraseId + "&editResult=successed");
+			request.getSession().setAttribute("result", "保存しました。");
 		}
 		else {
-			response.sendRedirect(request.getContextPath() + "/CheesePhraseEditServlet?id=" + phraseId + "&editResult=failed");
+			request.getSession().setAttribute("result", "保存に失敗しました。");
 		}
+		
+		// 同じJSPにリダイレクトする
+		response.sendRedirect(request.getContextPath() + "/CheesePhraseEditServlet?id=" + phraseId); 
+		return;
 		
 //		CheesePhrase phrase = pDao.findById(phraseId);
 		

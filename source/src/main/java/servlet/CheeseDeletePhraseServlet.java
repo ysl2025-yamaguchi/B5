@@ -70,24 +70,23 @@ public class CheeseDeletePhraseServlet extends HttpServlet {
 			}
 		}
 		
-		String redirectMessage;
 		// データベースの削除
 		if (fileDeleteFlag) {
 			CheesePhraseDao phraseDao = new CheesePhraseDao();
 			CheesePhraseTagDao phraseTagDao = new CheesePhraseTagDao();
 			if (phraseDao.delete(phraseId) && phraseTagDao.delete(phraseId) && phraseTagDao.deleteUnassignedTags()) { // 削除成功
-				redirectMessage = "?deleteResult=successed";
+				request.getSession().setAttribute("result", "削除成功しました！");
 			} else { // 削除失敗
-				redirectMessage = "?deleteResult=failed";
+				request.getSession().setAttribute("result", "削除失敗しました。");
 			}
 		}
 		else {
-			redirectMessage = "?deleteResult=failed";
+			request.getSession().setAttribute("result", "削除失敗しました。");
 		}
 		
-		// 同じJSPにリダイレクトする
-		response.sendRedirect(request.getContextPath() + "/CheesePhraseListServlet" + redirectMessage); 
-		return;
+		// 同じJSPにフォワードする
+		response.sendRedirect(request.getContextPath() + "/CheesePhraseListServlet"); // JSPを表示するサーブレットなど
+	    return;
 	}
 }
 

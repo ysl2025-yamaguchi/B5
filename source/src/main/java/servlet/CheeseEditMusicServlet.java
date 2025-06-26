@@ -47,6 +47,12 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 			return;
 		}
 		
+		String result = (String) session.getAttribute("result");
+		if (result != null) {
+			request.setAttribute("result", result);
+			session.removeAttribute("result");  // 1回だけ表示
+		}
+		
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
 		phraseList = phraseDao.select(new ArrayList<String>(), new ArrayList<String>(), "", userId);
@@ -105,16 +111,14 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		CheeseMusicPhraseDao bDao = new CheeseMusicPhraseDao();
 		
 		if (bDao.save(musicId, phraseIdArray, titleArray, remarksArray)) { // 更新成功
-			System.out.println("成功");
-			request.setAttribute("result", "保存しました。");
+			request.getSession().setAttribute("result", "保存しました。");
 		} else { // 更新失敗
-			System.out.println("失敗");
-			request.setAttribute("result", "失敗");
+			request.getSession().setAttribute("result", "保存に失敗しました。");
 		}
 	 
 		
 		// 結果ページにフォワードする
-		response.sendRedirect(request.getContextPath() + "CheeseEditMusicServlet?id=" + musicId);
+		response.sendRedirect(request.getContextPath() + "/CheeseEditMusicServlet?id=" + musicId);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
 //		dispatcher.forward();
 				

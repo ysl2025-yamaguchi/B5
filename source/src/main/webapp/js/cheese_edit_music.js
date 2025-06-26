@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			});
 		}
 
-		if (audio.getAttribute("src") == "" || audio.getAttribute("src") == 'null') {
+		if (audio.getAttribute("src") == "" || audio.getAttribute("src") == 'null' || audio.getAttribute("src") == '/B5/upload/') {
 			audio.style.display = 'none';
 		}
 		else {

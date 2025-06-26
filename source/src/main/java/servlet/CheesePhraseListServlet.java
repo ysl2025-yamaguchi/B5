@@ -43,24 +43,10 @@ public class CheesePhraseListServlet extends HttpServlet {
 //		
 //		List<CheeseTag> tagList;
 //		CheeseTagDao tag = new CheeseTagDao();
-		String deleteResult = request.getParameter("deleteResult");
-		if (deleteResult != null && !deleteResult.isEmpty()) {
-			if (deleteResult.equals("successed")) {
-				request.setAttribute("result", "削除に成功しました");
-			}
-			else {
-				request.setAttribute("result", "削除に失敗しました");
-			}
-		}
-		
-		String registResult = request.getParameter("registResult");
-		if (registResult != null && !registResult.isEmpty()) {
-			if (registResult.equals("successed")) {
-				request.setAttribute("result", "登録に成功しました");
-			}
-			else {
-				request.setAttribute("result", "登録に失敗しました");
-			}
+		String result = (String) session.getAttribute("result");
+		if (result != null) {
+			request.setAttribute("result", result);
+			session.removeAttribute("result");  // 1回だけ表示
 		}
 		
 		
