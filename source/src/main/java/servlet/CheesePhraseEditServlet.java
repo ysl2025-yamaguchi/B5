@@ -52,12 +52,19 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		
         //get parameters
 		int phraseId = Integer.parseInt(request.getParameter("id"));
+		CheesePhraseDao pDao = new CheesePhraseDao();
+		CheesePhrase phrase = pDao.findById(phraseId);
+		
+		// セッションスコープのuserIdとphraseのuserIdの比較
+		if (phrase.getUserId() != userId) {
+			// 違うならログイン画面へ
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
 		
         CheesePhraseTagDao ptDao = new CheesePhraseTagDao();
-		CheesePhraseDao pDao = new CheesePhraseDao();
 		CheeseTagDao tDao = new CheeseTagDao();
 		
-		CheesePhrase phrase = pDao.findById(phraseId);
 		List<Integer> assignedTagIdList = ptDao.selectPhraseTagInfo(phraseId);
 		List<CheeseTag> assignedTagList = tDao.select(assignedTagIdList);
 		

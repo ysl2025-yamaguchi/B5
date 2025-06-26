@@ -68,7 +68,7 @@
         	<button type = "submit">編集</button>
         </form>
      	
-       <form action="CheeseDeleteMusicServlet" method="POST" style="display:inline;" onsubmit="return confirm('本当に削除しますか？');">
+       <form action="<c:url value='CheeseDeleteMusicServlet'/>" method="POST" style="display:inline;" onsubmit="return confirm('本当に削除しますか？');">
        		<input type="hidden" name="id" value="${music.id}">
         	<button type="submit">削除</button>
        </form>

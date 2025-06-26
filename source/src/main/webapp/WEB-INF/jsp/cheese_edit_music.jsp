@@ -75,7 +75,7 @@
 	</div>
 
 	<!-- ▼ フォーム -->
-	<form id="editForm" method="post" action="CheeseEditMusicServlet">
+	<form id="editForm" method="post" action="<c:url value='/CheeseEditMusicServlet' />">
 
 		<input type="hidden" name="music_id" value="${music.id}" />
 

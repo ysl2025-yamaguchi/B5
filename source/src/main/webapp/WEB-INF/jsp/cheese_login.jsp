@@ -60,7 +60,7 @@
 
 
     <!-- ログインフォーム -->
-    <form id="loginForm" class="form-section active" method="POST" action="CheeseLoginServlet">
+    <form id="loginForm" class="form-section active" method="POST" action="<c:url value='CheeseLoginServlet'/>">
     <div >
       <span id="loginError" class="error-message"></span>
       <input type="text" id="loginUser" name="loginUser" placeholder="ユーザー名">
@@ -71,7 +71,7 @@
     
     
     <!-- 新規登録フォーム -->
-    <form id="registerForm" class="form-section"  method="POST" action="CheeseRegistUserServlet">
+    <form id="registerForm" class="form-section"  method="POST" action="<c:url value='CheeseRegistUserServlet'/>">
     <div >
       <span id="registerError" class="error-message"></span>
       <input type="text" id="regUser" name="regUser" placeholder="ユーザー名" >

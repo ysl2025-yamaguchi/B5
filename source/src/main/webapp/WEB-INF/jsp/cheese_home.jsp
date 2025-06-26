@@ -19,7 +19,7 @@
    <label><img src="<c:url value='/img/blackcheese.png' />" width="25" height="25">フレーズを追加</label><br>
     <div>
       <span id = "error_message"><c:out value = "${result}"/></span> <br>
-      <form method = "POST" id = "regist_phrase_form" action = "CheeseRegistPhraseServlet" enctype="multipart/form-data">
+      <form method = "POST" id = "regist_phrase_form" action="<c:url value='CheeseRegistPhraseServlet'/>" enctype="multipart/form-data">
       <input type = "file" value = "uplode file" name = "uploded_file" accept = ".mp3, .m4a, .wav">
          <input type = "text" name = "name" placeholder = "フレーズ名">
          <input type = "text" name = "remarks" placeholder = "メモ">
@@ -49,7 +49,7 @@
    </div>
 
    <!-- フレーズ検索 -->
-   <form method = "post" action = "CheesePhraseListServlet" autocomplete = "off">
+   <form method = "post" action="<c:url value='CheesePhraseListServlet'/>" autocomplete = "off">
    	  <label><img src="<c:url value='/img/blackcheese.png' />" width="25" height="25">フレーズを検索</label><br>
       <div class = "search_box">
       	<div class="input-with-button">
@@ -99,11 +99,11 @@
                   </tr>
                </table>
                <div class="button-row">
-                  <form method = "GET" action = "CheesePhraseEditServlet">
+                  <form method = "GET" action="<c:url value='CheesePhraseEditServlet'/>">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "編集">
                   </form>
-                  <form method = "POST" action = "CheeseDeletePhraseServlet">
+                  <form method = "POST" action="<c:url value='CheeseDeletePhraseServlet'/>">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "hidden" name = "path" value = "${phrase.path}">
                      <input type = "submit" value = "削除">
