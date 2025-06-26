@@ -151,7 +151,8 @@ public class CheesePhraseEditServlet extends HttpServlet {
 						result = ptDao.insert(phraseId, tagId);
 					}
 				}
-				result = true;
+				
+				result = ptDao.deleteUnassignedTags();
 			}
 		}
 		

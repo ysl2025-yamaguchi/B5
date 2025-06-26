@@ -75,7 +75,7 @@ public class CheeseDeletePhraseServlet extends HttpServlet {
 		if (fileDeleteFlag) {
 			CheesePhraseDao phraseDao = new CheesePhraseDao();
 			CheesePhraseTagDao phraseTagDao = new CheesePhraseTagDao();
-			if (phraseDao.delete(phraseId) && phraseTagDao.delete(phraseId)) { // 削除成功
+			if (phraseDao.delete(phraseId) && phraseTagDao.delete(phraseId) && phraseTagDao.deleteUnassignedTags()) { // 削除成功
 				redirectMessage = "?deleteResult=successed";
 			} else { // 削除失敗
 				redirectMessage = "?deleteResult=failed";
