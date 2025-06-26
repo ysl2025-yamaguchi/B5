@@ -38,7 +38,6 @@
   </form>
 
 
-  </script>
   <script src="<c:url value='/js/cheese_common.js' />" defer></script>
 	
 	<div class="logo">

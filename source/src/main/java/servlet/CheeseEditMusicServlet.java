@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CheeseMusicDao;
 import dao.CheeseMusicPhraseDao;
 import dao.CheesePhraseDao;
+import dto.CheeseMusic;
 import dto.CheeseMusicPhrase;
 import dto.CheesePhrase;
 
@@ -32,9 +34,9 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 //		// musicを作成したuserIdとログイン済みのuserIdが違うならログイン画面へ
 //		// musicIdの取得
 		int musicId = Integer.parseInt(request.getParameter("id"));
-//		// 曲データの取得
-//		CheeseMusicDao musicDao = new CheeseMusicDao();
-//		CheeseMusic music = musicDao.select(musicId);
+		// 曲データの取得
+		CheeseMusicDao musicDao = new CheeseMusicDao();
+		CheeseMusic music = musicDao.select(musicId);
 //		 // セッションスコープのuserIdとmusicのuserIdの比較
 //		if (user.getId() != music.getUserId()) {
 //			// 違うならログイン画面へ
@@ -56,7 +58,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		// jspへセット
 		request.setAttribute("assignedMusicPhraseList", assignedMusicPhraseList);
 		request.setAttribute("assignedPhraseList", assignedPhraseList);
-		request.setAttribute("musicId", musicId);
+		request.setAttribute("music", music);
 		System.out.println(musicId);
 		
 		// 曲編集画面にフォワードする
@@ -80,7 +82,6 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 //			return;
 //
 //		}
-		
 		
 		
 		// リクエストパラメータを取得する
@@ -110,7 +111,6 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		}
 	 
 		
-
 		// 結果ページにフォワードする
 		response.sendRedirect("CheeseEditMusicServlet?id=" + musicId);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");

@@ -79,7 +79,7 @@
 	<!-- ▼ フォーム -->
 	<form id="editForm" method="post" action="CheeseEditMusicServlet">
 
-		<input type="hidden" name="music_id" value="${musicId}" />
+		<input type="hidden" name="music_id" value="${music.id}" />
 
 		<!-- ▼ フレーズ入力欄リスト -->
 		<div id="phraseContainer">
