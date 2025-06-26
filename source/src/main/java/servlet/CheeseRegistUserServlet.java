@@ -47,7 +47,7 @@ public class CheeseRegistUserServlet extends HttpServlet {
 	    } else {
 	        // 失敗時はフォワードでメッセージ表示
 	        request.setAttribute("result", "登録失敗！");
-	        RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_login.jsp");
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_login.jsp");
 	        dispatcher.forward(request, response);
 	    }
 	}

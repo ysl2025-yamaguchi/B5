@@ -65,7 +65,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		System.out.println(musicId);
 		
 		// 曲編集画面にフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_edit_music.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
 		dispatcher.forward(request, response);
 				
 				
