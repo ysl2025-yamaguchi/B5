@@ -1,0 +1,28 @@
+@charset "UTF-8";
+body.ocean #add_tag_button {
+  padding: 8px 12px;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+body.ocean {
+  background-color: #0077b6;
+  color: black;
+  font-family: Segoe UI Black, sans-serif;
+}
+
+body.ocean label {
+	color: #0077b6;
+}
+
+body.ocean h1 {
+	color: #0077b6;
+}
+
+body.ocean form {
+  color: black
+}
