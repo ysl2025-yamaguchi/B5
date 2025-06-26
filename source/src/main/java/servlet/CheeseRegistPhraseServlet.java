@@ -38,7 +38,7 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 		}
 		
 		boolean testFlag = true;
-		boolean result = true;
+		boolean result = false;
 		int userId = 1;
 		
 		// リクエストパラメータを取得する
@@ -63,40 +63,42 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 			if (dotPosition != -1) {
 				// ファイルの拡張子を取得
 				String extension = uplodedFileName.substring(dotPosition);
-				
-				// 保存時のファイルパスの宣言
-				String dirPath;
-				
-				try {
-					// データベースへ登録
-					phrase.setName(phraseName);
-					phrase.setRemarks(phraseRemarks);
-					phrase.setUserId(userId);
-					uploadedPhrase = phraseDao.insertWithFile(phrase, extension);
+				// 拡張子の指定
+				if (extension.equals(".wav") || extension.equals(".mp3") || extension.equals(".m4a")) {
+					// 保存時のファイルパスの宣言
+					String dirPath;
 					
-					// ファイルの保存処理
-					if (testFlag) {
-						dirPath  = getServletContext().getRealPath("/upload");
-//						String dirPath = "C:/plusdojo2025/B5/uploded";
+					try {
+						// データベースへ登録
+						phrase.setName(phraseName);
+						phrase.setRemarks(phraseRemarks);
+						phrase.setUserId(userId);
+						uploadedPhrase = phraseDao.insertWithFile(phrase, extension);
+						
+						// ファイルの保存処理
+						if (testFlag) {
+							dirPath  = getServletContext().getRealPath("/upload");
+//							String dirPath = "C:/plusdojo2025/B5/uploded";
+						}
+						else {
+							dirPath = request.getContextPath() + "/upload";
+						}
+						System.out.println(dirPath);
+						
+						File dir = new File(dirPath);
+						if (!dir.exists()) {
+							dir.mkdir();
+						}
+						
+						String fullPath = dirPath + File.separator + uploadedPhrase.getPath();
+				    	part.write(fullPath);
+						System.out.println(fullPath);
+						
+						result = true;
 					}
-					else {
-						dirPath = request.getContextPath() + "/upload";
+					catch (IOException e ) {
+						result = false;
 					}
-					System.out.println(dirPath);
-					
-					File dir = new File(dirPath);
-					if (!dir.exists()) {
-						dir.mkdir();
-					}
-					
-					String fullPath = dirPath + File.separator + uploadedPhrase.getPath();
-			    	part.write(fullPath);
-					System.out.println(fullPath);
-					
-					result = true;
-				}
-				catch (IOException e ) {
-					result = false;
 				}
 			}
 		}

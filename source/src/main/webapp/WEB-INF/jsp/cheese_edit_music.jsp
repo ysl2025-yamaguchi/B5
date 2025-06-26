@@ -1,17 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Cheese Edit Music</title>
+<meta charset="UTF-8">
+<title>Cheese Edit Music</title>
 </head>
 <body>
 
-<jsp:include page="cheese_header.jsp" />
+	<jsp:include page="cheese_header.jsp" />
 
-<!-- ▼ フレーズ一覧（JavaScript用） -->
-<script>
+	<!-- ▼ フレーズ一覧（JavaScript用） -->
+	<script>
   const phraseList = [
     <c:forEach var="p" items="${phraseList}">
       { id: ${p.id}, name: "${p.name}", path: "${p.path}" },
@@ -19,110 +20,144 @@
   ];
 </script>
 
-<!-- 曲名表示 -->
-<h1>曲名：${music.name}</h1>
-<input type="hidden" id="songId" name="songId" value="${music.id}" />
+	<!-- 曲名表示 -->
+	<h1>曲名：${music.name}</h1>
+	<input type="hidden" id="songId" name="songId" value="${music.id}" />
 
-<!-- ボタン群 -->
-<div class="actionButtons">
-  <label>重複数チェック: <input type="number" id="duplicateCount" value="3" min="2" max="5"></label>
-  <button id="checkDuplicates" type="button">重複チェック</button>
-  <button id="saveBtn" form="editForm" type="submit">保存</button>
-</div>
+	<!-- ボタン群 -->
+	<div class="actionButtons">
+		<label>重複数チェック: <input type="number" id="duplicateCount"
+			value="3" min="2" max="5"></label>
+		<button id="checkDuplicates" type="button">重複チェック</button>
+		<button id="saveBtn" form="editForm" type="submit">保存</button>
+	</div>
 
-<!-- メッセージ -->
-<div id="dupMessageArea" class="message red"></div>
-<div id="dupSongNames" class="message gray"></div>
-<div id="messageArea" class="message red">
-  <c:if test="${not empty errorMsg}">
+	<!-- メッセージ -->
+	<div id="dupMessageArea" class="message red"></div>
+	<div id="dupSongNames" class="message gray"></div>
+	<div id="messageArea" class="message red">
+		<c:if test="${not empty errorMsg}">
     ${errorMsg}
   </c:if>
-</div>
+	</div>
 
-<!-- ＋ボタン -->
-<button id="addPhraseBtn" type="button">＋</button>
+	<!-- ＋ボタン -->
+	<button id="addPhraseBtn" type="button">＋</button>
 
-<!-- ▼ フォーム -->
-<form id="editForm" method="post" action="CheeseEditMusicServlet">
+	<!--  テンプレート -->
+	<div class = "phraseBox" data-index = "0">
+		<input type="hidden" name="phrase_id"
+			value="">
+		<h3></h3>
 
-<input type="hidden" name="music_id" value="${musicId}" />
+		<span>フレーズ名:</span> <select name="phraseSelect">
+			<option value="">-- フレーズを選択 --</option>
+			<c:forEach var="p" items="${phraseList}">
+				<option value="${p.id}"
+					data-path="<c:url value='/upload/${p.path}'/>"
+					<c:if test = "${p.name == assignedPhraseList[i].name}">selected</c:if>>
+					${p.name}</option>
+			</c:forEach>
+			<!-- JSでpopulatePhraseOptions()が追加 -->
+		</select>
 
-  <!-- ▼ フレーズ入力欄リスト -->
-  <div id="phraseContainer">
+		<audio controls
+			src="null"></audio>
+		<br> <span>タイトル:</span> <input type="text" name="title"
+			value="" placeholder="タイトル">
+		<span>メモ:</span> <input type="text" name="remarks"
+			value="" placeholder="メモ">
 
-      
-      <c:forEach var = "i" begin = "0" end= "${assignedPhraseList .size()- 1}" >
+		<!-- ▼ 操作ボタン -->
+		<div class="controls">
+			<button class="moveUp" type="button">↑</button>
+			<button class="moveDown" type="button">↓</button>
+			<button class="deleteBtn" type="button">×</button>
+		</div>
+	</div>
 
-      <div class="phraseBox" data-index="${i}">
-        <input type = "hidden" name = "phrase_id" value = "${assignedPhraseList[i].id}">
-        <h3>${i + 1}. </h3>
+	<!-- ▼ フォーム -->
+	<form id="editForm" method="post" action="CheeseEditMusicServlet">
 
-      <span>フレーズ名:</span>
-      <select name = "phraseSelect">
-      	<option value="">-- フレーズを選択 --</option>
-         	<c:forEach var="p" items="${phraseList}">
-         		<option value="${p.id}" data-path = "<c:url value='/upload/${p.path}'/>"
-         		<c:if test = "${p.name == assignedPhraseList[i].name}">selected</c:if>
-            	>
-            	${p.name}
-            	</option>
-            </c:forEach>
-          	<!-- JSでpopulatePhraseOptions()が追加 -->
-      </select>
-      
-      <audio controls src="<c:url value='/upload/${assignedPhraseList[i].path}'/>"></audio><br>
+		<input type="hidden" name="music_id" value="${musicId}" />
+
+		<!-- ▼ フレーズ入力欄リスト -->
+		<div id="phraseContainer">
 			
-        <span>タイトル:</span>	
-        <input type="text" name="title" value="${assignedMusicPhraseList[i].title}" placeholder="タイトル">
-        <span>メモ:</span>
-        <input type="text" name="remarks" value="${assignedMusicPhraseList[i].remarks}"placeholder="メモ">
+			<c:if test="${assignedPhraseList != null && assignedPhraseList.size() > 0}">
+				<c:forEach var="i" begin="0" end="${assignedPhraseList .size()- 1}">
 
-        <!-- ▼ 操作ボタン -->
-        <div class="controls">
-          <button class="moveUp" type="button">↑</button>
-          <button class="moveDown" type="button">↓</button>
-          <button class="deleteBtn" type="button">×</button>
-        </div>
-      </div>
-    </c:forEach>
+					<div class="phraseBox" data-index="${i}">
+						<input type="hidden" name="phrase_id"
+							value="${assignedPhraseList[i].id}">
+						<h3>${i + 1}.</h3>
 
-    <!-- 初期データがないとき、空の1つを用意 -->
-    <c:if test="${empty assignedPhraseList}">
-      <div class="phraseBox" data-index="0">
-        <h3>1.</h3>
+						<span>フレーズ名:</span> <select name="phraseSelect">
+							<option value="">-- フレーズを選択 --</option>
+							<c:forEach var="p" items="${phraseList}">
+								<option value="${p.id}"
+									data-path="<c:url value='/upload/${p.path}'/>"
+									<c:if test = "${p.name == assignedPhraseList[i].name}">selected</c:if>>
+									${p.name}</option>
+							</c:forEach>
+							<!-- JSでpopulatePhraseOptions()が追加 -->
+						</select>
 
-        <input type="text" name="title" placeholder="タイトル">
-        <textarea name="remarks"></textarea>
+						<audio controls
+							src="<c:url value='/upload/${assignedPhraseList[i].path}'/>"></audio>
+						<br> <span>タイトル:</span> <input type="text" name="title"
+							value="${assignedMusicPhraseList[i].title}" placeholder="タイトル">
+						<span>メモ:</span> <input type="text" name="remarks"
+							value="${assignedMusicPhraseList[i].remarks}" placeholder="メモ">
 
-        <div class="phrase-audio-section">
-          <label>フレーズ選択：
-            <select class="phrase-select" name="phraseSelect">
-              <option value="0">-- フレーズを選択 --</option>
-            </select>
-          </label>
-          <button type="button" class="playBtn">▶</button>
-        </div>
+						<!-- ▼ 操作ボタン -->
+						<div class="controls">
+							<button class="moveUp" type="button">↑</button>
+							<button class="moveDown" type="button">↓</button>
+							<button class="deleteBtn" type="button">×</button>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>
 
-        <div class="controls">
-          <button class="moveUp" type="button">↑</button>
-          <button class="moveDown" type="button">↓</button>
-          <button class="deleteBtn" type="button">×</button>
-        </div>
-      </div>
-    </c:if>
+			<!-- 初期データがないとき、空の1つを用意 -->
+			<!--
+			<c:if test="${empty assignedPhraseList}">
+				<div class="phraseBox" data-index="0">
+					<h3>1.</h3>
 
-  </div><!-- phraseContainer -->
+					<input type="text" name="title" placeholder="タイトル">
+					<textarea name="remarks"></textarea>
 
-</form>
+					<div class="phrase-audio-section">
+						<label>フレーズ選択： <select class="phrase-select"
+							name="phraseSelect">
+								<option value="0">-- フレーズを選択 --</option>
+						</select>
+						</label>
+						<button type="button" class="playBtn">▶</button>
+					</div>
 
-<!-- JavaScript読み込み -->
-<script src="<c:url value='/js/cheese_edit_music.js' />"></script>
+					<div class="controls">
+						<button class="moveUp" type="button">↑</button>
+						<button class="moveDown" type="button">↓</button>
+						<button class="deleteBtn" type="button">×</button>
+					</div>
+				</div>
+			</c:if>-->
+		</div> 
+		<!-- phraseContainer -->
+
+	</form>
+
+	<!-- JavaScript読み込み -->
+	<script src="<c:url value='/js/cheese_edit_music.js' />"></script>
 
 </body>
 </html>
 
 
-    <!--  
+<!--  
       <h3>${status.index + 1}.</h3>
 
       <input type="hidden" name="musicId" value="${song.id}" />
