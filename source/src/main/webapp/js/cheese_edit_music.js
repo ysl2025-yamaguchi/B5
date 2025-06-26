@@ -245,11 +245,12 @@ document.addEventListener("DOMContentLoaded", function() {
 				const path = selectedOption.getAttribute('data-path');
 				phrase_id.value = selectedOption.value;
 
+				console.log(path);
 				if (path !== null && path !== "") {
 					audio.src = path;
 					audio.load();
 				}
-				if (path == null) {
+				if (path == null || path === '/B5/upload/') {
 					audio.style.display = 'none';
 				}
 				else {
