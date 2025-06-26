@@ -71,7 +71,7 @@ public class CheeseMusicListServlet extends HttpServlet {
 	    request.setAttribute("cardList", cardList);
 	    request.setAttribute("musicPhraseMap", musicPhraseMap);
 
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_music.jsp");
+	    RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_music.jsp");
 	    dispatcher.forward(request, response);
 	}
 	    
@@ -165,7 +165,7 @@ public class CheeseMusicListServlet extends HttpServlet {
 		
 		
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_music.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_music.jsp");
 		dispatcher.forward(request, response);
 	}
 }

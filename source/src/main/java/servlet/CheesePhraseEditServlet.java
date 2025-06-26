@@ -89,7 +89,7 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		request.setAttribute("tagList", tagList);
 		request.setAttribute("assignedTagList", assignedTagList);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_phrase.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_edit_phrase.jsp");
         dispatcher.forward(request, response);
 	}
 	
@@ -149,10 +149,10 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		}
 		
 		if (result) {
-			response.sendRedirect("CheesePhraseEditServlet?id=" + phraseId + "&editResult=successed");
+			response.sendRedirect(request.getContextPath() + "CheesePhraseEditServlet?id=" + phraseId + "&editResult=successed");
 		}
 		else {
-			response.sendRedirect("CheesePhraseEditServlet?id=" + phraseId + "&editResult=failed");
+			response.sendRedirect(request.getContextPath() + "CheesePhraseEditServlet?id=" + phraseId + "&editResult=failed");
 		}
 		
 //		CheesePhrase phrase = pDao.findById(phraseId);

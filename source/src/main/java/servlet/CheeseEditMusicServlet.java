@@ -30,7 +30,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		HttpSession session = request.getSession();
 		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
 		if (user == null) {
-			response.sendRedirect("/CheeseLoginServlet");
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
 		// musicを作成したuserIdとログイン済みのuserIdが違うならログイン画面へ
@@ -43,7 +43,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		 // セッションスコープのuserIdとmusicのuserIdの比較
 		if (userId != music.getUserId()) {
 			// 違うならログイン画面へ
-			response.sendRedirect("/CheeseLoginServlet");
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
 		
@@ -65,7 +65,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		System.out.println(musicId);
 		
 		// 曲編集画面にフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_edit_music.jsp");
 		dispatcher.forward(request, response);
 				
 				
@@ -81,7 +81,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("loginUser") == null) {
-			response.sendRedirect("/CheeseLoginServlet");
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
 		
@@ -114,7 +114,7 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 	 
 		
 		// 結果ページにフォワードする
-		response.sendRedirect("CheeseEditMusicServlet?id=" + musicId);
+		response.sendRedirect(request.getContextPath() + "CheeseEditMusicServlet?id=" + musicId);
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_edit_music.jsp");
 //		dispatcher.forward();
 				

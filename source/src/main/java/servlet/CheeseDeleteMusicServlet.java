@@ -49,7 +49,7 @@ public class CheeseDeleteMusicServlet extends HttpServlet {
 		}
 		
 		// 同じJSPにリダイレクトする
-		response.sendRedirect("CheeseMusicListServlet"); 
+		response.sendRedirect(request.getContextPath() + "/CheeseMusicListServlet"); 
 		return;
 	}
 

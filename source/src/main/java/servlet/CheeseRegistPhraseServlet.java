@@ -148,10 +148,10 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 		}
 		
 		if (result) {
-			response.sendRedirect("CheesePhraseListServlet?registResult=successed");
+			response.sendRedirect(request.getContextPath() + "CheesePhraseListServlet?registResult=successed");
 		}
 		else {
-			response.sendRedirect("CheesePhraseListServlet?registResult=failed");
+			response.sendRedirect(request.getContextPath() + "CheesePhraseListServlet?registResult=failed");
 		}
 	}
 

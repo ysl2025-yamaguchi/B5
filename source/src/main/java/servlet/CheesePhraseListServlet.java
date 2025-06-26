@@ -90,7 +90,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 //        request.setAttribute("total", cardList.size());
 
         // 検索ページにフォワード
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_home.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_home.jsp");
         dispatcher.forward(request, response);
 	}
 // 
@@ -155,7 +155,7 @@ public class CheesePhraseListServlet extends HttpServlet {
         request.setAttribute("tagList", tagList);
 		
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_home.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_home.jsp");
 		dispatcher.forward(request, response);
 	}
 

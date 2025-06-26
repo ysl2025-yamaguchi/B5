@@ -26,7 +26,7 @@ public class CheeseLoginServlet extends HttpServlet{
 		}
 		
 		// ログインページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_login.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -57,7 +57,7 @@ public class CheeseLoginServlet extends HttpServlet{
 			request.setAttribute("result", "ログインに失敗しました。");
 			
 			// ログインページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_login.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

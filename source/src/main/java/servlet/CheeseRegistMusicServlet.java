@@ -53,7 +53,7 @@ public class CheeseRegistMusicServlet extends HttpServlet {
 		}
 		
 		// 同じJSPにフォワードする
-		response.sendRedirect("CheeseMusicListServlet"); // JSPを表示するサーブレットなど
+		response.sendRedirect(request.getContextPath() + "/CheeseMusicListServlet"); // JSPを表示するサーブレットなど
 	    return;
 	}
 	
