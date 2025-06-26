@@ -120,7 +120,9 @@ public class CheesePhraseEditServlet extends HttpServlet {
 	    String phraseRemarks = request.getParameter("phraseRemarks");
 		
 		String[] tagIdArray = request.getParameterValues("registed_tag_id");
+		System.out.println(tagIdArray.length);
 		String[] tagNameArray = request.getParameterValues("registed_tag_name");
+		System.out.println(tagNameArray.length);
 		
         CheesePhraseTagDao ptDao = new CheesePhraseTagDao();
 		CheesePhraseDao pDao = new CheesePhraseDao();
@@ -156,10 +158,10 @@ public class CheesePhraseEditServlet extends HttpServlet {
 		}
 		
 		if (result) {
-			response.sendRedirect(request.getContextPath() + "CheesePhraseEditServlet?id=" + phraseId + "&editResult=successed");
+			response.sendRedirect("CheesePhraseEditServlet?id=" + phraseId + "&editResult=successed");
 		}
 		else {
-			response.sendRedirect(request.getContextPath() + "CheesePhraseEditServlet?id=" + phraseId + "&editResult=failed");
+			response.sendRedirect("CheesePhraseEditServlet?id=" + phraseId + "&editResult=failed");
 		}
 		
 //		CheesePhrase phrase = pDao.findById(phraseId);
