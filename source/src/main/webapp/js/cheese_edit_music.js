@@ -189,6 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	// 最初の1個目をテンプレートとして使う
 	const templateBox = document.querySelector(".phraseBox");
+	templateBox.style.display = 'none';
 
 	// 枠の番号をふりなおす
 	function renumberBoxes() {
@@ -283,6 +284,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	// ＋ボタンが押された時の処理
 	addBtn.addEventListener("click", () => {
 		const clone = templateBox.cloneNode(true);
+		
+		clone.style.display = 'block';
 
 		// 入力初期化
 		const phrase_id = clone.querySelector('input[name="phrase_id"]');
