@@ -85,7 +85,6 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 						else {
 							dirPath = request.getContextPath() + "/upload";
 						}
-						System.out.println(dirPath);
 						
 						File dir = new File(dirPath);
 						if (!dir.exists()) {
@@ -94,7 +93,6 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 						
 						String fullPath = dirPath + File.separator + uploadedPhrase.getPath();
 				    	part.write(fullPath);
-						System.out.println(fullPath);
 						
 						result = true;
 					}
