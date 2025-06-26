@@ -189,3 +189,11 @@ body.dark label{
 body.dark .toggle-btn {
 	color: #fff;
 }
+
+body.dark .phraseBox {
+	color: #515151;
+}
+
+body.dark h3, span {
+	color: #515151 !important;
+}
