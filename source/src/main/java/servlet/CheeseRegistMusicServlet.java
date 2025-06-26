@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.CheeseMusicDao;
 import dto.CheeseMusic;
+import dto.CheeseUser;
 
 /**
  * Servlet implementation class RegistServlet
@@ -28,17 +29,16 @@ public class CheeseRegistMusicServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginUser") == null) {
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
+		int userId = user.getId();
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
-//		HttpSession session = request.getSession();
-//		int userId = (int) session.getAttribute("id"); /*Integer.parseInt(request.getParameter("user_id"));*/
-		int userId = 1;
 		String createdAt = request.getParameter("created_at");
 		String updatedAt = request.getParameter("updated_at");
 

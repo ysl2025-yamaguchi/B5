@@ -17,6 +17,7 @@ import dao.CheesePhraseTagDao;
 import dao.CheeseTagDao;
 import dto.CheesePhrase;
 import dto.CheeseTag;
+import dto.CheeseUser;
 
 /**
  * Servlet implementation class CheeseRegistPhraseServlet
@@ -32,14 +33,15 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("loginUser") == null) {
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 			return;
 		}
+		int userId = user.getId();
 		
 		boolean testFlag = true;
 		boolean result = false;
-		int userId = 1;
 		
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
