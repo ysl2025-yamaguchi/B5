@@ -83,7 +83,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 		}
 		
 		// ユーザーが登録したことのあるタグを取得
-		List<CheeseTag> tagList = TagDao.selectALL(1);
+		List<CheeseTag> tagList = TagDao.selectALL(userId);
 		
         // リクエスト属性にセット
         request.setAttribute("phraseList", phraseList);
