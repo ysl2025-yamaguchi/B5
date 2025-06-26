@@ -44,7 +44,6 @@ public class CheesePhraseListServlet extends HttpServlet {
 //		List<CheeseTag> tagList;
 //		CheeseTagDao tag = new CheeseTagDao();
 		String deleteResult = request.getParameter("deleteResult");
-		System.out.println(deleteResult);
 		if (deleteResult != null && !deleteResult.isEmpty()) {
 			if (deleteResult.equals("successed")) {
 				request.setAttribute("result", "削除に成功しました");
@@ -55,7 +54,6 @@ public class CheesePhraseListServlet extends HttpServlet {
 		}
 		
 		String registResult = request.getParameter("registResult");
-		System.out.println(registResult);
 		if (registResult != null && !registResult.isEmpty()) {
 			if (registResult.equals("successed")) {
 				request.setAttribute("result", "登録に成功しました");
@@ -92,7 +90,7 @@ public class CheesePhraseListServlet extends HttpServlet {
 //        request.setAttribute("total", cardList.size());
 
         // 検索ページにフォワード
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_home.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_home.jsp");
         dispatcher.forward(request, response);
 	}
 // 
@@ -157,7 +155,7 @@ public class CheesePhraseListServlet extends HttpServlet {
         request.setAttribute("tagList", tagList);
 		
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cheese_home.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "/WEB-INF/jsp/cheese_home.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -85,7 +85,6 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 						else {
 							dirPath = request.getContextPath() + "/upload";
 						}
-						System.out.println(dirPath);
 						
 						File dir = new File(dirPath);
 						if (!dir.exists()) {
@@ -94,7 +93,6 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 						
 						String fullPath = dirPath + File.separator + uploadedPhrase.getPath();
 				    	part.write(fullPath);
-						System.out.println(fullPath);
 						
 						result = true;
 					}
@@ -150,10 +148,10 @@ public class CheeseRegistPhraseServlet extends HttpServlet {
 		}
 		
 		if (result) {
-			response.sendRedirect("CheesePhraseListServlet?registResult=successed");
+			response.sendRedirect(request.getContextPath() + "CheesePhraseListServlet?registResult=successed");
 		}
 		else {
-			response.sendRedirect("CheesePhraseListServlet?registResult=failed");
+			response.sendRedirect(request.getContextPath() + "CheesePhraseListServlet?registResult=failed");
 		}
 	}
 

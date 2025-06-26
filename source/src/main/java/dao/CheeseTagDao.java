@@ -114,6 +114,10 @@ public class CheeseTagDao {
 	public List<CheeseTag> select(List<Integer> tagIdList) {
 		Connection conn = null;
 		List<CheeseTag> tagList = new ArrayList<CheeseTag>();
+        // tagIdListが空でないことを確認
+        if (tagIdList.isEmpty()) {
+            return tagList; // 空のリストを返す
+        }
 		
 		try {
 			// JDBCドライバを読み込む

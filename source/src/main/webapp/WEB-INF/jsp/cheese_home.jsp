@@ -99,7 +99,7 @@
                   </tr>
                </table>
                <div class="button-row">
-                  <form method = "POST" action = "CheesePhraseEditServlet">
+                  <form method = "GET" action = "CheesePhraseEditServlet">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "編集">
                   </form>
