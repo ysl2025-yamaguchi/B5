@@ -18,6 +18,12 @@ public class CheeseChangeThemaServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
 
         // パラメータ取得
         String themaStr = request.getParameter("thema");
@@ -29,7 +35,6 @@ public class CheeseChangeThemaServlet extends HttpServlet {
         }
 
         // ログインユーザー取得
-        HttpSession session = request.getSession();
         CheeseUser loginUser = (CheeseUser) session.getAttribute("loginUser");
         
         if (loginUser != null) {

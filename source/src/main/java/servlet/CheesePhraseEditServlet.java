@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CheesePhraseDao;
 import dao.CheesePhraseTagDao;
@@ -31,6 +32,13 @@ public class CheesePhraseEditServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
+		
 		//fetch all phrases
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
@@ -63,6 +71,12 @@ public class CheesePhraseEditServlet extends HttpServlet {
 //		if (session.getAttribute("loginUser") == null) {
 //			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
 //		}
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
 //			
 		    request.setCharacterEncoding("UTF-8");
 		

@@ -34,12 +34,12 @@ public class CheeseMusicListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("id") == null) {
-//		response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
-//		return;
-//	}
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
 		
 		List<String> searchWordList = new ArrayList<String>();
 		CheeseMusicDao musicDao = new CheeseMusicDao();
@@ -96,14 +96,13 @@ public class CheeseMusicListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("id") == null) {
-//			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
-//			return;
-//		}
-		
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			response.sendRedirect(request.getContextPath() + "/CheeseLoginServlet");
+			return;
+		}
+		
 		String result = (String) session.getAttribute("result");
 		if (result != null) {
 			request.setAttribute("result", result);

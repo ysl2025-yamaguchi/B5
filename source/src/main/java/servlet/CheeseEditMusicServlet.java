@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CheeseMusicDao;
 import dao.CheeseMusicPhraseDao;
@@ -17,6 +18,7 @@ import dao.CheesePhraseDao;
 import dto.CheeseMusic;
 import dto.CheeseMusicPhrase;
 import dto.CheesePhrase;
+import dto.CheeseUser;
 
 
 @WebServlet("/CheeseEditMusicServlet")
@@ -25,24 +27,24 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-//		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
-//		if (user == null) {
-//			response.sendRedirect("/CheeseLoginServlet");
-//			return;
-//		}
-//		// musicを作成したuserIdとログイン済みのuserIdが違うならログイン画面へ
-//		// musicIdの取得
+		HttpSession session = request.getSession();
+		CheeseUser user = (CheeseUser)session.getAttribute("loginUser");
+		if (user == null) {
+			response.sendRedirect("/CheeseLoginServlet");
+			return;
+		}
+		// musicを作成したuserIdとログイン済みのuserIdが違うならログイン画面へ
+		// musicIdの取得
 		int musicId = Integer.parseInt(request.getParameter("id"));
 		// 曲データの取得
 		CheeseMusicDao musicDao = new CheeseMusicDao();
 		CheeseMusic music = musicDao.select(musicId);
-//		 // セッションスコープのuserIdとmusicのuserIdの比較
-//		if (user.getId() != music.getUserId()) {
-//			// 違うならログイン画面へ
-//			response.sendRedirect("/CheeseLoginServlet");
-//			return;
-//		}
+		 // セッションスコープのuserIdとmusicのuserIdの比較
+		if (user.getId() != music.getUserId()) {
+			// 違うならログイン画面へ
+			response.sendRedirect("/CheeseLoginServlet");
+			return;
+		}
 		
 		List<CheesePhrase> phraseList;
 		CheesePhraseDao phraseDao =  new CheesePhraseDao();
@@ -76,12 +78,11 @@ public class CheeseEditMusicServlet  extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-//		HttpSession session = request.getSession();
-//		if (session.getAttribute("loginUser") == null) {
-//			response.sendRedirect("/CheeseLoginServlet");
-//			return;
-//
-//		}
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			response.sendRedirect("/CheeseLoginServlet");
+			return;
+		}
 		
 		
 		// リクエストパラメータを取得する

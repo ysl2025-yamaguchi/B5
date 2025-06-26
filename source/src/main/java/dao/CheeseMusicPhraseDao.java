@@ -301,52 +301,95 @@ public class CheeseMusicPhraseDao {
 	}
 	
 	// 引数phraseIdと紐づけられている曲がなければtrueを返す
-		public boolean check(int phraseId) {
-			Connection conn = null;
-			boolean result = false;
+	public boolean check(int phraseId) {
+		Connection conn = null;
+		boolean result = false;
 
-			try {
-				// JDBCドライバを読み込む
-				Class.forName("com.mysql.cj.jdbc.Driver");
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
-				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
 
-				// SQL文を準備する
-				String sql = "SELECT count(*) FROM musics_phrases WHERE phrase_id=?";
-				PreparedStatement pStmt = conn.prepareStatement(sql);
+			// SQL文を準備する
+			String sql = "SELECT count(*) FROM musics_phrases WHERE phrase_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				// SQL文を完成させる
-				pStmt.setInt(1, phraseId);
+			// SQL文を完成させる
+			pStmt.setInt(1, phraseId);
 
-				// SELECT文を実行し、結果表を取得する
-				ResultSet rs = pStmt.executeQuery();
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
 
-				// ユーザー名とパスワードが一致するユーザーがいれば結果をtrueにする
-				if (rs.next()) {
-					if (rs.getInt("count(*)") == 0) {
-						result = true;
-					}
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+			// ユーザー名とパスワードが一致するユーザーがいれば結果をtrueにする
+			if (rs.next()) {
+				if (rs.getInt("count(*)") == 0) {
+					result = true;
 				}
 			}
 
-			// 結果を返す
-			return result;
-		}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}	
+	
+	// 引数musicIdと紐づけされたデータすべてを削除する
+	public boolean deleteById(int musicId) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/B5?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SQL文を準備する
+			String sql = "DELETE FROM musics_phrases WHERE music_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setInt(1, musicId);
+
+			// SQL文を実行する
+			pStmt.executeUpdate();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
 }
