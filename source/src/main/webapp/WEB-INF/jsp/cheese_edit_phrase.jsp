@@ -39,7 +39,7 @@
 						<option value="${tag.id}"><c:out value="${tag.name} " /></option>
 					</c:forEach>
 				</select> <input type="text" name="tag_name" id="input_tag" hidden
-					autocomplete="off">
+					autocomplete="off"  maxlength="20">
 				<button type="button" id="add_tag_button">追加</button>
 			</div>
 

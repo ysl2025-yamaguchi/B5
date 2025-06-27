@@ -36,7 +36,7 @@
                   </c:forEach>
                </select>
                <div class="input-with-button">
-               <input type = "text" name = "tag_name" id = "input_tag" hidden autocomplete="off">
+               <input type = "text" name = "tag_name" id = "input_tag" hidden autocomplete="off" maxlength = "20">
                <button type = "button" id = "add_tag_button">追加</button>
                </div>
             </div>
