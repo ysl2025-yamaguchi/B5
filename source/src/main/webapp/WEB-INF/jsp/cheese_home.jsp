@@ -103,7 +103,7 @@
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "submit" value = "編集">
                   </form>
-                  <form method = "POST" action="<c:url value='CheeseDeletePhraseServlet'/>">
+                  <form method = "POST" action="<c:url value='CheeseDeletePhraseServlet'/>" style="display:inline;" onsubmit="return confirm('本当に削除しますか？');">
                      <input type = "hidden" name = "id" value = "${phrase.id}">
                      <input type = "hidden" name = "path" value = "${phrase.path}">
                      <input type = "submit" value = "削除">
