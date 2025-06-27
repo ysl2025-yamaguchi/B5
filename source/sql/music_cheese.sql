@@ -82,8 +82,8 @@ create table musics_phrases(
  delete from musics;
  alter table `musics` auto_increment = 1;
  
- insert into phrases (name, user_id) value ('テスト曲', 1);
- insert into phrases (name, user_id) value ('Lemon', 1);
+ insert into musics (name, user_id) value ('テスト曲', 1);
+ insert into musics (name, user_id) value ('Lemon', 1);
  
 -- テストtags
  delete from tags;
@@ -91,7 +91,7 @@ create table musics_phrases(
  
  insert into tags (name, user_id) value ('サビ', 1);
  insert into tags (name, user_id) value ('アップテンポ', 1);
- insert into tags (name, user_id) value ('夏');
+ insert into tags (name, user_id) value ('夏', 1);
  insert into tags (name, user_id) value ('BPM180', 1);
  insert into tags (name, user_id) value ('Bメロ', 1);
  insert into tags (name, user_id) value ('Aメロ', 1);
