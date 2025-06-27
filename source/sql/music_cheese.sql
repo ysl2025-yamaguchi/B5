@@ -129,19 +129,19 @@ create table musics_phrases(
  delete from musics_phrases;
  alter table `musics_phrases` auto_increment = 1;
  
-  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  insert into musics_phrases (music_id, phrase_id, title, remarks, phrase_order) 
   			  value (2, 4, 'Aメロ', 'Bメジャーコード、イントロなし、クラップ音', 1);
-  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  insert into musics_phrases (music_id, phrase_id, title, remarks, phrase_order) 
   			  value (2, 5, 'Bメロ', '', 2);
-  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  insert into musics_phrases (music_id, phrase_id, title, remarks, phrase_order) 
   			  value (2, 6, 'サビ', 'ストリングス強め', 3);
-  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  insert into musics_phrases (music_id, phrase_id, title, remarks, phrase_order) 
   			  value (1, 7, 'イントロ', 'ギターソロ', 1);
-  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  insert into musics_phrases (music_id, phrase_id, title, remarks, phrase_order) 
   			  value (1, 3, 'Aメロ', '4-5-6、夏のイメージ', 2);
-  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  insert into musics_phrases (music_id, phrase_id, title, remarks, phrase_order) 
   			  value (1, 2, 'Bメロ', '', 3);  			  
-  insert into musics_phrases (music_id, phrase_id, title, remarks phrase_order) 
+  insert into musics_phrases (music_id, phrase_id, title, remarks, phrase_order) 
   			  value (1, 1, 'サビ', '転調', 4); 
   			  
   			  
